@@ -6,58 +6,66 @@
     @stack('style')
 </head>
 <body>
-    <div class="container-fluid nav">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-8">
-                    <img src="/images/logo.png" class="logo" alt="logo website">
-                </div>
-                <div class="col-md-9 d-none d-sm-none d-md-block">
-                    <div class="row float-right topnav">
-                        {{-- <ul class="list-inline">
-                            <li class="list-inline-item"><a href="#">Menu1</a></li>
-                            <li class="list-inline-item"><a href="#">Menu2</a></li>
-                            <li class="list-inline-item"><a href="#">Menu3</a></li>
-                            <li class="list-inline-item"><a href="#">Menu4</a></li>
-                            <li class="list-inline-item"><button class="btn btn-danger btn-sm" name="trail-btn">Free trail</button></li>
-                        </ul> --}}
-                        <a href="#"><span><i class="fa fa-sign-out"></i></span><span> Log Out</span></a>
+    <div id="dashboard">
+        <div class="container-fluid navSecondary">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-xl-3 d-none d-sm-block logo-content">
+                        <img src="/images/logo.png" class="logo" alt="logo website">
+                    </div>
+                    <div class="col"></div>
+                    <div class="col-1 d-block d-sm-block d-md-block d-lg-none">
+                        <span class="float-right" style="font-size:30px; cursor:pointer" v-on:click="toggleOverlay">&#9776;</span>
                     </div>
                 </div>
-                <div class="col-4 d-block d-sm-block d-md-none">
-                    <span class="float-right" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+            </div>
+            <div class="overlay overlay-default" v-bind:class="{'overlay-toggled': isOverlayToggled}">
+                <div class="overlay-content">
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">About</a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">Services</a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">Clients</a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">Contact</a>
                 </div>
             </div>
         </div>
-        <div id="mySidenav" class="sidenav">
-            <button type="button" class="close" onclick="closeNav()"><span>×</span></button>
-            <a href="#">Menu1</a>
-            <a href="#">Menu2</a>
-            <a href="#">Menu3</a>
-            <a href="#">Menu4</a>
-            <a class="btn btn-danger btn-sm" name="trail-btn" style="margin-left: 15px; margin-right: 15px;">Free trail</a>
+        <div class="container-fluid nav">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-xl-3 logo-content">
+                        <img src="/images/logo.png" class="logo" alt="logo website">
+                    </div>
+                    <div class="col"></div>
+                    <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">
+                        <div class="row float-right topnav">
+                            <a href="#"><span><i class="fa fa-bell"></i></span><span class="badge badge-pill badge-dark">2</span> </a>
+                            <a href="#" class="username"><span><i class="fa fa-user"></i></span><span> Fullname Lastname</span></a>
+                            <a href="#"><span><i class="fa fa-sign-out"></i></span><span> Log Out</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div id="dashboard-content" class="container-fluid">
-        <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
-            <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
-                <span class="leftArrowIcon menuIcon"><i class="fa fa-chevron-left"></i></span>
-                <span class="arrowText"></span>
-            </a>
-            <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuIcon" v-on:click="lessMoreMenu">
-                <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
-                <span class="arrowText"></span>
-            </a>
-            <a href="#" class="sidebar-item sidebar-item-hover-default">
-                <span class="menuIcon"><i class="fa fa-home"></i></span>
-                <span class="menuText" v-if="isShowMenuList"> Home</span>
-            </a>
-        </div>
-        <div style="margin-left:300px;">
-            <div class="w3-container content">
-            <h2>Hello</h2>
-            <p>In this example, we have added a dropdown menu inside the sidebar.</p>
-            <p>Notice the caret-down icon, which we use to indicate that this is a dropdown menu.</p>
+        <div class="container-fluid">
+            <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
+                <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
+                    <span class="leftArrowIcon menuIcon"><i class="fa fa-chevron-left"></i></span>
+                    <span class="arrowText"></span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuIcon" v-on:click="lessMoreMenu">
+                    <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
+                    <span class="arrowText"></span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-item-hover-default">
+                    <span class="menuIcon"><i class="fa fa-home"></i></span>
+                    <span class="menuText" v-if="isShowMenuList"> Home</span>
+                </a>
+            </div>
+            <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
+                <div class="w3-container">
+                <h2>Hello</h2>
+                <p>In this example, we have added a dropdown menu inside the sidebar.</p>
+                <p>Notice the caret-down icon, which we use to indicate that this is a dropdown menu.</p>
+                </div>
             </div>
         </div>
     </div>

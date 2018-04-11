@@ -14,15 +14,19 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script>
         new Vue({
-            el: '#dashboard-content',
+            el: '#dashboard',
             data: {
                 isShowMenuList: true,
-                isShowMenuIcon: false
+                isShowMenuIcon: false,
+                isOverlayToggled: false
             },
             methods: {
                 lessMoreMenu: function () {
                     this.isShowMenuList = !this.isShowMenuList;
                     this.isShowMenuIcon = !this.isShowMenuIcon;
+                },
+                toggleOverlay: function () {
+                    this.isOverlayToggled = !this.isOverlayToggled;
                 }
             }
         });

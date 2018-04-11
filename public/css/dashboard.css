@@ -1,59 +1,88 @@
-.sidenav {
-    height: 100%;
-    width: 0;
+.overlay {
+    height: 0;
+    width: 100%;
     position: fixed;
     z-index: 1;
-    top: 0;
-    right: 0;
-    background-color: white;
+    top: 48px;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
+.overlay-toggled {
+    height: 100%;
+}
+
+.overlay-content {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.overlay-item {
+    padding: 8px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 36px;
     color: #818181;
     display: block;
     transition: 0.3s;
 }
 
-.sidenav a:hover {
+.overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
 }
 
-.close {
+.overlay .closebtn {
     position: absolute;
-    top: 18px;
-    left: 10px;
-    border: 2px solid green !important;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #fff;
-    font-size: 24px;
-    -webkit-transition: all 0.2s ease; */
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
 }
 
-.close:hover, .close:focus {
-    color: red;
-    border: 2px solid red !important;
-    text-decoration: none;
-    cursor: pointer;
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-    filter: alpha(opacity=50);
-    opacity: .5;
+.overlay-default {
+    background-color: #8A8B8F;
 }
 
+/* When the height of the screen is less than 450 pixels,
+change the font-size of the links and position the close button again, so they don't overlap */
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+/* When the height of the screen is less than 450 pixels,
+change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-width: 992px) {
+    .content {
+        margin-left: 0px !important;
+    }
+    .sidebar {
+        width: 0 !important;
+    }
+    .nav {
+        width: 0 !important;
+        margin-left: -100% !important;
+        margin-top: -50px !important;
+    }
+    .navSecondary {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+    }
+}
+
+a.username {
+    width: 200px;
+    max-height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .side-nav-toggle {
@@ -69,8 +98,21 @@
     width: 100px;
 }
 
+.logo-content {
+    max-width: 300px;
+    min-width: 300px;
+}
+
+.message-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px;
+}
+
 .topnav a {
     color: #f2f2f2;
+    border-left: 1px solid #78C76C;
     text-align: center;
     padding: 0 15px;
     line-height: 50px;
@@ -85,6 +127,15 @@
 .nav {
     background-color: #8A8B8F;
     max-height: 50px;
+}
+
+.navSecondary {
+    background-color: #8A8B8F;
+    max-height: 50px;
+    transition: 0.5s;
+    width: 0;
+    margin-left: -100%;
+    margin-top: -50px;
 }
 
 .sidebar {
@@ -123,6 +174,15 @@
     color: #FFF;
 }
 
+.content {
+    margin-left: 300px;
+    transition: 0.5s;
+}
+
+.content-toggled {
+    margin-left: 50px;
+}
+
 .menuIcon {
     font-size: 25px;
 }
@@ -138,4 +198,8 @@
 
 .rightArrowIcon {
     float: left;
+}
+
+.inline-block {
+    display: inline-block;
 }
