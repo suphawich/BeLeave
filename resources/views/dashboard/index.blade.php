@@ -18,7 +18,10 @@
             data: {
                 isShowMenuList: true,
                 isShowMenuIcon: false,
-                isOverlayToggled: false
+                isOverlayToggled: false,
+                isHoverSubMenuHome: false,
+                isShowSubMenuManage: false,
+                isHoverSubMenuManage: false
             },
             methods: {
                 lessMoreMenu: function () {
@@ -27,6 +30,31 @@
                 },
                 toggleOverlay: function () {
                     this.isOverlayToggled = !this.isOverlayToggled;
+                },
+                toggleManage: function () {
+                    this.isShowSubMenuManage = !this.isShowSubMenuManage;
+                },
+                hoverMenuHome: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuHome = true;
+                    }
+                },
+                closeMenuHome: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuHome = false;
+                    }
+                },
+                hoverMenuManage: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isShowSubMenuManage = true;
+                        this.isHoverSubMenuManage = true;
+                    }
+                },
+                closeMenuManage: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuManage = false;
+                        this.isShowSubMenuManage = false;
+                    }
                 }
             }
         });

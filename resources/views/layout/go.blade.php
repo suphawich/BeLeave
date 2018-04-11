@@ -55,16 +55,35 @@
                     <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
                     <span class="arrowText"></span>
                 </a>
-                <a href="#" class="sidebar-item sidebar-item-hover-default">
+                <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
                     <span class="menuIcon"><i class="fa fa-home"></i></span>
-                    <span class="menuText" v-if="isShowMenuList"> Home</span>
+                    <span class="menuText"> Home</span>
                 </a>
+                <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuManage }" v-on:click="toggleManage" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
+                    <span class="menuIcon"><i class="fa fa-list-alt"></i></span>
+                    <span class="menuText"> Manage</span>
+                    <span v-if="isShowMenuList">
+                        <span class="float-right menuIcon-2" v-if="isShowSubMenuManage"><i class="fa fa-chevron-up"></i></span>
+                        <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
+                    </span>
+                </a>
+                <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuManage,'subsidebar-icon-toggled': isHoverSubMenuManage}" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <span class="menuText">Events</span>
+                    </a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <span class="menuText">Events alias</span>
+                    </a>
+                </div>
             </div>
             <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
                 <div class="w3-container">
                 <h2>Hello</h2>
                 <p>In this example, we have added a dropdown menu inside the sidebar.</p>
                 <p>Notice the caret-down icon, which we use to indicate that this is a dropdown menu.</p>
+                <br><br><br><br>
+                <p>@{{ isShowSubMenuManage }}</p>
+                <p>@{{ isHoverSubMenuManage }}</p>
                 </div>
             </div>
         </div>

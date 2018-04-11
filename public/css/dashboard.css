@@ -145,7 +145,7 @@ a.username {
     position: fixed!important;
     z-index: 1;
     transition: 0.5s;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .sidebar-toggled {
@@ -160,6 +160,7 @@ a.username {
     text-align: left;
     text-decoration: none;
     padding-left: 12px;
+    padding-right: 15px;
     color: #FFF;
     width: 100%;
     display: inline-block;
@@ -167,11 +168,48 @@ a.username {
     line-height: 50px;
 }
 
+.sidebar-item-toggled {
+    overflow: hidden;
+}
+
+.sidebar-item-toggled-hover {
+    background-color: #8A8B8F;
+    width: 300px;
+}
+
 .sidebar-item-hover-default:hover {
     background-color: #3DAF2C;
     text-decoration: none;
     cursor:pointer;
     color: #FFF;
+}
+
+.subsidebar {
+    left: 0;
+    width: 300px;
+    max-height: 0;
+    position: fixed !important;
+    z-index: 0;
+    -webkit-transition: max-height 0.3s;
+    -moz-transition: max-height 0.3s;
+    -ms-transition: max-height 0.3s;
+    -o-transition: max-height 0.3s;
+    transition: max-height 0.3s;
+    overflow: hidden;
+}
+
+.subsidebar-toggled {
+    max-height: 100px;
+}
+
+.subsidebar-icon-toggled {
+    margin-top: -6px;
+    margin-left: 50px;
+    width: 250px;
+}
+
+.subsidebar-default {
+    background-color: #ADAEB0;
 }
 
 .content {
@@ -185,6 +223,11 @@ a.username {
 
 .menuIcon {
     font-size: 25px;
+    margin-right: 10px;
+}
+
+.menuIcon-2 {
+    font-size: 18px;
 }
 
 .menuText {
@@ -193,7 +236,7 @@ a.username {
 
 .leftArrowIcon {
     float: right;
-    padding-right: 20px;
+    /* padding-right: 20px; */
 }
 
 .rightArrowIcon {
