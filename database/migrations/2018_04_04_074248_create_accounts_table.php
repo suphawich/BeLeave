@@ -17,9 +17,7 @@ class CreateAccountsTable extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('first_name');
-            $table->string('middle_name')->nullable();
-            $table->string('last_name');
+            $table->string('full_name');
             $table->string('avatar');
             $table->string('address');
             $table->enum('access_level', [

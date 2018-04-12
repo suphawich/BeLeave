@@ -48,7 +48,7 @@
         <div class="container-fluid">
             <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
                 <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
-                    <span class="leftArrowIcon menuIcon"><i class="fa fa-chevron-left"></i></span>
+                    <span class="leftArrowIcon menuIcon-nomargin"><i class="fa fa-chevron-left"></i></span>
                     <span class="arrowText"></span>
                 </a>
                 <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuIcon" v-on:click="lessMoreMenu">

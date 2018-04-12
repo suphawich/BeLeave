@@ -226,6 +226,10 @@ a.username {
     margin-right: 10px;
 }
 
+.menuIcon-nomargin {
+    font-size: 25px;
+}
+
 .menuIcon-2 {
     font-size: 18px;
 }
@@ -236,7 +240,6 @@ a.username {
 
 .leftArrowIcon {
     float: right;
-    /* padding-right: 20px; */
 }
 
 .rightArrowIcon {

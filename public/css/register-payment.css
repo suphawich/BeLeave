@@ -1,0 +1,72 @@
+
+.form-content {
+    max-width: 900px;
+}
+
+.payment-type-content {
+    border: 1px solid #565960;
+    margin-bottom: 10px;
+}
+
+.payment-type-header {
+    background-color: #F4F4F4;
+}
+
+.payment-type-item {
+    font-size: 18px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    max-height: 150px;
+}
+
+.payment-type-text {
+    margin-left: 8px;
+}
+
+.payment-type-radio {
+    border: 1px solid #565960;
+}
+
+.creditcard-form {
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+.creditcard-form input {
+    margin-bottom: 5px;
+}
+
+.creditcard-form-number {
+    width: 120px;
+}
+
+.creditcard-form-month {
+    width: 70px;
+}
+
+.creditcard-form-year {
+    width: 70px;
+}
+
+.creditcard-form-cvv {
+    width: 50px;
+}
+
+@media screen and (max-width: 576px) {
+    .payment-submit {
+        font-size: 16px;
+    }
+    .payment-type-header {
+        font-size: 16px;
+    }
+    .payment-type-item {
+        font-size: 14px;
+        max-height: 200px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .payment-submit {
+        font-size: 12px;
+    }
+}
