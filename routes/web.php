@@ -30,3 +30,7 @@ Route::get('/register-payment', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 });
+
+Route::get('/register-complete', function () {
+    return view('register.complete');
+});

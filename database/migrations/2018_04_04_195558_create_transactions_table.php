@@ -16,13 +16,14 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedinteger('supervisor_id');
+            $table->unsignedinteger('plan_id');
             $table->enum('payment_type', [
-                'Bank', 'Credit Card', 'Paypal'
+                'Credit Card', 'Paypal'
             ]);
-            $table->timestamp('paid_at')->nullable();
             $table->timestamps();
 
             $table->foreign('supervisor_id')->references('id')->on('accounts');
+            $table->foreign('plan_id')->references('id')->on('plans');
         });
     }
 
@@ -36,6 +37,7 @@ class CreateTransactionsTable extends Migration
         Schema::enableForeignKeyConstraints();
         Schema::table('transactions', function(Blueprint $table) {
             $table->dropForeign(['supervisor_id']);
+            $table->dropForeign(['plan_id']);
         });
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('transactions');

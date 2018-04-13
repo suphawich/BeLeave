@@ -28,11 +28,7 @@
                     <img src="/images/logo.png" class="logo" alt="logo website">
                 </div>
                 <div class="form-group input-group">
-                    {{-- <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                    </div> --}}
                     <input type="text" class="form-control" name="full_name" pattern="[A-Za-z]" placeholder="Full name*" required>
-                    {{-- <input type="text" class="form-control" placeholder="Middle name*" required> --}}
                 </div>
                 <div class="form-group input-group">
                     <input type="text" class="form-control" name="company_name" pattern="[A-Za-z]" placeholder="Comoany name*" required>
@@ -40,9 +36,6 @@
                 <div class="form-group input-group">
                     <input type="email" class="form-control" name="company_email" placeholder="Company email*" required>
                 </div>
-                {{-- <div id="password-container" class="form-group input-group" v-if="isShowPasswordContainer">
-                    <input type="password" class="form-control" placeholder="Password" required>
-                </div> --}}
                 <div class="form-group input-group">
                     <input type="text" class="form-control" name="address" placeholder="Address" required>
                 </div>
