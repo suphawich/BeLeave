@@ -15,13 +15,9 @@ Route::get('/', function () {
     return view('home.index');
 });
 
-Route::get('/login', function () {
-    return view('login.index');
-});
+Route::any('/login', 'LoginController@index');
 
-Route::get('/register', function () {
-    return view('register.index');
-});
+Route::any('/register', 'RegisterController@save');
 
 Route::get('/register-payment', function () {
     return view('register.payment');

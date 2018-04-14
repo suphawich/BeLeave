@@ -14,7 +14,8 @@
 @endsection
 
 @section('form')
-    <form id="form-login" method="get">
+    <form id="form-login" action="login" method="post">
+        <input type="hidden" name="_token" value={{ csrf_token() }}>
         <div class="container">
             <div class="form-content">
                 <div class="form-group text-center">
@@ -24,7 +25,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                     </div>
-                    <input type="email" class="form-control" v-model="userId"
+                    <input type="email" class="form-control" v-model="userId" name="email"
                     placeholder="Please enter E-mail address" required>
                 </div>
                 <div id="next-container" class="form-group" v-if="isShowNextContainer">
@@ -34,7 +35,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" v-model="password" placeholder="Please enter Password" required>
+                    <input type="password" class="form-control" v-model="password" name="" placeholder="Please enter Password" required>
                 </div>
                 <div id="login-container" class="form-group" v-if="isShowLoginContainer">
                     <button type="submit" class="form-control btn btn-danger"><i class="fa fa-sign-in"></i> Login</button>
@@ -44,7 +45,7 @@
                     <a href="#"><i class="fa fa-lock"></i> Forget password?</a>
                     <br>
                     <a href="#"><i class="fa fa-user"></i> Sign up</a>
-                    <p>@{{ isTrue }}</p>
+                    <p>{{ $email or 'don\'t have email variable' }}</p>
                 </div>
             </div>
         </div>
