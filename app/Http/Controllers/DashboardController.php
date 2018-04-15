@@ -10,13 +10,13 @@ class DashboardController extends Controller
         if ($request->session()->has('login_successful') || $request->session()->has('id')) {
             $access_level = $request->session()->get('access_level');
             if ($access_level == "Administrator") {
-                return view('dashboard.administrator');
+                return view('dashboard.index');
             } else if ($access_level == "Supervisor") {
-                return view('dashboard.supervisor');
+                return view('dashboard.index');
             } else if ($access_level == "Subordinate") {
-                return view('dashboard.subordinate');
+                return view('dashboard.index');
             } else {
-                return view('dashboard.guest');
+                return view('dashboard.index');
             }
         } else {
             return redirect('login');
