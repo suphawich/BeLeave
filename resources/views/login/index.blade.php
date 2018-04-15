@@ -21,11 +21,14 @@
                 <div class="form-group text-center">
                     <img src="/images/logo.png" class="logo" alt="logo website">
                 </div>
+                <div class="alert alert-danger" v-if="{{ $isWrong or 'false' }}">
+                    <strong>Please enter email or password again.</strong>
+                </div>
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                     </div>
-                    <input type="email" class="form-control" v-model="userId" name="email"
+                    <input type="email" class="form-control" name="email" value="{{ $oldEmail or '' }}"
                     placeholder="Please enter E-mail address" required>
                 </div>
                 <div id="next-container" class="form-group" v-if="isShowNextContainer">
@@ -35,7 +38,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" v-model="password" name="" placeholder="Please enter Password" required>
+                    <input type="password" class="form-control" v-model="password" name="password" placeholder="Please enter Password" required>
                 </div>
                 <div id="login-container" class="form-group" v-if="isShowLoginContainer">
                     <button type="submit" class="form-control btn btn-danger"><i class="fa fa-sign-in"></i> Login</button>
@@ -45,7 +48,6 @@
                     <a href="#"><i class="fa fa-lock"></i> Forget password?</a>
                     <br>
                     <a href="#"><i class="fa fa-user"></i> Sign up</a>
-                    <p>{{ $email or 'don\'t have email variable' }}</p>
                 </div>
             </div>
         </div>

@@ -58,7 +58,7 @@
                     <img src="/images/logo.png" class="logo" alt="logo website">
                 </div>
                 <div class="form-group input-group">
-                    <input type="text" class="form-control" name="full_name" v-model="fullName" v-on:keyup="checkFullName" pattern="[A-Za-z][A-Za-z ]+" placeholder="Full name*" required>
+                    <input type="text" class="form-control" name="full_name" pattern="[A-Za-z][A-Za-z ]+" placeholder="Full name*" required>
                     {{-- <div class="input-group-prepend" v-if="isCurrectFullName && !isEmptyFullName">
                         <span class="input-group-text"><i class="fa fa-check"></i></span>
                     </div>
