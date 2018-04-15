@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     public function check(Request $request) {
+        if ($request->session()->has('id')) { return redirect('dashboard');}
         $data = array(
             'isWrong' => 'true'
         );
@@ -16,10 +17,12 @@ class LoginController extends Controller
             $data['oldEmail'] = $email;
 
             $dbEmail = \App\Account::where('email', $email)->get()->toArray();
+            $dbEmail = $dbEmail[0];
             if (count($dbEmail) > 0) {
-                $dbPassword = $dbEmail[0]['password'];
+                $dbPassword = $dbEmail['password'];
                 if (password_verify($password, $dbPassword)) {
-                    session($dbEmail);
+                    foreach ($dbEmail as $key => $value) { $request->session()->put($key, $value);}
+                    $request->session()->flash('login_successful');
                     return redirect('dashboard');
                 } else {
                     return view('login.index', $data);
@@ -30,5 +33,10 @@ class LoginController extends Controller
         } else {
             return view('login.index');
         }
+    }
+
+    public function getLogout(Request $request) {
+        $request->session()->flush();
+        return redirect('login');
     }
 }

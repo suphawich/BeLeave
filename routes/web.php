@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::any('/login', 'LoginController@check');
+Route::any('/logout', 'LoginController@getLogout');
 
 Route::any('/register', 'RegisterController@save');
 
@@ -23,10 +24,8 @@ Route::get('/register-payment', function () {
     return view('register.payment');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
-
 Route::get('/register-complete', function () {
     return view('register.complete');
 });
+
+Route::get('/dashboard', 'DashboardController@check');
