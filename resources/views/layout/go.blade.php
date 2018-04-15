@@ -69,22 +69,54 @@
                         <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
                     </span>
                 </a>
-                <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuManage,'subsidebar-icon-toggled': isHoverSubMenuManage}" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
+                <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuManage,'subsidebar-icon-toggled': isHoverSubMenuManage,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
                     <a href="#" class="sidebar-item sidebar-item-hover-default">
-                        <span class="menuText">Events</span>
+                        <span class="menuText">Leave</span>
                     </a>
                     <a href="#" class="sidebar-item sidebar-item-hover-default">
-                        <span class="menuText">Events alias</span>
+                        <span class="menuText">Leave history</span>
                     </a>
                 </div>
+                <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
+                    <span class="menuIcon"><i class="fa fa-signal"></i></span>
+                    <span class="menuText"> Analytics</span>
+                    <span v-if="isShowMenuList">
+                        <span class="float-right menuIcon-2" v-if="isShowSubMenuAnalytics"><i class="fa fa-chevron-up"></i></span>
+                        <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
+                    </span>
+                </a>
+                <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAnalytics,'subsidebar-icon-toggled': isHoverSubMenuAnalytics,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <span class="menuText">Graph</span>
+                    </a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <span class="menuText">Leave tracking</span>
+                    </a>
+                </div>
+                <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAccounts}" v-on:click="toggleAccounts" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
+                    <span class="menuIcon"><i class="fa fa-users"></i></span>
+                    <span class="menuText"> Accounts</span>
+                    <span v-if="isShowMenuList">
+                        <span class="float-right menuIcon-2" v-if="isShowSubMenuAccounts"><i class="fa fa-chevron-up"></i></span>
+                        <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
+                    </span>
+                </a>
+                <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAccounts,'subsidebar-icon-toggled': isHoverSubMenuAccounts,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <span class="menuText">Create subordinate</span>
+                    </a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <span class="menuText">Tasks</span>
+                    </a>
+                </div>
+                <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuSetting}" @mouseover="hoverMenuSetting" @mouseout="closeMenuSetting">
+                    <span class="menuIcon"><i class="fa fa-cog"></i></span>
+                    <span class="menuText"> Setting</span>
+                </a>
             </div>
             <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
                 <div class="w3-container">
-                <h2>Hello</h2>
-                <p>In this example, we have added a dropdown menu inside the sidebar.</p>
-                <p>Notice the caret-down icon, which we use to indicate that this is a dropdown menu.</p>
-                <br><br><br><br>
-                <p>@yield('access_level')</p>
+                    @yield('content')
                 </div>
             </div>
         </div>
@@ -103,19 +135,37 @@
                 isShowMenuIcon: false,
                 isOverlayToggled: false,
                 isHoverSubMenuHome: false,
+
                 isShowSubMenuManage: false,
-                isHoverSubMenuManage: false
+                isHoverSubMenuManage: false,
+
+                isShowSubMenuAnalytics: false,
+                isHoverSubMenuAnalytics: false,
+
+                isShowSubMenuAccounts: false,
+                isHoverSubMenuAccounts: false,
+
+                isHoverSubMenuSetting: false
             },
             methods: {
                 lessMoreMenu: function () {
                     this.isShowMenuList = !this.isShowMenuList;
                     this.isShowMenuIcon = !this.isShowMenuIcon;
+                    this.isShowSubMenuManage = false;
+                    this.isShowSubMenuAnalytics = false;
+                    this.isShowSubMenuAccounts = false;
                 },
                 toggleOverlay: function () {
                     this.isOverlayToggled = !this.isOverlayToggled;
                 },
                 toggleManage: function () {
                     this.isShowSubMenuManage = !this.isShowSubMenuManage;
+                },
+                toggleAnalytics: function () {
+                    this.isShowSubMenuAnalytics = !this.isShowSubMenuAnalytics;
+                },
+                toggleAccounts: function () {
+                    this.isShowSubMenuAccounts = !this.isShowSubMenuAccounts;
                 },
                 hoverMenuHome: function () {
                     if (this.isShowMenuIcon) {
@@ -137,6 +187,40 @@
                     if (this.isShowMenuIcon) {
                         this.isHoverSubMenuManage = false;
                         this.isShowSubMenuManage = false;
+                    }
+                },
+                hoverMenuAnalytics: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isShowSubMenuAnalytics = true;
+                        this.isHoverSubMenuAnalytics = true;
+                    }
+                },
+                closeMenuAnalytics: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuAnalytics = false;
+                        this.isShowSubMenuAnalytics = false;
+                    }
+                },
+                hoverMenuAccounts: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isShowSubMenuAccounts = true;
+                        this.isHoverSubMenuAccounts = true;
+                    }
+                },
+                closeMenuAccounts: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuAccounts = false;
+                        this.isShowSubMenuAccounts = false;
+                    }
+                },
+                hoverMenuSetting: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuSetting = true;
+                    }
+                },
+                closeMenuSetting: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuSetting = false;
                     }
                 }
             }

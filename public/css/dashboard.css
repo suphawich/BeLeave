@@ -188,18 +188,17 @@ a.username {
     left: 0;
     width: 300px;
     max-height: 0;
-    position: fixed !important;
+    /* position: fixed !important; */
     z-index: 0;
-    -webkit-transition: max-height 0.3s;
-    -moz-transition: max-height 0.3s;
-    -ms-transition: max-height 0.3s;
-    -o-transition: max-height 0.3s;
-    transition: max-height 0.3s;
     overflow: hidden;
 }
 
+.subsidebar-transition {
+    transition: max-height 0.3s;
+}
+
 .subsidebar-toggled {
-    max-height: 100px;
+    max-height: 200px;
 }
 
 .subsidebar-icon-toggled {
@@ -248,4 +247,9 @@ a.username {
 
 .inline-block {
     display: inline-block;
+}
+
+.w3-container {
+    margin-left: -10px;
+    margin-right: -10px;
 }
