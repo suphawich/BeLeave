@@ -10,7 +10,7 @@
     
 # Config
 1. edit default disk path (for storing file)
-    - In config/filesystem.php change "storage_path()" to "public_path()"
+    - In "config/filesystem.php" change "storage_path()" to "public_path()"
 
 # How to commit file to gitHub
     - Upload folder app, database, public, resources, routes or file has been edited only.
