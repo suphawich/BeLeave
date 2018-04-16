@@ -21,12 +21,12 @@ class CreateAccountsTable extends Migration
             $table->string('avatar');
             $table->string('address');
             $table->enum('access_level', [
-                'Subordinate', 'Supervisor', 'Administrator'
+                'Guest', 'Subordinate', 'Supervisor', 'Administrator'
             ]);
             $table->string('tel');
             $table->string('company_name');
             $table->boolean('is_enabled');
-            $table->rememberToken('token');
+            $table->string('token', 100);
             $table->timestamps();
         });
     }
