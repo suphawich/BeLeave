@@ -22,4 +22,20 @@ class DashboardController extends Controller
             return redirect('login');
         }
     }
+
+    public function getProfile(Request $request) {
+        if ($request->session()->has('login_successful') || $request->session()->has('id')) {
+            return view('dashboard.profile');
+        } else {
+            return redirect('login');
+        }
+    }
+
+    public function getChangepwd(Request $request) {
+        if ($request->session()->has('login_successful') || $request->session()->has('id')) {
+            return view('dashboard.changepwd');
+        } else {
+            return redirect('login');
+        }
+    }
 }

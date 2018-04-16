@@ -1,5 +1,9 @@
 @extends('layout.go')
 
+@push('style')
+
+@endpush
+
 @section('title')
     Dashboard
 @endsection

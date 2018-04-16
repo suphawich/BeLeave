@@ -6,6 +6,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    @stack('style')
 </head>
 <body>
     <div id="dashboard">
@@ -40,7 +41,7 @@
                     <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">
                         <div class="row float-right topnav">
                             <a href="#"><span><i class="fa fa-bell"></i></span><span class="badge badge-pill badge-dark">2</span> </a>
-                            <a href="#" class="username"><span><i class="fa fa-user"></i></span><span>{{ session()->get('full_name') }}</span></a>
+                            <a href="profile" class="username"><span><i class="fa fa-user"></i></span><span>{{ session()->get('full_name') }}</span></a>
                             <a href="logout"><span><i class="fa fa-sign-out"></i></span><span> Log Out</span></a>
                         </div>
                     </div>
@@ -127,6 +128,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {{-- <script src="/js/app.js" charset="utf-8"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    @stack('script')
     <script>
         new Vue({
             el: '#dashboard',
@@ -145,7 +147,9 @@
                 isShowSubMenuAccounts: false,
                 isHoverSubMenuAccounts: false,
 
-                isHoverSubMenuSetting: false
+                isHoverSubMenuSetting: false,
+
+                @yield('script-data')
             },
             methods: {
                 lessMoreMenu: function () {
@@ -222,7 +226,8 @@
                     if (this.isShowMenuIcon) {
                         this.isHoverSubMenuSetting = false;
                     }
-                }
+                },
+                @yield('script-methods')
             }
         });
     </script>

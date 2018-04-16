@@ -29,3 +29,6 @@ Route::get('/register-complete', function () {
 });
 
 Route::get('/dashboard', 'DashboardController@check');
+Route::any('/profile', 'DashboardController@getProfile');
+Route::any('edit-profile', 'ProfileController@edit');
+Route::get('change-password', 'DashboardController@getChangepwd');

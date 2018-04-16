@@ -64,6 +64,7 @@ change the font-size of the links and position the close button again, so they d
     }
     .sidebar {
         width: 0 !important;
+        margin-left: -100%;
     }
     .nav {
         width: 0 !important;
@@ -143,6 +144,7 @@ a.username {
     height: 100%;
     width: 300px;
     position: fixed!important;
+    display: block;
     z-index: 1;
     transition: 0.5s;
     /* overflow: auto; */
