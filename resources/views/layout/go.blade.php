@@ -35,7 +35,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 logo-content">
-                        <img src="/images/logo.png" class="logo" alt="logo website">
+                        <a href="dashboard"><img src="/images/logo.png" class="logo" alt="logo website"></a>
                     </div>
                     <div class="col"></div>
                     <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">
@@ -58,7 +58,7 @@
                     <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
                     <span class="arrowText"></span>
                 </a>
-                <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
+                <a href="dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
                     <span class="menuIcon"><i class="fa fa-home"></i></span>
                     <span class="menuText"> Home</span>
                 </a>
@@ -96,15 +96,21 @@
                 </div>
                 <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAccounts}" v-on:click="toggleAccounts" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
                     <span class="menuIcon"><i class="fa fa-users"></i></span>
-                    <span class="menuText"> Accounts</span>
+                    <span class="menuText"> Account</span>
                     <span v-if="isShowMenuList">
                         <span class="float-right menuIcon-2" v-if="isShowSubMenuAccounts"><i class="fa fa-chevron-up"></i></span>
                         <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
                     </span>
                 </a>
                 <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAccounts,'subsidebar-icon-toggled': isHoverSubMenuAccounts,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
+                    <a href="/profile" class="sidebar-item sidebar-item-hover-default">
+                        <span class="menuText">Personalization</span>
+                    </a>
                     <a href="#" class="sidebar-item sidebar-item-hover-default">
-                        <span class="menuText">Create subordinate</span>
+                        <span class="menuText">Subscription</span>
+                    </a>
+                    <a href="/users" class="sidebar-item sidebar-item-hover-default">
+                        <span class="menuText">Users</span>
                     </a>
                     <a href="#" class="sidebar-item sidebar-item-hover-default">
                         <span class="menuText">Tasks</span>

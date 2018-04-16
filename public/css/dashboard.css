@@ -97,6 +97,8 @@ a.username {
 
 .logo {
     width: 100px;
+    height: 50px;
+    border: 0;
 }
 
 .logo-content {
@@ -254,4 +256,9 @@ a.username {
 .w3-container {
     margin-left: -10px;
     margin-right: -10px;
+}
+
+.body-content {
+    /* background-color: lightblue; */
+    margin-top: 20px;
 }
