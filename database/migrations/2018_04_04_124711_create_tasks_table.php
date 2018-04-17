@@ -15,14 +15,11 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedinteger('subordinate_id');
             $table->string('task');
-            $table->string('substitute_task');
-            $table->boolean('can_leave');
-            $table->boolean('is_left');
-            $table->unsignedinteger('leave_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('leave_id')->references('id')->on('leaves');
+            $table->foreign('subordinate_id')->references('id')->on('accounts');
         });
     }
 
@@ -35,7 +32,7 @@ class CreateTasksTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
         Schema::table('tasks', function(Blueprint $table) {
-            $table->dropForeign(['leave_id']);
+            $table->dropForeign(['subordinate_id']);
         });
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('tasks');

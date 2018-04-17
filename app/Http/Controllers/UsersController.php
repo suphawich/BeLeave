@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Account;
 use App\Department;
+use App\Task;
 
 class UsersController extends Controller
 {
-    public function index() {
-        $subordinates = Department::where('supervisor_id', '11')->pluck('subordinate_id');
-
-    }
-
     public function retoken(Request $request) {
         $new = str_random(64);
         $id = $request->session()->get('id');
@@ -54,6 +50,11 @@ class UsersController extends Controller
         $department->supervisor_id = $supervisor_id;
         $department->subordinate_id = $user->id;
         $department->save();
+
+        $task = new Task;
+        $task->subordinate_id = $user->id;
+        $task->task = $request->input('task');
+        $task->save();
 
         return back();
     }

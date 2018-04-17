@@ -99,17 +99,22 @@
                                 <button type="submit" name="save" class="btn btn-secondary"><i class="fa fa-check-square-o"></i> Ok</button>
                             </td>
                         </tr>
-                        <tr>
-                            {{-- <th scope="row">1</th> --}}
-                            <td>{{ session()->get('full_name') }}</td>
-                            <td></td>
-                            <td>{{ session()->get('email') }}</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        @foreach ($subordinates as $subordinate)
+                            <tr>
+                                <td>{{ $subordinate->full_name }}</td>
+                                <td>{{ $subordinate->task ?? '-' }}</td>
+                                <td>{{ $subordinate->email }}</td>
+                                <td>{{ $subordinate->tel }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
                 </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 ml-auto mr-auto mt-5">
+                {{ $subordinates->appends(['sort' => request()->sort])->links() }}
             </div>
         </div>
     </div>
