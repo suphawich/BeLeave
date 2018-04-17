@@ -34,3 +34,4 @@ Route::any('edit-profile', 'ProfileController@edit');
 Route::get('change-password', 'DashboardController@getChangepwd');
 Route::get('users', 'DashboardController@getUsers');
 Route::get('re-token', 'UsersController@retoken');
+Route::post('user-create', 'UsersController@create');

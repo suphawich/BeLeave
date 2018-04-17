@@ -74,7 +74,10 @@
         </div>
         <div class="row">
             <div class="col-12 table-responsive">
-                <form method="post">
+                <form action="/user-create" method="post" >
+                @csrf
+                <input type="hidden" name="supervisor_id" value="{{ session()->get('id') }}">
+                <input type="hidden" name="company_name" value="{{ session()->get('company_name') }}">
                 <table class="table table-hover">
                     <thead class="table-text">
                         <tr>

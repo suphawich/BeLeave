@@ -19,7 +19,7 @@ class CreateAccountsTable extends Migration
             $table->string('password');
             $table->string('full_name');
             $table->string('avatar');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->enum('access_level', [
                 'Guest', 'Subordinate', 'Supervisor', 'Administrator'
             ]);
