@@ -29,4 +29,8 @@ class ManageController extends Controller
         $setting = Account_setting::where('account_id', $account_id)->update($data);
         return redirect('/request');
     }
+
+    public function takeLeave(Request $request) {
+        return "Hello";
+    }
 }

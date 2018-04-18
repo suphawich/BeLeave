@@ -95,8 +95,12 @@ class DashboardController extends Controller
 
     public function getRequest(Request $request) {
         $supervisor_id = $request->session()->get('id');
-        $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('account_settings', 'departments.subordinate_id', '=', 'account_settings.account_id')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('accounts.*','account_settings.*')->where('is_r2sup', '1')->paginate(1);
+        $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('account_settings', 'departments.subordinate_id', '=', 'account_settings.account_id')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('accounts.*','account_settings.*')->where('is_r2sup', '1')->paginate(15);
         return view('dashboard.request', ['settings' => $settings]);
+    }
+
+    public function getLeave(Request $request) {
+        return view('dashboard.leave');
     }
 
     private function hasLogedin($request) {
