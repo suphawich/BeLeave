@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>@yield('title')</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <title><?php echo $__env->yieldContent('title'); ?></title>
+    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    @stack('style')
+    <link href="<?php echo e(asset('css/dashboard.css')); ?>" rel="stylesheet">
+    <?php echo $__env->yieldPushContent('style'); ?>
 </head>
 <body>
     <div id="dashboard">
@@ -41,15 +41,15 @@
                     <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">
                         <div class="row float-right topnav">
                             <a href="#"><span><i class="fa fa-bell"></i></span><span class="badge badge-pill badge-dark">2</span> </a>
-                            <a href="profile" class="username"><span><i class="fa fa-user"></i></span><span>{{ session()->get('full_name') }}</span></a>
+                            <a href="profile" class="username"><span><i class="fa fa-user"></i></span><span><?php echo e(session()->get('full_name')); ?></span></a>
                             <a href="logout"><span><i class="fa fa-sign-out"></i></span><span> Log Out</span></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @if (session()->get('access_level') == 'Administrator')
-        @elseif (session()->get('access_level') == 'Supervisor' || session()->get('access_level') == 'Guest')
+        <?php if(session()->get('access_level') == 'Administrator'): ?>
+        <?php elseif(session()->get('access_level') == 'Manager' || session()->get('access_level') == 'Guest'): ?>
             <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
@@ -78,6 +78,9 @@
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Leave history</span>
+                        </a>
+                        <a href="/request" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Request</span>
                         </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
@@ -125,11 +128,12 @@
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
                     <div class="w3-container">
-                        @yield('content')
+                        <?php echo $__env->yieldContent('content'); ?>
                     </div>
                 </div>
             </div>
-        @elseif (session()->get('access_level') == 'Subordinate')
+        <?php elseif(session()->get('access_level') == 'Supervisor'): ?>
+        <?php elseif(session()->get('access_level') == 'Subordinate'): ?>
             <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
@@ -144,7 +148,7 @@
                         <span class="menuIcon"><i class="fa fa-home"></i></span>
                         <span class="menuText"> Home</span>
                     </a>
-                    <a href="dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeave}" @mouseover="hoverMenuLeave" @mouseout="closeMenuLeave">
+                    <a href="leave" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeave}" @mouseover="hoverMenuLeave" @mouseout="closeMenuLeave">
                         <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
                         <span class="menuText"> Leave</span>
                     </a>
@@ -156,22 +160,26 @@
                         <span class="menuIcon"><i class="fa fa-user"></i></span>
                         <span class="menuText"> Prosonalization</span>
                     </a>
+                    <a href="/setting" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuSetting}" @mouseover="hoverMenuSetting" @mouseout="closeMenuSetting">
+                        <span class="menuIcon"><i class="fa fa-cog"></i></span>
+                        <span class="menuText"> Setting</span>
+                    </a>
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
                     <div class="w3-container">
-                        @yield('content')
+                        <?php echo $__env->yieldContent('content'); ?>
                     </div>
                 </div>
             </div>
-        @endif
+        <?php endif; ?>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    {{-- <script src="/js/app.js" charset="utf-8"></script> --}}
+    
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    @stack('script')
+    <?php echo $__env->yieldPushContent('script'); ?>
     <script>
         new Vue({
             el: '#dashboard',
@@ -196,7 +204,7 @@
                 isHoverSubMenuLeaveHistory: false,
                 isHoverSubMenuPersonal: false,
 
-                @yield('script-data')
+                <?php echo $__env->yieldContent('script-data'); ?>
             },
             methods: {
                 lessMoreMenu: function () {
@@ -304,7 +312,7 @@
                         this.isHoverSubMenuPersonal = false;
                     }
                 },
-                @yield('script-methods')
+                <?php echo $__env->yieldContent('script-methods'); ?>
             }
         });
     </script>
