@@ -82,6 +82,7 @@
                     <thead class="table-text">
                         <tr>
                             <th scope="col">Full name</th>
+                            <th scope="col" v-if="!isShowNewUser">Supervisor name</th>
                             <th scope="col">Task</th>
                             <th scope="col">E-mail</th>
                             <th scope="col">Phone number</th>
@@ -91,6 +92,7 @@
                         <tr v-if="isShowNewUser">
                             {{-- <th scope="row">1</th> --}}
                             <td><input type="text" name="full_name" class="form-control" pattern="[A-Za-z][A-Za-z ]+" placeholder="Full name*" required></td>
+                            {{-- <td><input type="text" name="supervisor_name" class="form-control" value="{{ session()->get('full_name') }}" disabled ></td> --}}
                             <td><input type="text" name="task" class="form-control" pattern="[A-Za-z][A-Za-z ]+" placeholder="Task*" required></td>
                             <td><input type="email" name="email" class="form-control" placeholder="Email address" required></td>
                             <td><input type="text" name="tel" class="form-control" pattern="[0-9][0-9+]+" placeholder="Phone Number" required></td>
@@ -102,6 +104,7 @@
                         @foreach ($subordinates as $subordinate)
                             <tr>
                                 <td>{{ $subordinate->full_name }}</td>
+                                <td v-if="!isShowNewUser">{{ $subordinate->supervisor_name ?? '-' }}</td>
                                 <td>{{ $subordinate->task ?? '-' }}</td>
                                 <td>{{ $subordinate->email }}</td>
                                 <td>{{ $subordinate->tel }}</td>
