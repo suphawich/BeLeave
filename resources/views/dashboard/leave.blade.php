@@ -28,7 +28,7 @@
             <div class="col-12">
                 <div class="form-group input-group">
                     <label>Leave type</label>
-                    {!! Form::select('leave_type', ['Vacation' => 'Vacation leave', 'Personal Errand' => 'Personal errand leave', 'Sick' => 'Sick leave'], null,['class' => 'form-control']) !!}
+                    {!! Form::select('leave_type', ['Vacation' => 'Vacation leave', 'Personal Errand' => 'Personal errand leave', 'Sick' => 'Sick leave'], null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group input-group">
                     {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
@@ -38,9 +38,9 @@
                 <div class="form-group input-group">
                     {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
                     <label>Arrive date</label>
-                    {{ Form::date('arrive_at', null, ['class' => 'form-control']) }}
+                    {!! Form::date('arrive_at', null, ['class' => 'form-control']) !!}
                 </div>
-                {{ Form::submit('Send', ['class' => 'btn btn-light']) }}
+                {!! Form::submit('Send', ['class' => 'btn btn-light']) !!}
             </div>
             {!! Form::close() !!}
         </div>
