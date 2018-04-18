@@ -1,0 +1,28 @@
+.copy-message {
+    color: #A49596;
+}
+.table-text {
+    color: #666666;
+}
+.thead-fullname {
+    /* max-width: 250px;
+    width: 250px; */
+}
+.thead-task {
+    /* max-width: 150px;
+    width: 150px; */
+}
+.thead-email {
+    /* max-width: 100px; */
+    /* width: 50px; */
+    overflow: hidden;
+}
+.thead-tel {
+    width: 100px;
+}
+.tbody-text {
+    color: #7D6666;
+}
+.text-center {
+    text-align: center;
+}

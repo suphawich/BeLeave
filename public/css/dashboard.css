@@ -1,0 +1,264 @@
+.overlay {
+    height: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 48px;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-toggled {
+    height: 100%;
+}
+
+.overlay-content {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.overlay-item {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+.overlay-default {
+    background-color: #8A8B8F;
+}
+
+/* When the height of the screen is less than 450 pixels,
+change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+/* When the height of the screen is less than 450 pixels,
+change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-width: 992px) {
+    .content {
+        margin-left: 0px !important;
+    }
+    .sidebar {
+        width: 0 !important;
+        margin-left: -100%;
+    }
+    .nav {
+        width: 0 !important;
+        margin-left: -100% !important;
+        margin-top: -50px !important;
+    }
+    .navSecondary {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+    }
+}
+
+a.username {
+    width: 200px;
+    max-height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.side-nav-toggle {
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.logo {
+    width: 100px;
+    height: 50px;
+    border: 0;
+}
+
+.logo-content {
+    max-width: 300px;
+    min-width: 300px;
+}
+
+.message-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px;
+}
+
+.topnav a {
+    color: #f2f2f2;
+    border-left: 1px solid #78C76C;
+    text-align: center;
+    padding: 0 15px;
+    line-height: 50px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.topnav a:hover {
+    background-color: #3DAF2C;
+}
+
+.nav {
+    background-color: #8A8B8F;
+    max-height: 50px;
+}
+
+.navSecondary {
+    background-color: #8A8B8F;
+    max-height: 50px;
+    transition: 0.5s;
+    width: 0;
+    margin-left: -100%;
+    margin-top: -50px;
+}
+
+.sidebar {
+    left: 0;
+    height: 100%;
+    width: 300px;
+    position: fixed!important;
+    display: block;
+    z-index: 1;
+    transition: 0.5s;
+    /* overflow: auto; */
+}
+
+.sidebar-toggled {
+    width: 50px;
+}
+
+.sidebar-default {
+    background-color: #8A8B8F;
+}
+
+.sidebar-item {
+    text-align: left;
+    text-decoration: none;
+    padding-left: 12px;
+    padding-right: 15px;
+    color: #FFF;
+    width: 100%;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+}
+
+.sidebar-item-toggled {
+    overflow: hidden;
+}
+
+.sidebar-item-toggled-hover {
+    background-color: #8A8B8F;
+    width: 300px;
+}
+
+.sidebar-item-hover-default:hover {
+    background-color: #3DAF2C;
+    text-decoration: none;
+    cursor:pointer;
+    color: #FFF;
+}
+
+.subsidebar {
+    left: 0;
+    width: 300px;
+    max-height: 0;
+    /* position: fixed !important; */
+    z-index: 0;
+    overflow: hidden;
+}
+
+.subsidebar-transition {
+    transition: max-height 0.3s;
+}
+
+.subsidebar-toggled {
+    max-height: 200px;
+}
+
+.subsidebar-icon-toggled {
+    margin-top: -6px;
+    margin-left: 50px;
+    width: 250px;
+}
+
+.subsidebar-default {
+    background-color: #ADAEB0;
+}
+
+.content {
+    margin-left: 300px;
+    transition: 0.5s;
+}
+
+.content-toggled {
+    margin-left: 50px;
+}
+
+.menuIcon {
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.menuIcon-nomargin {
+    font-size: 25px;
+}
+
+.menuIcon-2 {
+    font-size: 18px;
+}
+
+.menuText {
+    font-size: 16px;
+}
+
+.leftArrowIcon {
+    float: right;
+}
+
+.rightArrowIcon {
+    float: left;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.w3-container {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.body-content {
+    /* background-color: lightblue; */
+    margin-top: 20px;
+}
