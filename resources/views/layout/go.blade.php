@@ -48,7 +48,8 @@
                 </div>
             </div>
         </div>
-        @if (session()->get('access_level') == "Supervisor" || session()->get('access_level') == "Guest")
+        @if (session()->get('access_level') == 'Administrator')
+        @elseif (session()->get('access_level') == 'Supervisor' || session()->get('access_level') == 'Guest')
             <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
@@ -129,6 +130,39 @@
                 </div>
             </div>
         @elseif (session()->get('access_level') == 'Subordinate')
+            <div class="container-fluid">
+                <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
+                        <span class="leftArrowIcon menuIcon-nomargin"><i class="fa fa-chevron-left"></i></span>
+                        <span class="arrowText"></span>
+                    </a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuIcon" v-on:click="lessMoreMenu">
+                        <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
+                        <span class="arrowText"></span>
+                    </a>
+                    <a href="dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
+                        <span class="menuIcon"><i class="fa fa-home"></i></span>
+                        <span class="menuText"> Home</span>
+                    </a>
+                    <a href="dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeave}" @mouseover="hoverMenuLeave" @mouseout="closeMenuLeave">
+                        <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
+                        <span class="menuText"> Leave</span>
+                    </a>
+                    <a href="dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeaveHistory}" @mouseover="hoverMenuLeaveHistory" @mouseout="closeMenuLeaveHistory">
+                        <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
+                        <span class="menuText"> Leave History</span>
+                    </a>
+                    <a href="/profile" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuPersonal}" @mouseover="hoverMenuPersonal" @mouseout="closeMenuPersonal">
+                        <span class="menuIcon"><i class="fa fa-user"></i></span>
+                        <span class="menuText"> Prosonalization</span>
+                    </a>
+                </div>
+                <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
+                    <div class="w3-container">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         @endif
     </div>
 
@@ -157,6 +191,10 @@
                 isHoverSubMenuAccounts: false,
 
                 isHoverSubMenuSetting: false,
+
+                isHoverSubMenuLeave: false,
+                isHoverSubMenuLeaveHistory: false,
+                isHoverSubMenuPersonal: false,
 
                 @yield('script-data')
             },
@@ -234,6 +272,36 @@
                 closeMenuSetting: function () {
                     if (this.isShowMenuIcon) {
                         this.isHoverSubMenuSetting = false;
+                    }
+                },
+                hoverMenuLeave: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuLeave = true;
+                    }
+                },
+                closeMenuLeave: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuLeave = false;
+                    }
+                },
+                hoverMenuLeaveHistory: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuLeaveHistory = true;
+                    }
+                },
+                closeMenuLeaveHistory: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuLeaveHistory = false;
+                    }
+                },
+                hoverMenuPersonal: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuPersonal = true;
+                    }
+                },
+                closeMenuPersonal: function () {
+                    if (this.isShowMenuIcon) {
+                        this.isHoverSubMenuPersonal = false;
                     }
                 },
                 @yield('script-methods')
