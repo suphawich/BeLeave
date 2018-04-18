@@ -1,0 +1,43 @@
+.form-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 100px auto;
+    max-width: 480px;
+}
+
+body {
+    /* background-color: rgba(61, 117, 116, 0.32); */
+    background: url('/images/bg.png');
+}
+
+.logo {
+    width: 100px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.connect-dashed {
+    border-top: 2px dashed #f2f3f3;
+}
+
+.login-dashed-margin-top {
+    margin-top: 30px;
+}
+
+.none {
+    display: none;
+}
+
+.agree-checkbox {
+    width: 18px;
+    height: 18px;
+}

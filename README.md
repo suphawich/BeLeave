@@ -7,7 +7,7 @@
     - npm install font-awesome --save
     - @import "~font-awesome/scss/font-awesome.scss"; ใน resources/assets/saas/app.scss
     - npm run dev
-    
+
 # Config
 1. edit default disk path (for storing file)
     - In "config/filesystem.php" change "storage_path()" to "public_path()"
