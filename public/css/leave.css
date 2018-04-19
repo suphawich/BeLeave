@@ -51,6 +51,8 @@
     display: inline-block;
     height: 20px;
     line-height: 20px;
+    font-size: 10px;
+    color: black;
 }
 
 .autocomplete-item-hover-default:hover {
