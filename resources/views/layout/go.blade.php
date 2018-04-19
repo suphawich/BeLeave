@@ -73,7 +73,7 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuManage,'subsidebar-icon-toggled': isHoverSubMenuManage,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/manage/leave" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Leave</span>
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">

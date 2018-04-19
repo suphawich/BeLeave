@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Account;
 use App\Account_setting;
+use App\Leave;
 
 class ManageController extends Controller
 {
@@ -30,7 +31,33 @@ class ManageController extends Controller
         return redirect('/request');
     }
 
+    public function leave_accept($subordinate_id) {
+        $data = array(
+            'is_enabled' => 0,
+            'is_approved' => 1
+        );
+        $leave = Leave::where('subordinate_id', $subordinate_id)->update($data);
+        return redirect('/manage/leave');
+    }
+
+    public function leave_decline($subordinate_id) {
+        $data = array(
+            'is_enabled' => 0,
+            'is_approved' => 0
+        );
+        $leave = Leave::where('subordinate_id', $subordinate_id)->update($data);
+        return redirect('/manage/leave');
+    }
+
     public function takeLeave(Request $request) {
-        return "Hello";
+        $leave = new Leave;
+        $leave->subordinate_id = $request->session()->get('id');
+        $leave->description = $request->input('description');
+        // $leave->substitute_id = $request->input
+        $leave->leave_type = $request->input('leave_type');
+        $leave->depart_at = $request->input('depart_at');
+        $leave->arrive_at = $request->input('arrive_at');
+        $leave->save();
+        return redirect()->back();
     }
 }

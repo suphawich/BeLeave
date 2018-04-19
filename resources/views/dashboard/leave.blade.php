@@ -23,7 +23,7 @@
 @section('content')
     <div class="container-fluid body-content">
         <div class="row">
-            {{-- {!! Form::open(['url' => '/takeleave']) !!} --}}
+            {{-- {!! Form::open(['url' => '/takeleave', 'method' => 'PUT']) !!} --}}
             {!! Form::open(['action' => 'ManageController@takeLeave', 'method' => 'PUT']) !!}
             <div class="col-12">
                 <div class="form-group input-group">
@@ -33,17 +33,17 @@
                 <div class="form-group input-group">
                     {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
                     <label>Depart date</label>
-                    {{ Form::date('depart_at', \Carbon\Carbon::now(), ['class' => 'form-control']) }}
+                    {{ Form::date('depart_at', \Carbon\Carbon::now(), ['class' => 'form-control', 'required']) }}
                 </div>
                 <div class="form-group input-group">
                     {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
                     <label>Arrive date</label>
-                    {!! Form::date('arrive_at', null, ['class' => 'form-control']) !!}
+                    {!! Form::date('arrive_at', null, ['class' => 'form-control', 'required']) !!}
                 </div>
                 <div class="form-group input-group">
                     {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
                     <label>Description</label>
-                    {!! Form::text('arrive_at', null, ['class' => 'form-control']) !!}
+                    {!! Form::textarea('description', null, ['class' => 'form-control', 'required']) !!}
                 </div>
                 {!! Form::submit('Send', ['class' => 'btn btn-light']) !!}
             </div>

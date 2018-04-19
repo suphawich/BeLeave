@@ -17,12 +17,12 @@ class CreateLeavesTable extends Migration
             $table->increments('id');
             $table->unsignedinteger('subordinate_id');
             $table->text('description');
-            $table->unsignedinteger('substitute_id');
+            $table->unsignedinteger('substitute_id')->nullable();
             $table->enum('leave_type', [
                 'Vacation', 'Personal Errand', 'Sick'
             ]);
-            $table->boolean('is_enabled');
-            $table->boolean('is_approved');
+            $table->boolean('is_enabled')->default(true);
+            $table->boolean('is_approved')->default(false);
             $table->timestamp('depart_at')->nullable();
             $table->timestamp('arrive_at')->nullable();
             $table->timestamps();

@@ -8,6 +8,7 @@ use Gbrock\Table\Facades\Table;
 use App\Account;
 use App\Account_setting;
 use App\Department;
+use App\Leave;
 
 class DashboardController extends Controller
 {
@@ -103,6 +104,13 @@ class DashboardController extends Controller
 
     public function getLeave(Request $request) {
         return view('dashboard.leave');
+    }
+
+    public function getRequestLeave(Request $request) {
+        $supervisor_id = $request->session()->get('id');
+        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('leaves.*', 'accounts.full_name')->paginate(15);
+        // $table = Table::create($settings, ['full_name']);
+        return view('dashboard.manageLeave', ['requests' => $requests]);
     }
 
     private function hasLogedin($request) {
