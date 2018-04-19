@@ -14,6 +14,7 @@
 
 # Packages
     - Form & HTML Collective https://laravelcollective.com/docs/5.4/html
+    - Gbrock Laravel-table https://github.com/gbrock/laravel-table
 # How to commit file to gitHub
     - Upload folder app, database, public, resources, routes or file has been edited only.
     - Avoid complex structure project
