@@ -108,6 +108,7 @@ class DashboardController extends Controller
 
     public function getRequestLeave(Request $request) {
         $supervisor_id = $request->session()->get('id');
+        // $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('accounts.*')->join('leaves', 'accounts.id', '=', 'leaves.subordinate_id')->select('leaves.*')->paginate(15);
         $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('leaves.*', 'accounts.full_name')->paginate(15);
         // $table = Table::create($settings, ['full_name']);
         return view('dashboard.manageLeave', ['requests' => $requests]);

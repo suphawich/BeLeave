@@ -60,7 +60,7 @@
                         <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
                         <span class="arrowText"></span>
                     </a>
-                    <a href="dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
+                    <a href="/dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
                         <span class="menuIcon"><i class="fa fa-home"></i></span>
                         <span class="menuText"> Home</span>
                     </a>
@@ -144,15 +144,15 @@
                         <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
                         <span class="arrowText"></span>
                     </a>
-                    <a href="dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
+                    <a href="/dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
                         <span class="menuIcon"><i class="fa fa-home"></i></span>
                         <span class="menuText"> Home</span>
                     </a>
-                    <a href="leave" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeave}" @mouseover="hoverMenuLeave" @mouseout="closeMenuLeave">
+                    <a href="/leave" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeave}" @mouseover="hoverMenuLeave" @mouseout="closeMenuLeave">
                         <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
                         <span class="menuText"> Leave</span>
                     </a>
-                    <a href="dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeaveHistory}" @mouseover="hoverMenuLeaveHistory" @mouseout="closeMenuLeaveHistory">
+                    <a href="/dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeaveHistory}" @mouseover="hoverMenuLeaveHistory" @mouseout="closeMenuLeaveHistory">
                         <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
                         <span class="menuText"> Leave History</span>
                     </a>

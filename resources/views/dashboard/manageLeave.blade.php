@@ -43,8 +43,8 @@
                                     <td>{{ date_format(date_create($request->depart_at),"m/d/Y") }}</td>
                                     <td>{{ date_format(date_create($request->arrive_at),"m/d/Y").date_diff(date_create($request->depart_at), date_create($request->arrive_at))->format(" (%a days)") }}</td>
                                     <td>
-                                        <a href="/manage/leave/accept/{{ $request->subordinate_id }}" class="btn btn-light"><i class="fa fa-check"></i></a>
-                                        <a href="/manage/leave/decline/{{ $request->subordinate_id }}" class="btn btn-light"><i class="fa fa-times"></i></a>
+                                        <a href="/manage/leave/accept/{{ $request->id }}" class="btn btn-light"><i class="fa fa-check"></i></a>
+                                        <a href="/manage/leave/decline/{{ $request->id }}" class="btn btn-light"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
                             @endif

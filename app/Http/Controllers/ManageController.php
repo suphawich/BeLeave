@@ -31,21 +31,21 @@ class ManageController extends Controller
         return redirect('/request');
     }
 
-    public function leave_accept($subordinate_id) {
+    public function leave_accept($id) {
         $data = array(
             'is_enabled' => 0,
             'is_approved' => 1
         );
-        $leave = Leave::where('subordinate_id', $subordinate_id)->update($data);
+        $leave = Leave::where('id', $id)->update($data);
         return redirect('/manage/leave');
     }
 
-    public function leave_decline($subordinate_id) {
+    public function leave_decline($id) {
         $data = array(
             'is_enabled' => 0,
             'is_approved' => 0
         );
-        $leave = Leave::where('subordinate_id', $subordinate_id)->update($data);
+        $leave = Leave::where('id', $id)->update($data);
         return redirect('/manage/leave');
     }
 
