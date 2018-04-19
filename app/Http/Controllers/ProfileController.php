@@ -62,10 +62,10 @@ class ProfileController extends Controller
                     $request->session()->flash('status', 'Changed Password Successful');
                     return redirect('profile');
                 }
-                $request->session()->flash('error','New password is not match, please try again.');
+                $request->session()->flash('status','New password is not match, please try again.');
                 return redirect('profile');
             } else {
-                $request->session()->flash('error','Current password is wrong, please try again.');
+                $request->session()->flash('status','Current password is wrong, please try again.');
                 return redirect('profile');
             }
         } else {

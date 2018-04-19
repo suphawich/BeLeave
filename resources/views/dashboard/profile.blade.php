@@ -52,9 +52,9 @@
         </div>
         <div class="row" v-else>
             <div class="col-xl-8 col-md-6 info-content">
-                @if (session()->get('error'))
+                @if (session()->has('status'))
                     <div class="alert alert-danger">
-                        <strong>{{ session()->get('error') }}</strong>
+                        <strong>{{ session()->get('status') }}</strong>
                     </div>
                 @endif
                 {{-- <p>{{session()->get('status')}}</p> --}}
