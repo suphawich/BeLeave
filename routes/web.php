@@ -43,6 +43,7 @@ Route::get('r2sup/accept/{account_id}', 'ManageController@r2sup_accept');
 Route::get('r2sup/decline/{account_id}', 'ManageController@r2sup_decline');
 
 Route::get('leave', 'DashboardController@getLeave');
+Route::any('leave/search', 'ManageController@search');
 Route::put('leave','ManageController@takeLeave');
 Route::get('manage/leave', 'DashboardController@getRequestLeave');
 Route::get('manage/leave/accept/{subordinate_id}', 'ManageController@leave_accept');

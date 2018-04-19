@@ -41,8 +41,8 @@
                     <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">
                         <div class="row float-right topnav">
                             <a href="#"><span><i class="fa fa-bell"></i></span><span class="badge badge-pill badge-dark">2</span> </a>
-                            <a href="profile" class="username"><span><i class="fa fa-user"></i></span><span>{{ session()->get('full_name') }}</span></a>
-                            <a href="logout"><span><i class="fa fa-sign-out"></i></span><span> Log Out</span></a>
+                            <a href="/profile" class="username"><span><i class="fa fa-user"></i></span><span>{{ session()->get('full_name') }}</span></a>
+                            <a href="/logout"><span><i class="fa fa-sign-out"></i></span><span> Log Out</span></a>
                         </div>
                     </div>
                 </div>
@@ -133,6 +133,72 @@
                 </div>
             </div>
         @elseif (session()->get('access_level') == 'Supervisor')
+            <div class="container-fluid">
+                <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
+                        <span class="leftArrowIcon menuIcon-nomargin"><i class="fa fa-chevron-left"></i></span>
+                        <span class="arrowText"></span>
+                    </a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuIcon" v-on:click="lessMoreMenu">
+                        <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
+                        <span class="arrowText"></span>
+                    </a>
+                    <a href="/dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
+                        <span class="menuIcon"><i class="fa fa-home"></i></span>
+                        <span class="menuText"> Home</span>
+                    </a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuManage }" v-on:click="toggleManage" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
+                        <span class="menuIcon"><i class="fa fa-list-alt"></i></span>
+                        <span class="menuText"> Manage</span>
+                        <span v-if="isShowMenuList">
+                            <span class="float-right menuIcon-2" v-if="isShowSubMenuManage"><i class="fa fa-chevron-up"></i></span>
+                            <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
+                        </span>
+                    </a>
+                    <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuManage,'subsidebar-icon-toggled': isHoverSubMenuManage,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
+                        <a href="/manage/leave" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Leave</span>
+                        </a>
+                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Leave history</span>
+                        </a>
+                        <a href="/request" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Request</span>
+                        </a>
+                    </div>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAccounts}" v-on:click="toggleAccounts" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
+                        <span class="menuIcon"><i class="fa fa-users"></i></span>
+                        <span class="menuText"> Account</span>
+                        <span v-if="isShowMenuList">
+                            <span class="float-right menuIcon-2" v-if="isShowSubMenuAccounts"><i class="fa fa-chevron-up"></i></span>
+                            <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
+                        </span>
+                    </a>
+                    <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAccounts,'subsidebar-icon-toggled': isHoverSubMenuAccounts,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
+                        <a href="/profile" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Personalization</span>
+                        </a>
+                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Subscription</span>
+                        </a>
+                        <a href="/users" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Users</span>
+                        </a>
+                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Tasks</span>
+                        </a>
+                    </div>
+                    <a href="/setting" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuSetting}" @mouseover="hoverMenuSetting" @mouseout="closeMenuSetting">
+                        <span class="menuIcon"><i class="fa fa-cog"></i></span>
+                        <span class="menuText"> Setting</span>
+                    </a>
+                </div>
+                <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
+                    <div class="w3-container">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         @elseif (session()->get('access_level') == 'Subordinate')
             <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">

@@ -60,4 +60,9 @@ class ManageController extends Controller
         $leave->save();
         return redirect()->back();
     }
+
+    public function search(Request $request) {
+        $accounts = Account::where('full_name', 'LIKE', $request->keyword.'%')->select('accounts.full_name')->get();
+        return response()->json($accounts);
+    }
 }
