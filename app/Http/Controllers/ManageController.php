@@ -60,4 +60,9 @@ class ManageController extends Controller
         $leave->save();
         return redirect()->back();
     }
+
+
+    public function history(){
+      return view('history.index');
+    }
 }

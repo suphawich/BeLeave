@@ -28,6 +28,8 @@ Route::get('/register-complete', function () {
     return view('register.complete');
 });
 
+Route::get('/history', 'ManageController@history');
+
 Route::get('/dashboard', 'DashboardController@check');
 Route::any('/profile', 'DashboardController@getProfile');
 Route::any('edit-profile', 'ProfileController@edit');
