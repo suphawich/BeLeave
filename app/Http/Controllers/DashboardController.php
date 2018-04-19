@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Gbrock\Table\Facades\Table;
 use App\Account;
 use App\Account_setting;
 use App\Department;
@@ -96,6 +97,7 @@ class DashboardController extends Controller
     public function getRequest(Request $request) {
         $supervisor_id = $request->session()->get('id');
         $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('account_settings', 'departments.subordinate_id', '=', 'account_settings.account_id')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('accounts.*','account_settings.*')->where('is_r2sup', '1')->paginate(15);
+        // $table = Table::create($settings, ['full_name']);
         return view('dashboard.request', ['settings' => $settings]);
     }
 

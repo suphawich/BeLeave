@@ -83,6 +83,10 @@ class ComposerStaticInitf945c99c69d5987f1ad5a61ccd07bb71
         array (
             'Illuminate\\' => 11,
         ),
+        'G' => 
+        array (
+            'Gbrock\\Table\\' => 13,
+        ),
         'F' => 
         array (
             'Fideloper\\Proxy\\' => 16,
@@ -233,6 +237,10 @@ class ComposerStaticInitf945c99c69d5987f1ad5a61ccd07bb71
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
+        ),
+        'Gbrock\\Table\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gbrock/laravel-table/src',
         ),
         'Fideloper\\Proxy\\' => 
         array (
@@ -921,6 +929,12 @@ class ComposerStaticInitf945c99c69d5987f1ad5a61ccd07bb71
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'Gbrock\\Table\\BlankModel' => __DIR__ . '/..' . '/gbrock/laravel-table/src/BlankModel.php',
+        'Gbrock\\Table\\Column' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Column.php',
+        'Gbrock\\Table\\Facades\\Table' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Facades/Table.php',
+        'Gbrock\\Table\\Providers\\TableServiceProvider' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Providers/TableServiceProvider.php',
+        'Gbrock\\Table\\Table' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Table.php',
+        'Gbrock\\Table\\Traits\\Sortable' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Traits/Sortable.php',
         'Hamcrest\\Arrays\\IsArray' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
         'Hamcrest\\Arrays\\IsArrayContaining' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContaining.php',
         'Hamcrest\\Arrays\\IsArrayContainingInAnyOrder' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContainingInAnyOrder.php',

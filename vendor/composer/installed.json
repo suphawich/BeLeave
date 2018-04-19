@@ -545,6 +545,58 @@
         ]
     },
     {
+        "name": "gbrock/laravel-table",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/gbrock/laravel-table.git",
+            "reference": "6c953016e127502f0df857d1515a571863d01319"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/gbrock/laravel-table/zipball/6c953016e127502f0df857d1515a571863d01319",
+            "reference": "6c953016e127502f0df857d1515a571863d01319",
+            "shasum": ""
+        },
+        "require": {
+            "laravel/framework": "5.*",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.5.*"
+        },
+        "time": "2016-12-21T07:52:44+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Gbrock\\Table\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Greg Brock",
+                "email": "contact@gbrock.com",
+                "homepage": "http://gbrock.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Table functionality for Laravel models",
+        "keywords": [
+            "filtering",
+            "html",
+            "laravel",
+            "model",
+            "sorting",
+            "table"
+        ]
+    },
+    {
         "name": "hamcrest/hamcrest-php",
         "version": "v2.0.0",
         "version_normalized": "2.0.0.0",

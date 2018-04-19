@@ -150,7 +150,7 @@ return [
          * Package Service Providers...
          */
         Collective\Html\HtmlServiceProvider::class,
-
+        'Gbrock\Table\Providers\TableServiceProvider',
         /*
          * Application Service Providers...
          */
@@ -210,7 +210,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'Table' => 'Gbrock\Table\Facades\Table',
     ],
 
 ];

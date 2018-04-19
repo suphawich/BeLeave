@@ -40,6 +40,11 @@
                     <label>Arrive date</label>
                     {!! Form::date('arrive_at', null, ['class' => 'form-control']) !!}
                 </div>
+                <div class="form-group input-group">
+                    {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
+                    <label>Description</label>
+                    {!! Form::text('arrive_at', null, ['class' => 'form-control']) !!}
+                </div>
                 {!! Form::submit('Send', ['class' => 'btn btn-light']) !!}
             </div>
             {!! Form::close() !!}
