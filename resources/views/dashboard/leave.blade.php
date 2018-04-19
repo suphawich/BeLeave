@@ -18,6 +18,8 @@
     searchText: '',
     result: [],
     isShowAutocomplete: false,
+    isFocusAutocomplete: false,
+    isOverAutocomplete: false,
 @endsection
 
 @section('script-methods')
@@ -34,9 +36,29 @@
             this.result = [];
         }
     },
-    assign: function(response) {
-        console.log(response.data);
-    }
+    setSubstitute: function(full_name) {
+        this.searchText = full_name;
+        this.isOverAutocomplete = false;
+    },
+    focusAutocomplete: function () {
+        this.isFocusAutocomplete = true;
+    },
+    nofocusAutocomplete: function () {
+        if (!this.isOverAutocomplete) {
+            this.isFocusAutocomplete = false;
+        }
+    },
+    overAutocomplete: function () {
+        this.isOverAutocomplete = true;
+    },
+    outAutocomplete: function () {
+        this.isOverAutocomplete = false;
+    },
+    closeModal: function () {
+        this.isShowAutocomplete = false;
+        this.isFocusAutocomplete = false;
+        this.isOverAutocomplete = false;
+    },
 @endsection
 
 @section('content')
@@ -48,7 +70,7 @@
                   <!-- Modal Header -->
                   <div class="modal-header">
                     <h4 class="modal-title ml-auto mr-auto">Create New Leave letter</h4>
-                    <button type="button" class="btn btn-light float-right" data-dismiss="modal">&times;</button>
+                    <button type="button" class="btn btn-light float-right" data-dismiss="modal" v-on:click="closeModal">&times;</button>
                   </div>
 
                   <!-- Modal body -->
@@ -90,16 +112,19 @@
                                       'class' => 'form-control substitute',
                                       'v-model' => 'searchText',
                                       'v-on:keyup' => 'live_search',
+                                      'v-on:focus' => 'focusAutocomplete',
+                                      'v-on:focusout' => 'nofocusAutocomplete',
+                                      'autocomplete' => 'off',
                                       'required'
                                   ])!!}
                               </div>
-                              <div class="autocomplete" v-if="result.length > 0" >
-                                  <a href="#" class="sidebar-item autocomplete-item autocomplete-item-hover-default" v-for="account in result" style="font-size: 10px; color: black;">@{{ account.full_name }}</a>
+                              <div class="autocomplete" v-if="result.length > 0 && isFocusAutocomplete" v-on:focusout="nofocusAutocomplete">
+                                  <a href="#" class="sidebar-item autocomplete-item autocomplete-item-hover-default" v-for="account in result" v-on:click="setSubstitute(account.full_name)" @mouseover="overAutocomplete" @mouseout="outAutocomplete">@{{ account.full_name }}, @{{ account.task }}</a>
                               </div>
                           </div>
                           <div class="form-group input-group">
                           </div>
-                          {{-- @{{ result }} --}}
+                          @{{ isFocusAutocomplete }}
                           {!! Form::submit('Send', ['class' => 'btn btn-light']) !!}
                       </div>
                       {!! Form::close() !!}
