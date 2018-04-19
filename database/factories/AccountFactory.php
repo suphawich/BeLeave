@@ -7,8 +7,7 @@ $factory->define(App\Account::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => bcrypt('secret'),
         'full_name' => $faker->name,
-        'avatar' => $faker->image('/Applications/XAMPP/xamppfiles/htdocs/BeLeave/public/images/profiles',640,480,'cats'),
-    
+        'avatar' => $faker->image('C:/xampp/htdocs/BeLeave/public/images/profiles',640,480,'cats'),
         // 'avatar' => $faker->image('/Applications/MAMP/htdocs/BeLeave/public/images/profiles',640,480,'cats'),
         'address' => $faker->address,
         'access_level' => $faker->randomElement([

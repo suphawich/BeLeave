@@ -61,8 +61,14 @@ class ManageController extends Controller
         return redirect()->back();
     }
 
+<<<<<<< HEAD
 
     public function history(){
       return view('history.index');
+=======
+    public function search(Request $request) {
+        $accounts = Account::where('full_name', 'LIKE', $request->keyword.'%')->select('accounts.full_name')->get();
+        return response()->json($accounts);
+>>>>>>> a1e78672b14b22ca1472bb3306ad9fcc9ac331f8
     }
 }

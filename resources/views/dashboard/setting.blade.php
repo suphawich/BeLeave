@@ -31,9 +31,9 @@
                     <div class="card-body">
                         <span>Request Supervisor</span>
                         @if ($setting->r2sup)
-                            <a href="#" name="request" class="btn btn-light float-right">Cancel</a>
+                            <a name="request" class="btn btn-light float-right" style="cursor: no-drop;">Approved</a>
                         @elseif ($setting->is_r2sup)
-                            <a href="#" name="request" class="btn float-right" style="cursor: no-drop;" disabled>Pending</a>
+                            <a name="request" class="btn float-right" style="cursor: no-drop;" disabled>Pending</a>
                         @else
                             <a href="pending-r2sup" name="request" class="btn btn-light float-right">Request</a>
                         @endif
