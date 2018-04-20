@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('home.index');
 });
 
-Route::any('/login', 'LoginController@check');
+Route::get('/login', 'LoginController@index');
+Route::put('/login', 'LoginController@check');
 Route::any('/logout', 'LoginController@getLogout');
 
 Route::any('/register', 'RegisterController@save');

@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function check(Request $request) {
+    public function index(Request $request) {
         if ($request->session()->has('id')) { return redirect('dashboard');}
+        else {return view('login.index');}
+    }
+
+    public function check(Request $request) {
         $data = array(
             'isWrong' => 'true'
         );
-        if ($request->has(['email', 'password'])) {
+        // if ($request->has(['email', 'password'])) {
             $email = $request->input('email');
             $password = $request->input('password');
             $data['oldEmail'] = $email;
@@ -30,9 +34,9 @@ class LoginController extends Controller
             } else {
                 return view('login.index', $data);
             }
-        } else {
-            return view('login.index');
-        }
+        // } else {
+        //     return view('login.index');
+        // }
     }
 
     public function getLogout(Request $request) {
