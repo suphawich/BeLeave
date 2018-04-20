@@ -58,7 +58,8 @@ class ManageController extends Controller
         $leave->leave_type = $request->input('leave_type');
         $leave->depart_at = $request->input('depart_at');
         $leave->arrive_at = $request->input('arrive_at');
-        $leave->save();
+        // $leave->save();
+        $request->session()->flash('leave_status', 'Request leave to your supervisor successful.');
         return redirect()->back();
     }
 

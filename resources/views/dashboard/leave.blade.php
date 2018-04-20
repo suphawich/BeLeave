@@ -153,6 +153,16 @@
                 {!! Form::close() !!}
             </div>
         </div>
+        @if (session()->has('leave_status'))
+            <div class="row">
+                <div class="col-12 alert alert-danger text-center">
+                    {{ session()->get('leave_status') }}
+                </div>
+            </div>
+        @else
+            <div class="row" style="min-height: 60px;"></div>
+        @endif
+
         <div class="row">
             <div class="col-12 pl-0 pr-0 mt-2">
                 <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm">
@@ -162,25 +172,36 @@
         </div>
         <div class="row">
             <div class="col-12 table-responsive">
-                <form action="/user-create" method="post" >
-                @csrf
-                <input type="hidden" name="supervisor_id" value="{{ session()->get('id') }}">
-                <input type="hidden" name="company_name" value="{{ session()->get('company_name') }}">
                 <table class="table table-hover">
                     <thead class="table-text">
                         <tr>
-                            <th scope="col">Full name</th>
-                            <th scope="col" v-if="!isShowNewUser">Supervisor name</th>
-                            <th scope="col">Task</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Phone number</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Depart date</th>
+                            <th scope="col">Arrive date</th>
+                            <th scope="col">Substitute name</th>
+                            <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody class="tbody-text">
-
+                        @foreach ($leaves as $leave)
+                            <tr>
+                                <td>{{ $leave->leave_type }}</td>
+                                <td >{{ date_format(date_create($leave->depart_at),"m/d/Y") }}</td>
+                                <td>{{ date_format(date_create($leave->arrive_at),"m/d/Y").date_diff(date_create($leave->depart_at), date_create($leave->arrive_at))->format(" (%a days)") }}</td>
+                                <td>{{ $leave->substitute_id ?? '-' }}</td>
+                                @if ($leave->is_approved)
+                                    <td>Approved</td>
+                                @else
+                                    @if ($leave->is_enabled)
+                                        <td>Pending</td>
+                                    @else
+                                        <td>Decline</td>
+                                    @endif
+                                @endif
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
-                </form>
             </div>
         </div>
     </div>
