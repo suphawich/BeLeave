@@ -274,6 +274,9 @@
 
                 @yield('script-data')
             },
+            mounted: function () {
+                @yield('script-mounted')
+            },
             methods: {
                 lessMoreMenu: function () {
                     this.isShowMenuList = !this.isShowMenuList;

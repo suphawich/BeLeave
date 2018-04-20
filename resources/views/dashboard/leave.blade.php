@@ -25,10 +25,10 @@
 @section('script-methods')
     live_search: function () {
         if (this.searchText != '') {
-            axios.get('/leave/search', {
-                params: {
+            axios.post('/leave/search', {
+                {{-- params: { --}}
                   keyword: this.searchText
-                }
+                {{-- } --}}
               }).then(response => this.result = response.data);
             this.isShowAutocomplete = true;
         } else {
@@ -54,32 +54,41 @@
     outAutocomplete: function () {
         this.isOverAutocomplete = false;
     },
-    closeModal: function () {
+@endsection
+
+@section('script-mounted')
+    $(this.$refs.modalLeaveForm).on('hidden.bs.modal', () => {
+        this.$refs.search.value = null
+        this.$refs.arrive_at.value = null
+        this.$refs.description.value = null
+        this.$refs.leave_type.value = "Vacation"
+
         this.isShowAutocomplete = false;
         this.isFocusAutocomplete = false;
         this.isOverAutocomplete = false;
-    },
+    })
 @endsection
 
 @section('content')
     <div class="container-fluid body-content">
-        <div class="modal fade" id="modalLeaveForm">
+        <div class="modal fade" id="modalLeaveForm" ref="modalLeaveForm">
             <div class="modal-dialog modal-lg">
+                {!! Form::open(['action' => 'ManageController@takeLeave', 'method' => 'PUT']) !!}
                 <div class="modal-content">
 
                   <!-- Modal Header -->
                   <div class="modal-header">
                     <h4 class="modal-title ml-auto mr-auto">Create New Leave letter</h4>
-                    <button type="button" class="btn btn-light float-right" data-dismiss="modal" v-on:click="closeModal">&times;</button>
+                    <button type="button" class="btn btn-light float-right" data-dismiss="modal">&times;</button>
                   </div>
 
                   <!-- Modal body -->
                   <div class="modal-body">
-                      {!! Form::open(['action' => 'ManageController@takeLeave', 'method' => 'PUT']) !!}
                       <div class="col-12">
                           <div class="form-group input-group">
                               <label class="input-title">Leave type</label>
-                              {!! Form::select('leave_type', ['Vacation' => 'Vacation leave', 'Personal Errand' => 'Personal errand leave', 'Sick' => 'Sick leave'], null, ['class' => 'form-control leave_type']) !!}
+                              {!! Form::select('leave_type', ['Vacation' => 'Vacation leave', 'Personal Errand' => 'Personal errand leave', 'Sick' => 'Sick leave'], null,
+                                  ['class' => 'form-control leave_type', 'ref' => 'leave_type']) !!}
                           </div>
                           {{-- <div class="center-block"><div class="connect-dashed login-dashed-margin-top"></div></div> --}}
                           <hr>
@@ -92,7 +101,12 @@
                           <div class="form-group input-group">
                               {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
                               <label class="input-title">Arrive date</label>
-                              {!! Form::date('arrive_at', null, ['class' => 'form-control date', 'required']) !!}
+                              {!! Form::date('arrive_at', null, [
+                                  'class' => 'form-control date',
+                                  'ref' => 'arrive_at',
+                                  'required'
+                                  ])
+                              !!}
                           </div>
                           <hr>
                           <div class="form-group input-group">
@@ -100,6 +114,7 @@
                               <label class="input-title">Description</label>
                               {!! Form::textarea('description', null, [
                                   'class' => 'form-control description',
+                                  'ref' => 'description',
                                   'required'
                               ])!!}
                           </div>
@@ -115,6 +130,7 @@
                                       'v-on:focus' => 'focusAutocomplete',
                                       'v-on:focusout' => 'nofocusAutocomplete',
                                       'autocomplete' => 'off',
+                                      'ref' => 'search',
                                       'required'
                                   ])!!}
                               </div>
@@ -124,51 +140,48 @@
                           </div>
                           <div class="form-group input-group">
                           </div>
-                          @{{ isFocusAutocomplete }}
-                          {!! Form::submit('Send', ['class' => 'btn btn-light']) !!}
+                          {{-- @{{ isFocusAutocomplete }} --}}
                       </div>
-                      {!! Form::close() !!}
                   </div>
 
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      {!! Form::submit('Send', ['class' => 'btn btn-light']) !!}
+                      <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
                   </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 pl-0 pr-0 mt-2">
+                <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm">
+                    <i class="fa fa-plus"></i> New Leave letter
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <form action="/user-create" method="post" >
+                @csrf
+                <input type="hidden" name="supervisor_id" value="{{ session()->get('id') }}">
+                <input type="hidden" name="company_name" value="{{ session()->get('company_name') }}">
+                <table class="table table-hover">
+                    <thead class="table-text">
+                        <tr>
+                            <th scope="col">Full name</th>
+                            <th scope="col" v-if="!isShowNewUser">Supervisor name</th>
+                            <th scope="col">Task</th>
+                            <th scope="col">E-mail</th>
+                            <th scope="col">Phone number</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-text">
 
-                </div>
+                    </tbody>
+                </table>
+                </form>
             </div>
-        </div>
-        <div class="row">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLeaveForm">
-                Open modal
-            </button>
-        </div>
-        <div class="row">
-            {{-- {!! Form::open(['url' => '/takeleave', 'method' => 'PUT']) !!} --}}
-            {!! Form::open(['action' => 'ManageController@takeLeave', 'method' => 'PUT']) !!}
-            <div class="col-12">
-                <div class="form-group input-group">
-                    <label>Leave type</label>
-                    {!! Form::select('leave_type', ['Vacation' => 'Vacation leave', 'Personal Errand' => 'Personal errand leave', 'Sick' => 'Sick leave'], null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group input-group">
-                    {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
-                    <label>Depart date</label>
-                    {{ Form::date('depart_at', \Carbon\Carbon::now(), ['class' => 'form-control', 'required']) }}
-                </div>
-                <div class="form-group input-group">
-                    {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
-                    <label>Arrive date</label>
-                    {!! Form::date('arrive_at', null, ['class' => 'form-control', 'required']) !!}
-                </div>
-                <div class="form-group input-group">
-                    {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
-                    <label>Description</label>
-                    {!! Form::textarea('description', null, ['class' => 'form-control', 'required']) !!}
-                </div>
-                {!! Form::submit('Send', ['class' => 'btn btn-light']) !!}
-            </div>
-            {!! Form::close() !!}
         </div>
     </div>
 @endsection

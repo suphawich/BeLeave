@@ -18,7 +18,7 @@ class AccountsTableSeeder extends Seeder
         $user->full_name = 'Suphawich Sungkhavorn';
         $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
         $user->address = "20 Soi Pichayanunt15 Tiwanont Road";
-        $user->access_level = 'Supervisor';
+        $user->access_level = 'Manager';
         $user->tel = '0836429451';
         $user->company_name = "Suphawich";
         $user->is_enabled = 0;
