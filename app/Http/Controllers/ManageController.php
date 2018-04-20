@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Gbrock\Table\Facades\Table;
 use App\Account;
 use App\Account_setting;
 use App\Leave;
@@ -64,5 +65,16 @@ class ManageController extends Controller
     public function search(Request $request) {
         $accounts = Account::where('full_name', 'LIKE', $request->keyword.'%')->join('tasks', 'accounts.id', '=', 'tasks.subordinate_id')->select('accounts.full_name','tasks.task')->get();
         return response()->json($accounts);
+    }
+
+
+
+    public function history(){
+      // $rows = Leave::get();
+      $leaves = Leave::sorted()->paginate(5);
+      // $table = Table::create($rows);
+      // $leaves = Leave::sorted()->get();
+      return view('history.index',['leaves' => $leaves]);
+
     }
 }
