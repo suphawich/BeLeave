@@ -14,8 +14,9 @@
 @endsection
 
 @section('form')
-    <form id="form-login" action="login" method="post">
+    <form id="form-login" action="/login" method="post">
         <input type="hidden" name="_token" value={{ csrf_token() }}>
+        @method('PUT')
         <div class="container">
             <div class="form-content">
                 <div class="form-group text-center">
