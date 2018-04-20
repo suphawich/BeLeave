@@ -103,7 +103,8 @@ class DashboardController extends Controller
     }
 
     public function getLeave(Request $request) {
-        return view('dashboard.leave');
+        $leaves = Leave::where('subordinate_id', $request->session()->get('id'))->paginate(10);
+        return view('dashboard.leave', ['leaves' => $leaves]);
     }
 
     public function getRequestLeave(Request $request) {
