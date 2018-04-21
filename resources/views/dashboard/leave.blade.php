@@ -30,18 +30,20 @@
                   keyword: this.searchText
                 {{-- } --}}
               }).then(response => this.result = response.data);
-            this.isShowAutocomplete = true;
+              this.isShowAutocomplete = true;
         } else {
-            this.isShowAutocomplete = false;
             this.result = [];
         }
     },
     setSubstitute: function(full_name) {
         this.searchText = full_name;
         this.isOverAutocomplete = false;
+        this.$refs.search.blur();
+        this.isShowAutocomplete = false;
     },
     focusAutocomplete: function () {
         this.isFocusAutocomplete = true;
+        this.isShowAutocomplete = true;
     },
     nofocusAutocomplete: function () {
         if (!this.isOverAutocomplete) {
@@ -63,7 +65,6 @@
         this.$refs.description.value = null
         this.$refs.leave_type.value = "Vacation"
 
-        this.isShowAutocomplete = false;
         this.isFocusAutocomplete = false;
         this.isOverAutocomplete = false;
     })
@@ -134,7 +135,7 @@
                                       'required'
                                   ])!!}
                               </div>
-                              <div class="autocomplete" v-if="result.length > 0 && isFocusAutocomplete" v-on:focusout="nofocusAutocomplete">
+                              <div class="autocomplete" v-show="isShowAutocomplete" v-if="result.length > 0 && isFocusAutocomplete" v-on:focusout="nofocusAutocomplete">
                                   <a href="#" class="sidebar-item autocomplete-item autocomplete-item-hover-default" v-for="account in result" v-on:click="setSubstitute(account.full_name)" @mouseover="overAutocomplete" @mouseout="outAutocomplete">@{{ account.full_name }}, @{{ account.task }}</a>
                               </div>
                           </div>

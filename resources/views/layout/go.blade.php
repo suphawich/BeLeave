@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 
-    
+
     @stack('style')
 </head>
 <body>
@@ -219,10 +219,6 @@
                     <a href="/leave" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeave}" @mouseover="hoverMenuLeave" @mouseout="closeMenuLeave">
                         <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
                         <span class="menuText"> Leave</span>
-                    </a>
-                    <a href="/dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeaveHistory}" @mouseover="hoverMenuLeaveHistory" @mouseout="closeMenuLeaveHistory">
-                        <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
-                        <span class="menuText"> Leave History</span>
                     </a>
                     <a href="/profile" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuPersonal}" @mouseover="hoverMenuPersonal" @mouseout="closeMenuPersonal">
                         <span class="menuIcon"><i class="fa fa-user"></i></span>
