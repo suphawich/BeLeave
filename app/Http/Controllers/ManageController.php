@@ -52,11 +52,15 @@ class ManageController extends Controller
 
     public function takeLeave(Request $request) {
         $validatedData = $request->validate([
-            'depart_at' => 'required|date|after:today',
-            'arrive_at' => 'required|date|after:depart_at',
-            'description' => 'required|size:500',
-            'search' => 'required|exists:accounts,full_name'
+            'depart_at' => 'required|date|after_or_equal:today',
+            'arrive_at' => 'required|date|after_or_equal:depart_at',
+            'description' => 'required|max:500',
+            'token' => 'exists:accounts,token'
         ]);
+
+        if ($validatedData->fails()) {
+            return redirect()->back()->withInput();
+        }
 
         $leave = new Leave;
         $leave->subordinate_id = $request->session()->get('id');

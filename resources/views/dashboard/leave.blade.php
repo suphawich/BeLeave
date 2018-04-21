@@ -68,6 +68,8 @@
         this.$refs.description.value = null
         this.$refs.leave_type.value = "Vacation"
 
+        this.searchText = '';
+        this.token = '';
         this.isFocusAutocomplete = false;
         this.isOverAutocomplete = false;
     })
@@ -142,6 +144,7 @@
                                   </div>
                                   {!! Form::hidden('substitute_id', null, [
                                       'v-model' => 'token',
+                                      'ref' => 'token',
                                       'required'
                                   ])!!}
                               </div>
@@ -213,6 +216,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $errors }}
             </div>
         </div>
     </div>
