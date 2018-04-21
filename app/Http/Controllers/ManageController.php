@@ -51,6 +51,17 @@ class ManageController extends Controller
     }
 
     public function takeLeave(Request $request) {
+        $validatedData = $request->validate([
+            'depart_at' => 'required|date|after_or_equal:today',
+            'arrive_at' => 'required|date|after_or_equal:depart_at',
+            'description' => 'required|max:500',
+            'token' => 'exists:accounts,token'
+        ]);
+
+        if ($validatedData->fails()) {
+            return redirect()->back()->withInput();
+        }
+
         $leave = new Leave;
         $leave->subordinate_id = $request->session()->get('id');
         $leave->description = $request->input('description');
@@ -64,7 +75,7 @@ class ManageController extends Controller
     }
 
     public function search(Request $request) {
-        $accounts = Account::where('full_name', 'LIKE', $request->keyword.'%')->join('tasks', 'accounts.id', '=', 'tasks.subordinate_id')->select('accounts.full_name','tasks.task')->get();
+        $accounts = Account::where('full_name', 'LIKE', $request->keyword.'%')->join('tasks', 'accounts.id', '=', 'tasks.subordinate_id')->select('accounts.full_name','accounts.token','tasks.task')->get();
         return response()->json($accounts);
     }
 

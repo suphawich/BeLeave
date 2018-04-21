@@ -16,6 +16,7 @@
 
 @section('script-data')
     searchText: '',
+    token: '',
     result: [],
     isShowAutocomplete: false,
     isFocusAutocomplete: false,
@@ -33,10 +34,12 @@
               this.isShowAutocomplete = true;
         } else {
             this.result = [];
+            this.token = '';
         }
     },
-    setSubstitute: function(full_name) {
+    setSubstitute: function(full_name, token) {
         this.searchText = full_name;
+        this.token = token;
         this.isOverAutocomplete = false;
         this.$refs.search.blur();
         this.isShowAutocomplete = false;
@@ -65,6 +68,8 @@
         this.$refs.description.value = null
         this.$refs.leave_type.value = "Vacation"
 
+        this.searchText = '';
+        this.token = '';
         this.isFocusAutocomplete = false;
         this.isOverAutocomplete = false;
     })
@@ -134,9 +139,17 @@
                                       'ref' => 'search',
                                       'required'
                                   ])!!}
+                                  <div class="input-group-prepend" v-if="token != ''">
+                                      <span class="input-group-text">Selected contact<i class="fa fa-check ml-2"></i></span>
+                                  </div>
+                                  {!! Form::hidden('substitute_id', null, [
+                                      'v-model' => 'token',
+                                      'ref' => 'token',
+                                      'required'
+                                  ])!!}
                               </div>
                               <div class="autocomplete" v-show="isShowAutocomplete" v-if="result.length > 0 && isFocusAutocomplete" v-on:focusout="nofocusAutocomplete">
-                                  <a href="#" class="sidebar-item autocomplete-item autocomplete-item-hover-default" v-for="account in result" v-on:click="setSubstitute(account.full_name)" @mouseover="overAutocomplete" @mouseout="outAutocomplete">@{{ account.full_name }}, @{{ account.task }}</a>
+                                  <a href="#" class="sidebar-item autocomplete-item autocomplete-item-hover-default" v-for="account in result" v-on:click="setSubstitute(account.full_name, account.token)" @mouseover="overAutocomplete" @mouseout="outAutocomplete">@{{ account.full_name }}, @{{ account.task }}</a>
                               </div>
                           </div>
                           <div class="form-group input-group">
@@ -203,6 +216,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $errors }}
             </div>
         </div>
     </div>
