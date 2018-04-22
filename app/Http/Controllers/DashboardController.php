@@ -104,6 +104,9 @@ class DashboardController extends Controller
 
     public function getLeave(Request $request) {
         $leaves = Leave::where('subordinate_id', $request->session()->get('id'))->paginate(10);
+        if (Leave::where('subordinate_id', $request->session()->get('id'))->where('is_enabled', '1')->count() == 1) {
+            return view('dashboard.leave', ['leaves' => $leaves, 'isPending' => 1]);
+        }
         return view('dashboard.leave', ['leaves' => $leaves]);
     }
 

@@ -18,9 +18,11 @@
     searchText: '',
     token: '',
     result: [],
+    resultforce: [],
     isShowAutocomplete: false,
     isFocusAutocomplete: false,
     isOverAutocomplete: false,
+    canSubmit: true,
 @endsection
 
 @section('script-methods')
@@ -32,8 +34,11 @@
                 {{-- } --}}
               }).then(response => this.result = response.data);
               this.isShowAutocomplete = true;
+              this.token = '';
+              this.canSubmit = false;
         } else {
             this.result = [];
+            this.canSubmit = true;
             this.token = '';
         }
     },
@@ -43,6 +48,7 @@
         this.isOverAutocomplete = false;
         this.$refs.search.blur();
         this.isShowAutocomplete = false;
+        this.canSubmit = true;
     },
     focusAutocomplete: function () {
         this.isFocusAutocomplete = true;
@@ -136,31 +142,33 @@
                                       'v-on:focus' => 'focusAutocomplete',
                                       'v-on:focusout' => 'nofocusAutocomplete',
                                       'autocomplete' => 'off',
-                                      'ref' => 'search',
-                                      'required'
+                                      'ref' => 'search'
                                   ])!!}
                                   <div class="input-group-prepend" v-if="token != ''">
                                       <span class="input-group-text">Selected contact<i class="fa fa-check ml-2"></i></span>
                                   </div>
-                                  {!! Form::hidden('substitute_id', null, [
+                                  {!! Form::hidden('substitute_token', null, [
                                       'v-model' => 'token',
                                       'ref' => 'token',
                                       'required'
                                   ])!!}
                               </div>
                               <div class="autocomplete" v-show="isShowAutocomplete" v-if="result.length > 0 && isFocusAutocomplete" v-on:focusout="nofocusAutocomplete">
-                                  <a href="#" class="sidebar-item autocomplete-item autocomplete-item-hover-default" v-for="account in result" v-on:click="setSubstitute(account.full_name, account.token)" @mouseover="overAutocomplete" @mouseout="outAutocomplete">@{{ account.full_name }}, @{{ account.task }}</a>
+                                  <a href="#" class="sidebar-item autocomplete-item autocomplete-item-hover-default" v-for="account in result" v-if="account.token" v-on:click="setSubstitute(account.full_name, account.token)" @mouseover="overAutocomplete" @mouseout="outAutocomplete">@{{ account.full_name }}, @{{ account.task }}</a>
                               </div>
                           </div>
                           <div class="form-group input-group">
                           </div>
-                          {{-- @{{ isFocusAutocomplete }} --}}
                       </div>
                   </div>
 
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                      {!! Form::submit('Send', ['class' => 'btn btn-light']) !!}
+                      {!! Form::submit('Send', [
+                          'class' => 'btn btn-light',
+                          ':disabled' => '!canSubmit'
+                          ])
+                      !!}
                       <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
                   </div>
                 </div>
@@ -173,13 +181,21 @@
                     {{ session()->get('leave_status') }}
                 </div>
             </div>
+        @elseif (count($errors) > 0)
+            <div class="row">
+                <div class="col-12 alert alert-danger text-center">
+                    @foreach ($errors->all() as $message)
+                        <div>{{ $message }}</div>
+                    @endforeach
+                </div>
+            </div>
         @else
             <div class="row" style="min-height: 60px;"></div>
         @endif
 
         <div class="row">
             <div class="col-12 pl-0 pr-0 mt-2">
-                <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm">
+                <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm" :disabled="{{ $isPending or 'false' }}">
                     <i class="fa fa-plus"></i> New Leave letter
                 </button>
             </div>
@@ -216,7 +232,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $errors }}
             </div>
         </div>
     </div>
