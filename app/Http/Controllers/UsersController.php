@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Account;
-use App\Account_setting;
+use App\User;
+use App\User_setting;
 use App\Department;
 use App\Task;
 
@@ -34,7 +34,7 @@ class UsersController extends Controller
         $is_enabled = 0;
         $token = str_random(64);
 
-        $user = new Account;
+        $user = new User;
         $user->email = $email;
         $user->password = $password;
         $user->full_name = $fullname;
@@ -46,8 +46,8 @@ class UsersController extends Controller
         $user->token = $token;
         $user->save();
 
-        $as = new Account_setting;
-        $as->account_id = $user->id;
+        $as = new User_setting;
+        $as->user_id = $user->id;
         $as->save();
 
         $supervisor_id = $request->input('supervisor_id');

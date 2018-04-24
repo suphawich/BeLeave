@@ -31,8 +31,8 @@ Route::get('/register-complete', function () {
 
 Route::get('/history', 'ManageController@history');
 
-Route::get('/', 'DashboardController@check');
-Route::get('/dashboard', 'DashboardController@check');
+Route::get('/', 'DashboardController@index');
+Route::get('/dashboard', 'DashboardController@index');
 Route::any('/profile', 'DashboardController@getProfile');
 Route::any('edit-profile', 'ProfileController@edit');
 Route::get('change-password', 'DashboardController@getChangepwd');

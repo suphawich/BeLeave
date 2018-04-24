@@ -50,7 +50,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">url</span>
                             </div>
-                            <input type="text" class="form-control" name="url" value="{{'localhost:7000/newuser/'.session()->get('token')}}" v-on:click="copyToClipboard">
+                            <input type="text" class="form-control" name="url" value="{{'localhost:7000/newuser/'.Auth::user()->token}}" v-on:click="copyToClipboard">
                         </div>
                         <label class="copy-message" v-if="isCopyUrl">Copied text to clipboard</label>
                         <label class="copy-message" v-else><i class="fa fa-external-link"></i> Click to copy</label>
@@ -76,8 +76,8 @@
             <div class="col-12 table-responsive">
                 <form action="/user-create" method="post" >
                 @csrf
-                <input type="hidden" name="supervisor_id" value="{{ session()->get('id') }}">
-                <input type="hidden" name="company_name" value="{{ session()->get('company_name') }}">
+                <input type="hidden" name="supervisor_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="company_name" value="{{ Auth::user()->company_name }}">
                 <table class="table table-hover">
                     <thead class="table-text">
                         <tr>
