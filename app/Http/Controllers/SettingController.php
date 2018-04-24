@@ -14,11 +14,11 @@ class SettingController extends Controller
      */
     public function r2sup(Request $request)
     {
-        $account_id = $request->session()->get('id');
+        $user_id = Auth::user()->id;
         $data = array(
             'is_r2sup' => 1
         );
-        $setting = Account_setting::where('account_id', $account_id)->update($data);
+        $setting = User_setting::where('user_id', $user_id)->update($data);
         return redirect('/setting');
     }
 }

@@ -9,6 +9,7 @@ use App\User;
 use App\User_setting;
 use App\Department;
 use App\Leave;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -16,21 +17,7 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-    public function check(Request $request) {
-        // if ($this->hasLogedin($request)) {
-        //     $access_level = $request->session()->get('access_level');
-        //     if ($access_level == "Administrator") {
-        //         return view('dashboard.index');
-        //     } else if ($access_level == "Supervisor") {
-        //         return view('dashboard.index');
-        //     } else if ($access_level == "Subordinate") {
-        //         return view('dashboard.index');
-        //     } else {
-        //         return view('dashboard.index');
-        //     }
-        // } else {
-        //     return redirect('login');
-        // }
+    public function index(Request $request) {
         return view('dashboard.index');
     }
 
@@ -52,22 +39,22 @@ class DashboardController extends Controller
 
     public function getUsers(Request $request) {
         if ($this->hasLogedin($request)) {
-            $supervisor_id = $request->session()->get('id');
+            $supervisor_id = Auth::user()->id;
             // $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('Users', 'departments.subordinate_id', '=', 'Users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('Users.*', 'tasks.task')->paginate(15);
             // return view('dashboard.users', ['subordinates' => $subordinates]);
 
             $data = array();
-            $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('Users', 'departments.subordinate_id', '=', 'Users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('Users.*', 'tasks.task')->get()->toArray();
+            $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('users.*', 'tasks.task')->get()->toArray();
             // foreach ($subordinates as $subordinate) {
             //     $subordinate['supervisor_name'] = $request->session()->get('full_name');
             // }
             while (count($subordinates) > 0) {
                 $subordinate = array_shift($subordinates);
                 if (!array_key_exists('supervisor_name', $subordinate)) {
-                    $subordinate['supervisor_name'] = $request->session()->get('full_name');
+                    $subordinate['supervisor_name'] = Auth::user()->full_name;
                 }
                 $data[] = (object) $subordinate;
-                $childs = Department::where('supervisor_id', $subordinate['id'], 'desc')->join('Users', 'departments.subordinate_id', '=', 'Users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('Users.*', 'tasks.task')->get()->toArray();
+                $childs = Department::where('supervisor_id', $subordinate['id'], 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('users.*', 'tasks.task')->get()->toArray();
                 foreach ($childs as $child) {
                     $child['supervisor_name'] = $subordinate['full_name'];
                     $subordinates[] = $child;
@@ -95,8 +82,8 @@ class DashboardController extends Controller
     }
 
     public function getSetting(Request $request) {
-        $User_id = $request->session()->get('id');
-        $setting = User_setting::where('User_id', $User_id)->first();
+        $user_id = Auth::user()->id;
+        $setting = User_setting::where('user_id', $user_id)->first();
         return view('dashboard.setting', ['setting' => $setting]);
     }
 
@@ -124,7 +111,7 @@ class DashboardController extends Controller
     }
 
     private function hasLogedin($request) {
-        if ($request->session()->has('login_successful') || $request->session()->has('id')) {
+        if (Auth::check()) {
             return true;
         } else {
             return false;

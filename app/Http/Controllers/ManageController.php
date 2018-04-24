@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Gbrock\Table\Facades\Table;
 use Validator;
-use App\Account;
-use App\Account_setting;
+use App\User;
+use App\User_setting;
 use App\Leave;
 
 class ManageController extends Controller
