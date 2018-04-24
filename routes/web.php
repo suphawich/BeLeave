@@ -52,8 +52,8 @@ Route::post('leave/search', 'ManageController@search');
 Route::get('leave', 'LeavesController@index');
 Route::put('leave','LeavesController@store');
 
-Route::get('setting', 'DashboardController@getSetting');
-Route::get('pending-r2sup', 'SettingController@r2sup');
+Route::get('setting', 'DashboardController@index_Setting');
+Route::get('setting/r2sup', 'DashboardController@r2sup');
 Route::get('request', 'DashboardController@getRequest');
 
 Auth::routes();

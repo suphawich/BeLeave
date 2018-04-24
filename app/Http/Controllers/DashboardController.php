@@ -21,17 +21,19 @@ class DashboardController extends Controller
         return view('dashboard.index');
     }
 
-    public function getSetting(Request $request) {
+    public function index_Setting(Request $request) {
         $user_id = Auth::user()->id;
         $setting = User_setting::where('user_id', $user_id)->first();
         return view('dashboard.setting', ['setting' => $setting]);
     }
 
-    private function hasLogedin($request) {
-        if (Auth::check()) {
-            return true;
-        } else {
-            return false;
-        }
+    public function r2sup(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $data = array(
+            'is_r2sup' => 1
+        );
+        $setting = User_setting::where('user_id', $user_id)->update($data);
+        return redirect('/setting');
     }
 }
