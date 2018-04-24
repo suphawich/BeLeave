@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Account;
+use App\User;
 
-class AccountsTableSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class AccountsTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = new Account;
+        $user = new User;
         $user->email = "suphawich.s@ku.th";
         $user->password = password_hash('mark', PASSWORD_DEFAULT);
         $user->full_name = 'Suphawich Sungkhavorn';
@@ -24,6 +24,6 @@ class AccountsTableSeeder extends Seeder
         $user->is_enabled = 0;
         $user->token = str_random(64);
         $user->save();
-        factory(App\Account::class, 10)->create();
+        factory(App\User::class, 10)->create();
     }
 }

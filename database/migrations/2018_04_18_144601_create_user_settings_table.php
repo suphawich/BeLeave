@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccountSettingsTable extends Migration
+class CreateUserSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAccountSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_settings', function (Blueprint $table) {
-            $table->unsignedinteger('account_id');
+        Schema::create('user_settings', function (Blueprint $table) {
+            $table->unsignedinteger('user_id');
             $table->boolean('is_r2sup')->default(false);
             $table->boolean('r2sup')->default(false);
             $table->timestamps();
 
-            $table->primary('account_id');
-            $table->foreign('account_id')->references('id')->on('accounts');
+            $table->primary('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -32,10 +32,10 @@ class CreateAccountSettingsTable extends Migration
     public function down()
     {
         Schema::enableForeignKeyConstraints();
-        Schema::table('account_settings', function(Blueprint $table) {
-            $table->dropForeign(['account_id']);
+        Schema::table('user_settings', function(Blueprint $table) {
+            $table->dropForeign(['user_id']);
         });
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('account_settings');
+        Schema::dropIfExists('user_settings');
     }
 }

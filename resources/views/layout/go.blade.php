@@ -43,15 +43,21 @@
                     <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">
                         <div class="row float-right topnav">
                             <a href="#"><span><i class="fa fa-bell"></i></span><span class="badge badge-pill badge-dark">2</span> </a>
-                            <a href="/profile" class="username"><span><i class="fa fa-user"></i></span><span>{{ session()->get('full_name') }}</span></a>
-                            <a href="/logout"><span><i class="fa fa-sign-out"></i></span><span> Log Out</span></a>
+                            <a href="/profile" class="username"><span><i class="fa fa-user"></i></span><span>{{ Auth::user()->full_name }}</span></a>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <span><i class="fa fa-sign-out"></i></span><span> Log Out</span>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @if (session()->get('access_level') == 'Administrator')
-        @elseif (session()->get('access_level') == 'Manager' || session()->get('access_level') == 'Guest')
+        @if (Auth::user()->access_level == 'Administrator')
+        @elseif (Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Guest')
             <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
@@ -134,7 +140,7 @@
                     </div>
                 </div>
             </div>
-        @elseif (session()->get('access_level') == 'Supervisor')
+        @elseif (Auth::user()->access_level == 'Supervisor')
             <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
@@ -201,7 +207,7 @@
                     </div>
                 </div>
             </div>
-        @elseif (session()->get('access_level') == 'Subordinate')
+        @elseif (Auth::user()->access_level == 'Subordinate')
             <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">

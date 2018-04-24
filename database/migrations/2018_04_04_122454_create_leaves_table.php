@@ -27,8 +27,8 @@ class CreateLeavesTable extends Migration
             $table->timestamp('arrive_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('subordinate_id')->references('id')->on('accounts');
-            $table->foreign('substitute_id')->references('id')->on('accounts');
+            $table->foreign('subordinate_id')->references('id')->on('users');
+            $table->foreign('substitute_id')->references('id')->on('users');
         });
     }
 

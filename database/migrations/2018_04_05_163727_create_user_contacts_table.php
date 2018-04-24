@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccountContactsTable extends Migration
+class CreateUserContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateAccountContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_contacts', function (Blueprint $table) {
-            $table->unsignedinteger('account_id');
+        Schema::create('user_contacts', function (Blueprint $table) {
+            $table->unsignedinteger('user_id');
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
             $table->string('line_id')->nullable();
             $table->string('whatapp_id')->nullable();
             $table->timestamps();
 
-            $table->primary('account_id');
-            $table->foreign('account_id')->references('id')->on('accounts');
+            $table->primary('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -34,10 +34,10 @@ class CreateAccountContactsTable extends Migration
     public function down()
     {
         Schema::enableForeignKeyConstraints();
-        Schema::table('account_contacts', function(Blueprint $table) {
-            $table->dropForeign(['account_id']);
+        Schema::table('user_contacts', function(Blueprint $table) {
+            $table->dropForeign(['user_id']);
         });
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('account_contacts');
+        Schema::dropIfExists('user_contacts');
     }
 }

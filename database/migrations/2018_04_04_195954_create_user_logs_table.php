@@ -15,13 +15,13 @@ class CreateUserLogsTable extends Migration
     {
         Schema::create('user_logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedinteger('account_id');
+            $table->unsignedinteger('user_id');
             $table->enum('action_type', [
                 'Login', 'Logout'
             ]);
             $table->timestamps();
 
-            $table->foreign('account_id')->references('id')->on('accounts');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -34,7 +34,7 @@ class CreateUserLogsTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
         Schema::table('user_logs', function(Blueprint $table) {
-            $table->dropForeign(['account_id']);
+            $table->dropForeign(['user_id']);
         });
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('user_logs');

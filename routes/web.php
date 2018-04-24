@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home.index');
-});
+// Route::get('/', function () {
+//     return view('home.index');
+// });
 
-Route::get('/login', 'LoginController@index');
-Route::put('/login', 'LoginController@check');
-Route::any('/logout', 'LoginController@getLogout');
+// Route::get('/login', 'LoginController@index');
+// Route::put('/login', 'LoginController@check');
+// Route::any('/logout', 'LoginController@getLogout');
 
 Route::any('/register', 'RegisterController@save');
 
@@ -31,6 +31,7 @@ Route::get('/register-complete', function () {
 
 Route::get('/history', 'ManageController@history');
 
+Route::get('/', 'DashboardController@check');
 Route::get('/dashboard', 'DashboardController@check');
 Route::any('/profile', 'DashboardController@getProfile');
 Route::any('edit-profile', 'ProfileController@edit');
@@ -52,3 +53,7 @@ Route::put('leave','ManageController@takeLeave');
 Route::get('manage/leave', 'DashboardController@getRequestLeave');
 Route::get('manage/leave/accept/{subordinate_id}', 'ManageController@leave_accept');
 Route::get('manage/leave/decline/{subordinate_id}', 'ManageController@leave_decline');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

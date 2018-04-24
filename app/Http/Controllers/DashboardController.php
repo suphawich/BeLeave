@@ -5,28 +5,33 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Gbrock\Table\Facades\Table;
-use App\Account;
-use App\Account_setting;
+use App\User;
+use App\User_setting;
 use App\Department;
 use App\Leave;
 
 class DashboardController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function check(Request $request) {
-        if ($this->hasLogedin($request)) {
-            $access_level = $request->session()->get('access_level');
-            if ($access_level == "Administrator") {
-                return view('dashboard.index');
-            } else if ($access_level == "Supervisor") {
-                return view('dashboard.index');
-            } else if ($access_level == "Subordinate") {
-                return view('dashboard.index');
-            } else {
-                return view('dashboard.index');
-            }
-        } else {
-            return redirect('login');
-        }
+        // if ($this->hasLogedin($request)) {
+        //     $access_level = $request->session()->get('access_level');
+        //     if ($access_level == "Administrator") {
+        //         return view('dashboard.index');
+        //     } else if ($access_level == "Supervisor") {
+        //         return view('dashboard.index');
+        //     } else if ($access_level == "Subordinate") {
+        //         return view('dashboard.index');
+        //     } else {
+        //         return view('dashboard.index');
+        //     }
+        // } else {
+        //     return redirect('login');
+        // }
+        return view('dashboard.index');
     }
 
     public function getProfile(Request $request) {
@@ -48,11 +53,11 @@ class DashboardController extends Controller
     public function getUsers(Request $request) {
         if ($this->hasLogedin($request)) {
             $supervisor_id = $request->session()->get('id');
-            // $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('accounts.*', 'tasks.task')->paginate(15);
+            // $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('Users', 'departments.subordinate_id', '=', 'Users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('Users.*', 'tasks.task')->paginate(15);
             // return view('dashboard.users', ['subordinates' => $subordinates]);
 
             $data = array();
-            $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('accounts.*', 'tasks.task')->get()->toArray();
+            $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('Users', 'departments.subordinate_id', '=', 'Users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('Users.*', 'tasks.task')->get()->toArray();
             // foreach ($subordinates as $subordinate) {
             //     $subordinate['supervisor_name'] = $request->session()->get('full_name');
             // }
@@ -62,7 +67,7 @@ class DashboardController extends Controller
                     $subordinate['supervisor_name'] = $request->session()->get('full_name');
                 }
                 $data[] = (object) $subordinate;
-                $childs = Department::where('supervisor_id', $subordinate['id'], 'desc')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('accounts.*', 'tasks.task')->get()->toArray();
+                $childs = Department::where('supervisor_id', $subordinate['id'], 'desc')->join('Users', 'departments.subordinate_id', '=', 'Users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('Users.*', 'tasks.task')->get()->toArray();
                 foreach ($childs as $child) {
                     $child['supervisor_name'] = $subordinate['full_name'];
                     $subordinates[] = $child;
@@ -90,14 +95,14 @@ class DashboardController extends Controller
     }
 
     public function getSetting(Request $request) {
-        $account_id = $request->session()->get('id');
-        $setting = Account_setting::where('account_id', $account_id)->first();
+        $User_id = $request->session()->get('id');
+        $setting = User_setting::where('User_id', $User_id)->first();
         return view('dashboard.setting', ['setting' => $setting]);
     }
 
     public function getRequest(Request $request) {
         $supervisor_id = $request->session()->get('id');
-        $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('account_settings', 'departments.subordinate_id', '=', 'account_settings.account_id')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('accounts.*','account_settings.*')->where('is_r2sup', '1')->paginate(15);
+        $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('user_settings', 'departments.subordinate_id', '=', 'user_settings.user_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('users.*','user_settings.*')->where('is_r2sup', '1')->paginate(15);
         // $table = Table::create($settings, ['full_name']);
         return view('dashboard.request', ['settings' => $settings]);
     }
@@ -112,8 +117,8 @@ class DashboardController extends Controller
 
     public function getRequestLeave(Request $request) {
         $supervisor_id = $request->session()->get('id');
-        // $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('accounts.*')->join('leaves', 'accounts.id', '=', 'leaves.subordinate_id')->select('leaves.*')->paginate(15);
-        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('accounts', 'departments.subordinate_id', '=', 'accounts.id')->select('leaves.*', 'accounts.full_name')->paginate(15);
+        // $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('users.*')->join('leaves', 'users.id', '=', 'leaves.subordinate_id')->select('leaves.*')->paginate(15);
+        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->paginate(15);
         // $table = Table::create($settings, ['full_name']);
         return view('dashboard.manageLeave', ['requests' => $requests]);
     }

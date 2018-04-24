@@ -19,7 +19,7 @@ class CreateTasksTable extends Migration
             $table->string('task');
             $table->timestamps();
 
-            $table->foreign('subordinate_id')->references('id')->on('accounts');
+            $table->foreign('subordinate_id')->references('id')->on('users');
         });
     }
 

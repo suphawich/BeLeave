@@ -23,7 +23,7 @@ class CreateSupervisorDetailsTable extends Migration
             $table->timestamps();
 
             $table->primary('supervisor_id');
-            $table->foreign('supervisor_id')->references('id')->on('accounts');
+            $table->foreign('supervisor_id')->references('id')->on('users');
         });
     }
 
