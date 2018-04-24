@@ -42,7 +42,7 @@
                 <div class="card">
                     <div class="card-header">
                         <span>Generate register link</span>
-                        <a href="re-token" class="float-right"><i class="fa fa-refresh"></i></a>
+                        <a href="/users/{{ Auth::user()->id }}/retoken" class="float-right"><i class="fa fa-refresh"></i></a>
                     </div>
                     <div class="card-body text-center">
                         <form method="post">
@@ -74,7 +74,7 @@
         </div>
         <div class="row">
             <div class="col-12 table-responsive">
-                <form action="/user-create" method="post" >
+                <form action="users" method="post" >
                 @csrf
                 <input type="hidden" name="supervisor_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="company_name" value="{{ Auth::user()->company_name }}">
@@ -90,9 +90,8 @@
                     </thead>
                     <tbody class="tbody-text">
                         <tr v-if="isShowNewUser">
-                            {{-- <th scope="row">1</th> --}}
                             <td><input type="text" name="full_name" class="form-control" pattern="[A-Za-z][A-Za-z ]+" placeholder="Full name*" required></td>
-                            {{-- <td><input type="text" name="supervisor_name" class="form-control" value="{{ session()->get('full_name') }}" disabled ></td> --}}
+                            <input type="hidden" name="access_level" class="form-control" value="Subordinate">
                             <td><input type="text" name="task" class="form-control" pattern="[A-Za-z][A-Za-z ]+" placeholder="Task*" required></td>
                             <td><input type="email" name="email" class="form-control" placeholder="Email address" required></td>
                             <td><input type="text" name="tel" class="form-control" pattern="[0-9][0-9+]+" placeholder="Phone Number" required></td>

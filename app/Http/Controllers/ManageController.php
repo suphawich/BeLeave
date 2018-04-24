@@ -5,32 +5,46 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Gbrock\Table\Facades\Table;
 use Validator;
+use Auth;
 use App\User;
 use App\User_setting;
 use App\Leave;
+use App\Department;
 
 class ManageController extends Controller
 {
-    public function r2sup_accept($account_id) {
+    public function index_request() {
+        $supervisor_id = Auth::user()->id;
+        $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('user_settings', 'departments.subordinate_id', '=', 'user_settings.user_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('users.*','user_settings.*')->where('is_r2sup', '1')->paginate(15);
+        return view('manage.request', ['settings' => $settings]);
+    }
+
+    public function index_request_leave() {
+        $supervisor_id = Auth::user()->id;
+        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->paginate(15);
+        return view('manage.request_leave', ['requests' => $requests]);
+    }
+
+    public function r2sup_accept($user_id) {
         $data = array(
             'is_r2sup' => 0,
             'r2sup' => 1
         );
-        $setting = Account_setting::where('account_id', $account_id)->update($data);
+        $setting = User_setting::where('user_id', $user_id)->update($data);
         $data = array(
             'access_level' => 'Supervisor'
         );
-        $account = Account::where('id', $account_id)->update($data);
-        return redirect('/request');
+        $account = User::where('id', $user_id)->update($data);
+        return redirect()->back();
     }
 
-    public function r2sup_decline($account_id) {
+    public function r2sup_decline($user_id) {
         $data = array(
             'is_r2sup' => 0,
             'r2sup' => 0
         );
-        $setting = Account_setting::where('account_id', $account_id)->update($data);
-        return redirect('/request');
+        $setting = User_setting::where('user_id', $user_id)->update($data);
+        return redirect()->back();
     }
 
     public function leave_accept($id) {
@@ -39,7 +53,7 @@ class ManageController extends Controller
             'is_approved' => 1
         );
         $leave = Leave::where('id', $id)->update($data);
-        return redirect('/manage/leave');
+        return redirect()->back();
     }
 
     public function leave_decline($id) {
@@ -48,52 +62,12 @@ class ManageController extends Controller
             'is_approved' => 0
         );
         $leave = Leave::where('id', $id)->update($data);
-        return redirect('/manage/leave');
-    }
-
-    public function takeLeave(Request $request) {
-        if (Leave::where('subordinate_id', $request->session()->get('id'))->where('is_enabled', '1')->count() == 1) {
-            $v = Validator::make([], []);
-            // $v->errors()->add('some_field', 'some_translated_error_key');
-            $v->getMessageBag()->add('interfere', 'Can\'t send more than one leave letter.');
-            return redirect()->back()->withErrors($v);
-        } else if ($request->input('token') == '') {
-            $validatedData = $request->validate([
-                'depart_at' => 'required|date|after_or_equal:today',
-                'arrive_at' => 'required|date|after_or_equal:depart_at',
-                'description' => 'required|max:500'
-            ]);
-        } else {
-            $validatedData = $request->validate([
-                'depart_at' => 'required|date|after_or_equal:today',
-                'arrive_at' => 'required|date|after_or_equal:depart_at',
-                'description' => 'required|max:500',
-                'substitute_token' => 'exists:accounts,token'
-            ]);
-        }
-
-        // if ($validatedData->fails()) {
-        //     return redirect()->back();
-        // }
-        // return $validatedData;
-
-        $leave = new Leave;
-        $leave->subordinate_id = $request->session()->get('id');
-        if ($request->input('token') != '') {
-            $leave->substitute_id = Account::where('token', $request->input('substitute_token'))->first()->id;
-        }
-        $leave->description = $request->input('description');
-        $leave->leave_type = $request->input('leave_type');
-        $leave->depart_at = $request->input('depart_at');
-        $leave->arrive_at = $request->input('arrive_at');
-        $leave->save();
-        $request->session()->flash('leave_status', 'Request leave to your supervisor successful.');
-        return redirect('/leave');
+        return redirect()->back();
     }
 
     public function search(Request $request) {
-        $accounts = Account::where('full_name', 'LIKE', $request->keyword.'%')->join('tasks', 'accounts.id', '=', 'tasks.subordinate_id')->select('accounts.full_name','accounts.token','tasks.task')->where('token', '!=', $request->session()->get('token'))->get();
-        return response()->json($accounts);
+        $users = User::where('full_name', 'LIKE', $request->keyword.'%')->join('tasks', 'users.id', '=', 'tasks.subordinate_id')->select('users.full_name','users.token','tasks.task')->where('token', '!=', Auth::user()->token)->get();
+        return response()->json($users);
     }
 
     public function history(){

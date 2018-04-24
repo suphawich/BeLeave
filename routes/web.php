@@ -33,26 +33,28 @@ Route::get('/history', 'ManageController@history');
 
 Route::get('/', 'DashboardController@index');
 Route::get('/dashboard', 'DashboardController@index');
-Route::any('/profile', 'DashboardController@getProfile');
-Route::any('edit-profile', 'ProfileController@edit');
-Route::get('change-password', 'DashboardController@getChangepwd');
-Route::get('users', 'DashboardController@getUsers');
-Route::get('re-token', 'UsersController@retoken');
-Route::post('user-create', 'UsersController@create');
+
+
+Route::get('users/{user}/edit', 'UsersController@edit');
+Route::get('users/{user}/retoken', 'UsersController@retoken');
+Route::put('users/{user}', 'UsersController@update');
+Route::get('users', 'UsersController@index');
+Route::post('users', 'UsersController@store');
+
+Route::get('manage/request', 'ManageController@index_request');
+Route::get('r2sup/accept/{user_id}', 'ManageController@r2sup_accept');
+Route::get('r2sup/decline/{user_id}', 'ManageController@r2sup_decline');
+Route::get('manage/request/leave', 'ManageController@index_request_leave');
+Route::get('manage/request/leave/{subordinate_id}/accept', 'ManageController@leave_accept');
+Route::get('manage/request/leave/{subordinate_id}/decline', 'ManageController@leave_decline');
+Route::post('leave/search', 'ManageController@search');
+
+Route::get('leave', 'LeavesController@index');
+Route::put('leave','LeavesController@store');
 
 Route::get('setting', 'DashboardController@getSetting');
 Route::get('pending-r2sup', 'SettingController@r2sup');
 Route::get('request', 'DashboardController@getRequest');
-Route::get('r2sup/accept/{account_id}', 'ManageController@r2sup_accept');
-Route::get('r2sup/decline/{account_id}', 'ManageController@r2sup_decline');
-
-Route::get('leave', 'DashboardController@getLeave');
-Route::get('/leave/search', 'DashboardController@getLeave');
-Route::post('/leave/search', 'ManageController@search');
-Route::put('leave','ManageController@takeLeave');
-Route::get('manage/leave', 'DashboardController@getRequestLeave');
-Route::get('manage/leave/accept/{subordinate_id}', 'ManageController@leave_accept');
-Route::get('manage/leave/decline/{subordinate_id}', 'ManageController@leave_decline');
 
 Auth::routes();
 

@@ -85,7 +85,7 @@
     <div class="container-fluid body-content">
         <div class="modal fade" id="modalLeaveForm" ref="modalLeaveForm">
             <div class="modal-dialog modal-lg">
-                {!! Form::open(['action' => 'ManageController@takeLeave', 'method' => 'PUT']) !!}
+                {!! Form::open(['action' => 'LeavesController@store', 'method' => 'PUT']) !!}
                 <div class="modal-content">
 
                   <!-- Modal Header -->
