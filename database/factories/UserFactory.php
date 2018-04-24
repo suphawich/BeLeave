@@ -15,9 +15,20 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'password' => bcrypt('secret'),
+        'full_name' => $faker->name,
+        // 'avatar' => $faker->image('C:/xampp/htdocs/BeLeave/public/images/profiles',640,480,'cats'),
+        // 'avatar' => $faker->image('/Applications/MAMP/htdocs/BeLeave/public/images/profiles',640,480,'cats'),
+        'avatar' => '',
+        'address' => $faker->address,
+        'access_level' => $faker->randomElement([
+            'Guest', 'Subordinate', 'Supervisor', 'Administrator'
+        ]),
+        'tel' => $faker->phoneNumber,
+        'company_name' => $faker->company,
+        'is_enabled' => $faker->boolean(90),
+        'token' => $faker->sha256,
+        'remember_token' => null
     ];
 });

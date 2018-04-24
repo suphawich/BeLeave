@@ -19,8 +19,8 @@ class CreateDepartmentsTable extends Migration
             $table->unsignedinteger('subordinate_id');
             $table->timestamps();
 
-            $table->foreign('supervisor_id')->references('id')->on('accounts');
-            $table->foreign('subordinate_id')->references('id')->on('accounts');
+            $table->foreign('supervisor_id')->references('id')->on('users');
+            $table->foreign('subordinate_id')->references('id')->on('users');
         });
     }
 

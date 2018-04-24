@@ -19,7 +19,7 @@ class CreateSupervisorPlansTable extends Migration
             $table->string('plan');
             $table->timestamps();
 
-            $table->foreign('supervisor_id')->references('id')->on('accounts');
+            $table->foreign('supervisor_id')->references('id')->on('users');
         });
     }
 

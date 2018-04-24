@@ -22,7 +22,7 @@ class CreateTransactionsTable extends Migration
             ]);
             $table->timestamps();
 
-            $table->foreign('supervisor_id')->references('id')->on('accounts');
+            $table->foreign('supervisor_id')->references('id')->on('users');
             $table->foreign('plan_id')->references('id')->on('plans');
         });
     }

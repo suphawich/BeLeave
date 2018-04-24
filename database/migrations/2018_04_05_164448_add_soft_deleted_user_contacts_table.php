@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeletedAccountContactsTable extends Migration
+class AddSoftDeletedUserContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddSoftDeletedAccountContactsTable extends Migration
      */
     public function up()
     {
-        Schema::table('account_contacts', function (Blueprint $table) {
+        Schema::table('user_contacts', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -25,7 +25,7 @@ class AddSoftDeletedAccountContactsTable extends Migration
      */
     public function down()
     {
-        Schema::table('account_contacts', function (Blueprint $table) {
+        Schema::table('user_contacts', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }
