@@ -43,7 +43,7 @@
                     <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">
                         <div class="row float-right topnav">
                             <a href="#"><span><i class="fa fa-bell"></i></span><span class="badge badge-pill badge-dark">2</span> </a>
-                            <a href="/profile" class="username"><span><i class="fa fa-user"></i></span><span>{{ Auth::user()->full_name }}</span></a>
+                            <a href="/users/{{ Auth::user()->id }}/edit" class="username"><span><i class="fa fa-user"></i></span><span>{{ Auth::user()->full_name }}</span></a>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <span><i class="fa fa-sign-out"></i></span><span> Log Out</span>
@@ -81,14 +81,14 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuManage,'subsidebar-icon-toggled': isHoverSubMenuManage,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
-                        <a href="/manage/leave" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Leave</span>
+                        <a href="/manage/request" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Request</span>
+                        </a>
+                        <a href="/manage/request/leave" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Request Leave</span>
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Leave history</span>
-                        </a>
-                        <a href="/request" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Request</span>
                         </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
@@ -116,7 +116,7 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAccounts,'subsidebar-icon-toggled': isHoverSubMenuAccounts,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
-                        <a href="/profile" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/users/{{ Auth::user()->id }}/edit" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Personalization</span>
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">
@@ -164,14 +164,14 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuManage,'subsidebar-icon-toggled': isHoverSubMenuManage,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
-                        <a href="/manage/leave" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Leave</span>
+                        <a href="/manage/request" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Request</span>
+                        </a>
+                        <a href="/manage/request/leave" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Request Leave</span>
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Leave history</span>
-                        </a>
-                        <a href="/request" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Request</span>
                         </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAccounts}" v-on:click="toggleAccounts" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
@@ -226,7 +226,7 @@
                         <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
                         <span class="menuText"> Leave</span>
                     </a>
-                    <a href="/profile" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuPersonal}" @mouseover="hoverMenuPersonal" @mouseout="closeMenuPersonal">
+                    <a href="/users/{{ Auth::user()->id }}/edit" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuPersonal}" @mouseover="hoverMenuPersonal" @mouseout="closeMenuPersonal">
                         <span class="menuIcon"><i class="fa fa-user"></i></span>
                         <span class="menuText"> Prosonalization</span>
                     </a>

@@ -9,7 +9,7 @@
 @endpush
 
 @section('title')
-    Request Leave
+    Request
 @endsection
 
 @section('script-data')
@@ -27,27 +27,21 @@
                 <table class="table table-hover">
                     <thead class="table-text">
                         <tr>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Message</th>
-                            <th scope="col">Depart date</th>
-                            <th scope="col">Arrive date</th>
+                            <th scope="col">Request message</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody class="tbody-text">
-                        @foreach ($requests as $request)
-                            @if ($request->is_enabled)
-                                <tr>
-                                    <td>{{ $request->full_name }}</td>
-                                    <td>{{ $request->description }}</td>
-                                    <td>{{ date_format(date_create($request->depart_at),"m/d/Y") }}</td>
-                                    <td>{{ date_format(date_create($request->arrive_at),"m/d/Y").date_diff(date_create($request->depart_at), date_create($request->arrive_at))->format(" (%a days)") }}</td>
-                                    <td>
-                                        <a href="/manage/leave/accept/{{ $request->id }}" class="btn btn-light"><i class="fa fa-check"></i></a>
-                                        <a href="/manage/leave/decline/{{ $request->id }}" class="btn btn-light"><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
-                            @endif
+                        @foreach ($settings as $setting)
+                            <tr>
+                                @if ($setting->is_r2sup)
+                                    <td>{{ $setting->full_name }}<span> is request Supervisor.</span></td>
+                                @endif
+                                <td>
+                                    <a href="/r2sup/accept/{{ $setting->user_id }}" class="btn btn-light"><i class="fa fa-check"></i></a>
+                                    <a href="/r2sup/decline/{{ $setting->user_id }}" class="btn btn-light"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -55,7 +49,7 @@
         </div>
         <div class="row">
             <div class="col-2 ml-auto mr-auto mt-5">
-                {!! $requests->render() !!}
+                {!! $settings->render() !!}
             </div>
         </div>
         {{-- @foreach ($settings as $setting)

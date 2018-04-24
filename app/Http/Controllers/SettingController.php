@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Account_setting;
+use App\User_setting;
+use Auth;
 
 class SettingController extends Controller
 {

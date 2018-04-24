@@ -3,32 +3,82 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Controllers\Controller;
+use Auth;
 use App\User;
 use App\User_setting;
-use App\Department;
 use App\Task;
+use App\Department;
 
 class UsersController extends Controller
 {
-    public function retoken(Request $request) {
-        $new = str_random(64);
-        $id = $request->session()->get('id');
-        $data = array(
-            'token' => $new
-        );
-        Account::where('id', $id)->update($data);
-        $request->session()->put('token', $new);
-        return redirect()->back();
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $supervisor_id = Auth::user()->id;
+
+        $data = array();
+        $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('users.*', 'tasks.task')->get()->toArray();
+        while (count($subordinates) > 0) {
+            $subordinate = array_shift($subordinates);
+            if (!array_key_exists('supervisor_name', $subordinate)) {
+                $subordinate['supervisor_name'] = Auth::user()->full_name;
+            }
+            $data[] = (object) $subordinate;
+            $childs = Department::where('supervisor_id', $subordinate['id'], 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('users.*', 'tasks.task')->get()->toArray();
+            foreach ($childs as $child) {
+                $child['supervisor_name'] = $subordinate['full_name'];
+                $subordinates[] = $child;
+            }
+        }
+
+        // Get current page form url e.x. &page=1
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        // Create a new Laravel collection from the array data
+        $itemCollection = collect($data);
+        // Define how many items we want to be visible in each page
+        $perPage = 15;
+        // Slice the collection to get the items to display in current page
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        // Create our paginator and pass it to the view
+        $data= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        // set url path for generted links
+        $data->setPath($request->url());
+
+        // return $data;
+        return view('users.index', ['subordinates' => $data]);
     }
 
-    public function create(Request $request) {
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $email = $request->input('email');
         // $password = str_random(20);
         $password = "mark";
         $password = password_hash($password, PASSWORD_DEFAULT);
         $fullname = $request->input('full_name');
         $avatar = $this->defaultAvatarPath();
-        $access_level = "Subordinate";
+        $access_level = $request->input('access_level');
         $tel = $request->input('tel');
         $companyName = $request->input('company_name');
         $is_enabled = 0;
@@ -64,7 +114,123 @@ class UsersController extends Controller
         return back();
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        return view('users.edit', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, User $user)
+    {
+        if ($request->has(['full_name', 'company_name', 'company_email', 'address', 'tel'])) {
+            $companyEmail = $request->input('company_email');
+            $password = $request->session()->get('password');
+            $fullname = $request->input('full_name');
+            $avatar = $request->session()->get('avatar');
+            $address = $request->input('address');
+            $access_level = $request->input('access_level');
+            $tel = $request->input('tel');
+            $companyName = $request->input('company_name');
+
+            if (!$this->hasEmailNotDup($companyEmail)) {
+                if ($request->hasFile('file')) {
+                    $avatar = $request->file->store('/images/profiles');
+                }
+                $user->email = $companyEmail;
+                $user->full_name = $fullname;
+                $user->avatar = $avatar;
+                $user->address = $address;
+                $user->tel = $tel;
+                $user->company_name = $companyName;
+                $user->save();
+                // $user = User::where('id', $id)->update($data);
+                // foreach ($data as $key => $value) {
+                //     $request->session()->put($key, $value);
+                // }
+                $request->session()->flash('error', 'Changed profile successfully.');
+                return redirect('/users/'.$user->id.'/edit');
+            }
+            $request->session()->flash('error','E-mail is already used, please try again.');
+            return redirect('profile');
+        } else if ($request->has(['current_password', 'new_password', 'confirm_password'])) {
+            $current = $request->input('current_password');
+            $new = $request->input('new_password');
+            $confirm = $request->input('confirm_password');
+            if (password_verify($current, Auth::user()->password)) {
+                if ($new == $confirm) {
+                    $user->password = password_hash($new, PASSWORD_DEFAULT);
+                    $user->save();
+                    $request->session()->flash('error', 'Changed Password Successful');
+                    return redirect('/users/'.$user->id.'/edit');
+                }
+                $request->session()->flash('status','New password is not match, please try again.');
+                return redirect('/users/'.$user->id.'/edit');
+            } else {
+                $request->session()->flash('error','Current password is wrong, please try again.');
+                return redirect('/users/'.$user->id.'/edit');
+            }
+        } else {
+            $request->session()->flash('error', 'if 1');
+            return redirect('/users/'.$user->id.'/edit');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect('/users');
+    }
+
+    public function retoken(User $user) {
+        $new = str_random(64);
+        $user->token = $new;
+        $user->save();
+        return redirect()->back();
+    }
+
     private function defaultAvatarPath() {
         return 'C:\xampp\htdocs\BeLeave\public\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+    }
+
+    private function hasEmailNotDup($email) {
+        $emails = User::where('email', $email)->get()->toArray();
+        if (count($emails) > 0) {
+            if (Auth::user()->email == $email) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 }

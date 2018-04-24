@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('full_name');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('address')->nullable();
             $table->enum('access_level', [
                 'Guest', 'Subordinate', 'Supervisor', 'Manager','Administrator'
