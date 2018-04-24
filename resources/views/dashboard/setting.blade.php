@@ -35,7 +35,7 @@
                         @elseif ($setting->is_r2sup)
                             <a name="request" class="btn float-right" style="cursor: no-drop;" disabled>Pending</a>
                         @else
-                            <a href="pending-r2sup" name="request" class="btn btn-light float-right">Request</a>
+                            <a href="/setting/r2sup" name="request" class="btn btn-light float-right">Request</a>
                         @endif
                     </div>
                 </div>
