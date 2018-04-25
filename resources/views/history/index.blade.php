@@ -1,59 +1,108 @@
 @extends('layout.go')
 
 
+@push('script')
+<script src="//code.jquery.com/jquery-1.12.3.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script
+src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet"
+href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet"
+href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+
+
+
+<script>
+$(document).ready(function() {
+$('#table').DataTable();
+} );
+
+
+
+$(document).on('click', '.edit-modal', function() {
+    $('#footer_action_button').text(" Update");
+    $('#footer_action_button').addClass('glyphicon-check');
+    $('#footer_action_button').removeClass('glyphicon-trash');
+    $('.actionBtn').addClass('btn-success');
+    $('.actionBtn').removeClass('btn-danger');
+    $('.actionBtn').removeClass('delete');
+    $('.actionBtn').addClass('edit');
+    $('.modal-title').text('Edit');
+    $('.deleteContent').hide();
+    $('.form-horizontal').show();
+    var stuff = $(this).data('info').split(',');
+    fillmodalData(stuff)
+    $('#myModal').modal('show');
+});
+</script>
+
+
+@endpush
+
+
+<style media="screen">
+button {
+ color       : red;
+ height      : auto;
+ line-height : 21px;
+ text-align  : center;
+ width       : auto;
+ border      : 0px;
+ padding-left:10px;
+ padding-right:10px;
+ min-width:100px;
+}
+</style>
 @section('content')
 
-
 <br>
-<br>
-<div >
+<table class="table" id="table">
+    <thead>
+        <tr>
+          <th>Number</th>
+          <th>Subordinate Name</th>
+          <th>Description</th>
+          <th>Substitute Name</th>
+          <th>Leave Type</th>
+          <th>Enable</th>
+          <th>Approve</th>
 
-
-  <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-
-
-
-
-    <table class="table table-hover">
-      <thead class="table-text">
-      <tr>
-        <td>ID</td>
-        <td>Subordinate ID</td>
-        <td>Description</td>
-        <td>Substitute ID</td>
-        <td>Leave Type</td>
-        <td>Enable</td>
-        <td>Approved</td>
-      </tr>
+        </tr>
     </thead>
+    <tbody>
+    @foreach($leaves as $item)
 
-      <tr>
-        <?php foreach ($leaves as $leave): ?>
-          <tr>
-            <td>{{ $leave->id }}</td>
-            <td>{{ $leave->subordinate_id }}</td>
-            <td>{{ $leave->description }}</td>
-            <td>{{ $leave->substitute_id }}</td>
-            <td>{{ $leave->leave_type }}</td>
-            <td>{{ $leave->is_enabled }}</td>
-            <td>{{ $leave->is_approved }}</td>
-          </tr>
+    <tr class="item{{$item->id}}">
 
-        <?php endforeach; ?>
-      </tr>
-    </table>
+      <td>{{ $loop->iteration }}</td>
+      <td><button class="form-control " style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->full_name }}</a></botton></td>
+      <td>{{ $item->description }}</td>
+      @foreach($users as $user)
+      @if($user->id === $item->substitute_id)
+
+      <?php
+      $item->subordinate_id = $item->substitute_id;
+       $item->substitute_id = $user->full_name;
+       ?>
+
+      @endif
+
+      @endforeach
+
+      <td><button class="form-control "  style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->substitute_id }}</a></button></td>
+      <td>{{ $item->leave_type }}</td>
+      <td>{!! $item->is_enabled ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' !!}</td>
+      <td>{!! $item->is_approved ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' !!}</td>
 
 
-    <div class="row">
-        <div class="col-2 ml-auto mr-auto mt-5">
-            {{ $leaves->appends(['sort' => request()->sort])->links() }}
-        </div>
-    </div>
+    </tr>
+    @endforeach
+    </tbody>
+</table>
 
 
-</div>
 
-<p>Boomin</p>
 
 
 @endsection

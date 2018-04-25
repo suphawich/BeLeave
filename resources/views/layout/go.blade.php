@@ -85,7 +85,7 @@
                         <a href="/manage/request/leave" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Request Leave</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/history" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Leave history</span>
                         </a>
                     </div>
@@ -117,7 +117,7 @@
                         <a href="/users/{{ Auth::user()->id }}/edit" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Personalization</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/subscription/{{ Auth::user()->id}}" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Subscription</span>
                         </a>
                         <a href="/users" class="sidebar-item sidebar-item-hover-default">
@@ -185,7 +185,7 @@
                         <a href="/users/{{ Auth::user()->id }}/edit" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Personalization</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/subscription" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Subscription</span>
                         </a>
                         <a href="/users" class="sidebar-item sidebar-item-hover-default">

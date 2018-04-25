@@ -124,8 +124,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $id)
     {
+
+      // $user = User::where('id','=','$id');
+      // dd( $user->id );
+      return view('users.profile', ['user' => $id]);
         //
     }
 
@@ -273,4 +277,8 @@ class UsersController extends Controller
         }
         return false;
     }
+
+
+
+
 }

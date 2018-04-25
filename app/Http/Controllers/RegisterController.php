@@ -34,11 +34,16 @@ class RegisterController extends Controller
             $user->token = $token;
             $user->save();
 
+            
+
             return redirect('/');
         } else {
             return view('register.index');
         }
     }
+
+
+    
 
     private function genePassword() {
         $pwd = "";

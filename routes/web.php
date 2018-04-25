@@ -19,6 +19,10 @@
 // Route::put('/login', 'LoginController@check');
 // Route::any('/logout', 'LoginController@getLogout');
 
+Route::get('subscription', function(){
+    return view('subscription.index');
+});
+
 Route::any('/register', 'RegisterController@save');
 
 Route::get('/register-payment', function () {
@@ -36,11 +40,19 @@ Route::get('/dashboard', 'DashboardController@index');
 
 
 Route::get('users/{user}/edit', 'UsersController@edit');
+
+
+
+
+
 Route::get('users/{user}/retoken', 'UsersController@retoken');
+
+Route::get('users/{id}/profile', 'UsersController@show');
 Route::put('users/{user}', 'UsersController@update');
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');
 Route::put('users', 'UsersController@search');
+
 
 
 Route::get('manage/request', 'ManageController@index_request');
@@ -63,3 +75,7 @@ Route::get('request', 'DashboardController@getRequest');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/register-plan' , function(){
+    return view('register.plan');
+});
