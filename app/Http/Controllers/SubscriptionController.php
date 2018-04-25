@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Subscription;
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
 
 class SubscriptionController extends Controller
 {
@@ -14,7 +16,8 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        $users= Auth::user()->id;
+        return view('subscription.index');
     }
 
     /**
