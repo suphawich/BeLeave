@@ -18,7 +18,7 @@ use App\Supervisor; ?>
 
   <p>PACKAGE:{{}}</p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/register/plan" role="button">BUY PACKAGE</a>
+    <a class="btn btn-primary btn-lg" href="/register-plan" role="button">BUY PACKAGE</a>
   </p>
 </div>
 @endsection
