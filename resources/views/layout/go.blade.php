@@ -6,6 +6,37 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.12.3.js"></script>
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script
+        src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet"
+        href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">\
+        <script>
+          $(document).ready(function() {
+            $('#table').DataTable();
+        } );
+
+
+
+        $(document).on('click', '.edit-modal', function() {
+                $('#footer_action_button').text(" Update");
+                $('#footer_action_button').addClass('glyphicon-check');
+                $('#footer_action_button').removeClass('glyphicon-trash');
+                $('.actionBtn').addClass('btn-success');
+                $('.actionBtn').removeClass('btn-danger');
+                $('.actionBtn').removeClass('delete');
+                $('.actionBtn').addClass('edit');
+                $('.modal-title').text('Edit');
+                $('.deleteContent').hide();
+                $('.form-horizontal').show();
+                var stuff = $(this).data('info').split(',');
+                fillmodalData(stuff)
+                $('#myModal').modal('show');
+            });
+         </script>
 
 
     @stack('style')
