@@ -41,17 +41,29 @@ $(document).on('click', '.edit-modal', function() {
 @endpush
 
 
-
+<style media="screen">
+button {
+ color       : red;
+ height      : auto;
+ line-height : 21px;
+ text-align  : center;
+ width       : auto;
+ border      : 0px;
+ padding-left:10px;
+ padding-right:10px;
+ min-width:100px;
+}
+</style>
 @section('content')
 
 <br>
 <table class="table" id="table">
     <thead>
         <tr>
-          <th>ID</th>
-          <th>Subordinate ID</th>
+          <th>Number</th>
+          <th>Subordinate Name</th>
           <th>Description</th>
-          <th>Substitute ID</th>
+          <th>Substitute Name</th>
           <th>Leave Type</th>
           <th>Enable</th>
           <th>Approve</th>
@@ -63,10 +75,22 @@ $(document).on('click', '.edit-modal', function() {
 
     <tr class="item{{$item->id}}">
 
-      <td>{{ $item->id }}</td>
-      <td>{{ $item->full_name }}</td>
+      <td>{{ $loop->iteration }}</td>
+      <td><button class="form-control " style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->full_name }}</a></botton></td>
       <td>{{ $item->description }}</td>
-      <td>{{ $item->substitute_id }}</td>
+      @foreach($users as $user)
+      @if($user->id === $item->substitute_id)
+
+      <?php
+      $item->subordinate_id = $item->substitute_id;
+       $item->substitute_id = $user->full_name;
+       ?>
+
+      @endif
+
+      @endforeach
+
+      <td><button class="form-control "  style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->substitute_id }}</a></button></td>
       <td>{{ $item->leave_type }}</td>
       <td>{!! $item->is_enabled ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' !!}</td>
       <td>{!! $item->is_approved ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' !!}</td>
@@ -77,8 +101,6 @@ $(document).on('click', '.edit-modal', function() {
     </tbody>
 </table>
 
-
-{{ Auth::user()->id }}
 
 
 
