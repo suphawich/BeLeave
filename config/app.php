@@ -152,6 +152,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         'Msieprawski\ResourceTable\ResourceTableServiceProvider',
         'Gbrock\Table\Providers\TableServiceProvider',
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -214,6 +215,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Table' => 'Gbrock\Table\Facades\Table',
         'ResourceTable' => 'Msieprawski\ResourceTable\ResourceTable',
+        'Lava' => 'Khill\Lavacharts\Laravel\LavachartsFacade',
     ],
 
 ];

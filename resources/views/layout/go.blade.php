@@ -98,7 +98,7 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAnalytics,'subsidebar-icon-toggled': isHoverSubMenuAnalytics,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/graph" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Graph</span>
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">
