@@ -40,10 +40,18 @@ Route::get('/dashboard', 'DashboardController@index');
 
 
 Route::get('users/{user}/edit', 'UsersController@edit');
+
+
+
+
+
 Route::get('users/{user}/retoken', 'UsersController@retoken');
+
+Route::get('users/{user}/profile', 'UsersController@show');
 Route::put('users/{user}', 'UsersController@update');
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');
+
 
 Route::get('manage/request', 'ManageController@index_request');
 Route::get('r2sup/accept/{user_id}', 'ManageController@r2sup_accept');

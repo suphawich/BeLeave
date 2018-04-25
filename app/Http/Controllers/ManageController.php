@@ -76,13 +76,14 @@ class ManageController extends Controller
 
       $leaves = Leave::all();
       $supervisor_id = Auth::user()->id;
-      $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->get();
-
+      $leaves = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->get();
+      $users = User::all();
       // $d = Department::all()->pluck('subordinate_id','id');
       // $u = User::all()->pluck('full_name','id');
       // $table = Table::create($rows);
       // $leaves = Leave::sorted()->get();
       return view('history.index',['leaves' => $leaves]);
+      return view('history.index',['leaves' => $leaves , 'users' => $users]);
 
     }
 }
