@@ -217,7 +217,7 @@
                         <a href="/profile" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Personalization</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/subscription" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Subscription</span>
                         </a>
                         <a href="/users" class="sidebar-item sidebar-item-hover-default">
