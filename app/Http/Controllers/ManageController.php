@@ -22,6 +22,7 @@ class ManageController extends Controller
     public function index_request_leave() {
         $supervisor_id = Auth::user()->id;
         $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->paginate(15);
+
         return view('manage.request_leave', ['requests' => $requests]);
     }
 
@@ -72,7 +73,13 @@ class ManageController extends Controller
 
     public function history(){
       // $rows = Leave::get();
-      $leaves = Leave::sorted()->paginate(5);
+
+      $leaves = Leave::all();
+      $supervisor_id = Auth::user()->id;
+      $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->get();
+
+      // $d = Department::all()->pluck('subordinate_id','id');
+      // $u = User::all()->pluck('full_name','id');
       // $table = Table::create($rows);
       // $leaves = Leave::sorted()->get();
       return view('history.index',['leaves' => $leaves]);

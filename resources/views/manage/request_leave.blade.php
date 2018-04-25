@@ -21,6 +21,7 @@
 @endsection
 
 @section('content')
+
     <div class="container-fluid body-content">
         <div class="row">
             <div class="col-12">
