@@ -13,6 +13,10 @@ use App\Department;
 
 class UsersController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +54,7 @@ class UsersController extends Controller
         // set url path for generted links
         $data->setPath($request->url());
 
-        // return $data;
+        // return $news;
         return view('users.index', ['subordinates' => $data]);
     }
 
@@ -210,6 +214,42 @@ class UsersController extends Controller
     {
         $user->delete();
         return redirect('/users');
+    }
+
+    public function search(Request $request) {
+        $supervisor_id = Auth::user()->id;
+        $word = $request->input('search');
+
+        $data = array();
+        $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('users.*', 'tasks.task')->where('full_name', 'LIKE', $word.'%')->get()->toArray();
+        while (count($subordinates) > 0) {
+            $subordinate = array_shift($subordinates);
+            if (!array_key_exists('supervisor_name', $subordinate)) {
+                $subordinate['supervisor_name'] = Auth::user()->full_name;
+            }
+            $data[] = (object) $subordinate;
+            $childs = Department::where('supervisor_id', $subordinate['id'], 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('users.*', 'tasks.task')->get()->toArray();
+            foreach ($childs as $child) {
+                $child['supervisor_name'] = $subordinate['full_name'];
+                $subordinates[] = $child;
+            }
+        }
+
+        // Get current page form url e.x. &page=1
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        // Create a new Laravel collection from the array data
+        $itemCollection = collect($data);
+        // Define how many items we want to be visible in each page
+        $perPage = 15;
+        // Slice the collection to get the items to display in current page
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        // Create our paginator and pass it to the view
+        $data= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        // set url path for generted links
+        $data->setPath($request->url());
+
+        // return $data;
+        return view('users.index', ['subordinates' => $data]);
     }
 
     public function retoken(User $user) {

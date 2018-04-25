@@ -1247,6 +1247,42 @@
         ]
     },
     {
+        "name": "msieprawski/resource-table",
+        "version": "v0.71",
+        "version_normalized": "0.71.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/msieprawski/resource-table.git",
+            "reference": "516581e522feb5a5ccaf7db39f80ba2576a2e3f9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/msieprawski/resource-table/zipball/516581e522feb5a5ccaf7db39f80ba2576a2e3f9",
+            "reference": "516581e522feb5a5ccaf7db39f80ba2576a2e3f9",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~5",
+            "php": ">=5.4.0"
+        },
+        "time": "2015-07-10T09:13:12+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Msieprawski\\ResourceTable": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Mateusz Sieprawski",
+                "email": "crom9153@gmail.com"
+            }
+        ],
+        "description": "Alternative for Laravel DataTable"
+    },
+    {
         "name": "myclabs/deep-copy",
         "version": "1.7.0",
         "version_normalized": "1.7.0.0",

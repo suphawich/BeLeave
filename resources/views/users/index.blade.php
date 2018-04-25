@@ -62,12 +62,14 @@
         <div class="row">
             <div class="col-12 pl-0 pr-0 mt-2">
                 <button type="button" name="newUser" class="btn btn-light float-right mb-2" v-on:click="clickNewUser"><i class="fa fa-plus"></i> Add New User</button>
-                <form method="post">
+                <form action="/users/search" method="post">
+                @csrf
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
                     </div>
                     <input type="text" class="form-control" name="search" placeholder="Search by Full Name, E-mail, Phone Number or Task">
+                    <input type="submit" name="save" value="" style="display: none;">
                 </div>
                 </form>
             </div>

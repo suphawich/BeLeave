@@ -155,6 +155,10 @@
                         <span class="menuIcon"><i class="fa fa-home"></i></span>
                         <span class="menuText"> Home</span>
                     </a>
+                    <a href="/leave" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeave}" @mouseover="hoverMenuLeave" @mouseout="closeMenuLeave">
+                        <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
+                        <span class="menuText"> Leave</span>
+                    </a>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuManage }" v-on:click="toggleManage" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
                         <span class="menuIcon"><i class="fa fa-list-alt"></i></span>
                         <span class="menuText"> Manage</span>

@@ -13,6 +13,10 @@ use App\Department;
 
 class ManageController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function index_request() {
         $supervisor_id = Auth::user()->id;
         $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('user_settings', 'departments.subordinate_id', '=', 'user_settings.user_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('users.*','user_settings.*')->where('is_r2sup', '1')->paginate(15);

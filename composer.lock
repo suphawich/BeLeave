@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "adefd8cd55804e646e47860ebe69f6ba",
+    "content-hash": "34cf2791cc89e2ab7953c56f86d7de60",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -934,6 +934,40 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "msieprawski/resource-table",
+            "version": "v0.71",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msieprawski/resource-table.git",
+                "reference": "516581e522feb5a5ccaf7db39f80ba2576a2e3f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msieprawski/resource-table/zipball/516581e522feb5a5ccaf7db39f80ba2576a2e3f9",
+                "reference": "516581e522feb5a5ccaf7db39f80ba2576a2e3f9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Msieprawski\\ResourceTable": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Mateusz Sieprawski",
+                    "email": "crom9153@gmail.com"
+                }
+            ],
+            "description": "Alternative for Laravel DataTable",
+            "time": "2015-07-10T09:13:12+00:00"
         },
         {
             "name": "nesbot/carbon",

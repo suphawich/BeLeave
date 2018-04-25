@@ -302,6 +302,10 @@ class ComposerStaticInitf945c99c69d5987f1ad5a61ccd07bb71
         ),
         'M' => 
         array (
+            'Msieprawski\\ResourceTable' => 
+            array (
+                0 => __DIR__ . '/..' . '/msieprawski/resource-table/src',
+            ),
             'Mockery' => 
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
@@ -338,11 +342,10 @@ class ComposerStaticInitf945c99c69d5987f1ad5a61ccd07bb71
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\LeavesController' => __DIR__ . '/../..' . '/app/Http/Controllers/LeavesController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\ManageController' => __DIR__ . '/../..' . '/app/Http/Controllers/ManageController.php',
-        'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterController.php',
-        'App\\Http\\Controllers\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/SettingController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -2004,6 +2007,15 @@ class ComposerStaticInitf945c99c69d5987f1ad5a61ccd07bb71
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
+        'Msieprawski\\ResourceTable\\Exceptions\\CollectionException' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/Exceptions/CollectionException.php',
+        'Msieprawski\\ResourceTable\\Exceptions\\TableException' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/Exceptions/TableException.php',
+        'Msieprawski\\ResourceTable\\Generators\\Collection' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/Generators/Collection.php',
+        'Msieprawski\\ResourceTable\\Generators\\Table' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/Generators/Table.php',
+        'Msieprawski\\ResourceTable\\Helpers\\Column' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/Helpers/Column.php',
+        'Msieprawski\\ResourceTable\\Presenters\\AdminLTEPresenter' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/Presenters/AdminLTEPresenter.php',
+        'Msieprawski\\ResourceTable\\Presenters\\DefaultPresenter' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/Presenters/DefaultPresenter.php',
+        'Msieprawski\\ResourceTable\\ResourceTable' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/ResourceTable.php',
+        'Msieprawski\\ResourceTable\\ResourceTableServiceProvider' => __DIR__ . '/..' . '/msieprawski/resource-table/src/Msieprawski/ResourceTable/ResourceTableServiceProvider.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/CollisionServiceProvider.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\Inspector' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/Inspector.php',

@@ -17,6 +17,7 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->unsignedinteger('subordinate_id');
             $table->string('task');
+            $table->string('substitute_task')->nullable();
             $table->timestamps();
 
             $table->foreign('subordinate_id')->references('id')->on('users');
