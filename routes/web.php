@@ -47,7 +47,7 @@ Route::get('users/{user}/edit', 'UsersController@edit');
 
 Route::get('users/{user}/retoken', 'UsersController@retoken');
 
-Route::get('users/{user}/profile', 'UsersController@show');
+Route::get('users/{id}/profile', 'UsersController@show');
 Route::put('users/{user}', 'UsersController@update');
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');

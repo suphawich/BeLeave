@@ -82,7 +82,6 @@ class ManageController extends Controller
       // $u = User::all()->pluck('full_name','id');
       // $table = Table::create($rows);
       // $leaves = Leave::sorted()->get();
-      return view('history.index',['leaves' => $leaves]);
       return view('history.index',['leaves' => $leaves , 'users' => $users]);
 
     }
