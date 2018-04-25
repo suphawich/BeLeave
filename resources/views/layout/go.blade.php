@@ -97,7 +97,7 @@
                         <a href="/manage/request/leave" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Request Leave</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/history" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Leave history</span>
                         </a>
                     </div>
