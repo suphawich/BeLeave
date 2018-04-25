@@ -6,18 +6,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-
-
-
-
-
-
-
-
-
-
-
-
     @stack('style')
 </head>
 <body>
@@ -110,7 +98,7 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAnalytics,'subsidebar-icon-toggled': isHoverSubMenuAnalytics,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/graph" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Graph</span>
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">
@@ -134,9 +122,6 @@
                         </a>
                         <a href="/users" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Users</span>
-                        </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Tasks</span>
                         </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuSetting}" @mouseover="hoverMenuSetting" @mouseout="closeMenuSetting">
@@ -164,6 +149,10 @@
                     <a href="/dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
                         <span class="menuIcon"><i class="fa fa-home"></i></span>
                         <span class="menuText"> Home</span>
+                    </a>
+                    <a href="/leave" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuLeave}" @mouseover="hoverMenuLeave" @mouseout="closeMenuLeave">
+                        <span class="menuIcon"><i class="fa fa-pencil-square-o"></i></span>
+                        <span class="menuText"> Leave</span>
                     </a>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuManage }" v-on:click="toggleManage" @mouseover="hoverMenuManage" @mouseout="closeMenuManage">
                         <span class="menuIcon"><i class="fa fa-list-alt"></i></span>
@@ -193,7 +182,7 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAccounts,'subsidebar-icon-toggled': isHoverSubMenuAccounts,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
-                        <a href="/profile" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/users/{{ Auth::user()->id }}/edit" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Personalization</span>
                         </a>
                         <a href="/subscription" class="sidebar-item sidebar-item-hover-default">
@@ -201,9 +190,6 @@
                         </a>
                         <a href="/users" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Users</span>
-                        </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Tasks</span>
                         </a>
                     </div>
                     <a href="/setting" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuSetting}" @mouseover="hoverMenuSetting" @mouseout="closeMenuSetting">

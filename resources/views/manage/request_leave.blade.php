@@ -38,14 +38,38 @@
                     <tbody class="tbody-text">
                         @foreach ($requests as $request)
                             @if ($request->is_enabled)
-                                <tr>
-                                    <td>{{ $request->full_name }}</td>
+                                <tr data-toggle="collapse" data-target="#demo">
+                                    <a href="/manage/request/{{ $request->subordinate_id }}/history"></a>
+                                    <td><a href="/manage/request/{{ $request->subordinate_id }}/history">{{ $request->full_name }}</a></td>
                                     <td>{{ $request->description }}</td>
                                     <td>{{ date_format(date_create($request->depart_at),"m/d/Y") }}</td>
                                     <td>{{ date_format(date_create($request->arrive_at),"m/d/Y").date_diff(date_create($request->depart_at), date_create($request->arrive_at))->format(" (%a days)") }}</td>
                                     <td>
                                         <a href="/manage/request/leave/{{ $request->id }}/accept" class="btn btn-light"><i class="fa fa-check"></i></a>
                                         <a href="/manage/request/leave/{{ $request->id }}/decline" class="btn btn-light"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                <tr id="demo" class="collapse">
+                                    <td colspan="5">
+                                        <div class="container">
+                                            <span>Full name: {{ $users[$request->subordinate_id]->full_name }}</span>
+                                            <br>
+                                            <span>
+                                                Leave:
+                                                {{ $users[$request->subordinate_id]->leave_count
+                                                    .' (in '.\Carbon\Carbon::now()->year
+                                                    .')'
+                                                }}
+                                            </span>
+                                            <ul>
+                                                <li>Vacation: {{ $users[$request->subordinate_id]->leave_vacation_count }}</li>
+                                                <li>Personal Errand: {{ $users[$request->subordinate_id]->leave_personal_errand_count }}</li>
+                                                <li>Sick: {{ $users[$request->subordinate_id]->leave_sick_count }}</li>
+                                            </ul>
+                                            <span>Latest Leave from: {{ date_format(date_create($users[$request->subordinate_id]->leave_latest_depart),"m/d/Y") }}</span>
+                                            <br>
+                                            <span>Latest Leave to: {{ date_format(date_create($users[$request->subordinate_id]->leave_latest_arrive),"m/d/Y").date_diff(date_create($users[$request->subordinate_id]->leave_latest_depart), date_create($users[$request->subordinate_id]->leave_latest_arrive))->format(" (%a days)") }}</span>
+                                        </div>
                                     </td>
                                 </tr>
                             @endif

@@ -195,7 +195,11 @@
 
         <div class="row">
             <div class="col-12 pl-0 pr-0 mt-2">
-                <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm" :disabled="{{ $isPending or 'false' }}">
+                @if ($isPending or $isSubstitute)
+                    <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm" disabled>
+                @else
+                    <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm">
+                @endif
                     <i class="fa fa-plus"></i> New Leave letter
                 </button>
             </div>
@@ -218,7 +222,7 @@
                                 <td>{{ $leave->leave_type }}</td>
                                 <td >{{ date_format(date_create($leave->depart_at),"m/d/Y") }}</td>
                                 <td>{{ date_format(date_create($leave->arrive_at),"m/d/Y").date_diff(date_create($leave->depart_at), date_create($leave->arrive_at))->format(" (%a days)") }}</td>
-                                <td>{{ $leave->substitute_id ?? '-' }}</td>
+                                <td>{{ $substitutes_name[$leave->substitute_id] ?? '-' }}</td>
                                 @if ($leave->is_approved)
                                     <td>Approved</td>
                                 @else
@@ -232,6 +236,31 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-8 col-12 pl-0 pr-0" >
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <span>Substitute Task</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div>
+                                @if ($isSubstitute)
+                                    <span>From: {{ $subordinate->full_name }}</span>
+                                    <br>
+                                    <span>Task: {{ $subordinate->task }}</span>
+                                    <br>
+                                    <span>Work Date: {{ date_format(date_create($substitute->depart_at),"m/d/Y") }}</span>
+                                    <span>-> {{ date_format(date_create($substitute->arrive_at),"m/d/Y").date_diff(date_create($substitute->depart_at), date_create($substitute->arrive_at))->format(" (%a days)") }}</span>
+                                @else
+                                    <span>You have no substitute task</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

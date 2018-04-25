@@ -51,6 +51,8 @@ Route::get('users/{id}/profile', 'UsersController@show');
 Route::put('users/{user}', 'UsersController@update');
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');
+Route::put('users', 'UsersController@search');
+
 
 
 Route::get('manage/request', 'ManageController@index_request');
@@ -63,6 +65,8 @@ Route::post('leave/search', 'ManageController@search');
 
 Route::get('leave', 'LeavesController@index');
 Route::put('leave','LeavesController@store');
+
+Route::get('graph','AnalyticController@index');
 
 Route::get('setting', 'DashboardController@index_Setting');
 Route::get('setting/r2sup', 'DashboardController@r2sup');
