@@ -30,6 +30,7 @@ class LeavesController extends Controller
                 $substitutes[$leave->substitute_id] = "-";
             } else {
                 $substitutes[$leave->substitute_id] = User::where('id', $leave->substitute_id)->first()->full_name;
+                // return $leave->substitute_id;
             }
         }
         $leaves = Leave::where('subordinate_id', Auth::user()->id)->orderby('created_at', 'desc')->paginate(10);

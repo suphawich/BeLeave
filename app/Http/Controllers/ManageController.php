@@ -16,7 +16,7 @@ class ManageController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
-    
+
     public function index_request() {
         $supervisor_id = Auth::user()->id;
         $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('user_settings', 'departments.subordinate_id', '=', 'user_settings.user_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('users.*','user_settings.*')->where('is_r2sup', '1')->paginate(15);
@@ -25,8 +25,23 @@ class ManageController extends Controller
 
     public function index_request_leave() {
         $supervisor_id = Auth::user()->id;
-        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->paginate(15);
-        return view('manage.request_leave', ['requests' => $requests]);
+        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name');
+        $users = [];
+        foreach ($requests->get() as $request) {
+            $u = User::where('id', $request->subordinate_id)->first();
+            $obj['id'] = $u->id;
+            $obj['full_name'] = $u->full_name;
+            $obj['leave_count'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->count();
+            $obj['leave_vacation_count'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->where('leave_type', 'Vacation')->count();
+            $obj['leave_personal_errand_count'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->where('leave_type', 'Personal Errand')->count();
+            $obj['leave_sick_count'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->where('leave_type', 'Sick')->count();
+            $obj['leave_latest_depart'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->latest()->first()->depart_at;
+            $obj['leave_latest_arrive'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->latest()->first()->arrive_at;
+            $users[$request->subordinate_id] = (object) $obj;
+        }
+        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->paginate(10);
+        return view('manage.request_leave', ['requests' => $requests, 'users' => $users]);
+        // return $requests;
     }
 
     public function r2sup_accept($user_id) {
@@ -56,7 +71,7 @@ class ManageController extends Controller
             'is_enabled' => 0,
             'is_approved' => 1
         );
-        $leave = Leave::where('id', $id)->update($data);
+        $leaveeave = Leave::where('id', $id)->update($data);
         return redirect()->back();
     }
 
@@ -65,7 +80,7 @@ class ManageController extends Controller
             'is_enabled' => 0,
             'is_approved' => 0
         );
-        $leave = Leave::where('id', $id)->update($data);
+        $leaveeave = Leave::where('id', $id)->update($data);
         return redirect()->back();
     }
 
@@ -78,7 +93,7 @@ class ManageController extends Controller
       // $rows = Leave::get();
       $leaves = Leave::sorted()->paginate(5);
       // $table = Table::create($rows);
-      // $leaves = Leave::sorted()->get();
+      // $leaveeaves = Leave::sorted()->get();
       return view('history.index',['leaves' => $leaves]);
 
     }

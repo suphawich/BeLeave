@@ -40,7 +40,7 @@ Route::get('users/{user}/retoken', 'UsersController@retoken');
 Route::put('users/{user}', 'UsersController@update');
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');
-Route::post('users/search', 'UsersController@search');
+Route::put('users', 'UsersController@search');
 
 
 Route::get('manage/request', 'ManageController@index_request');

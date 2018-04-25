@@ -62,8 +62,9 @@
         <div class="row">
             <div class="col-12 pl-0 pr-0 mt-2">
                 <button type="button" name="newUser" class="btn btn-light float-right mb-2" v-on:click="clickNewUser"><i class="fa fa-plus"></i> Add New User</button>
-                <form action="/users/search" method="post">
+                <form action="/users" method="post">
                 @csrf
+                @method('PUT')
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
