@@ -36,7 +36,9 @@ Route::get('/boom', function(){
   return view('users.boom');
 });
 
-Route::get('/', 'DashboardController@index');
+Route::get('/', function(){
+    return view('home.index');
+});
 Route::get('/dashboard', 'DashboardController@index');
 
 
