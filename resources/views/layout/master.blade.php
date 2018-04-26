@@ -10,7 +10,14 @@
 <body>
     <div class="container-fluid" style="background-color:rgba(255,255,0,0.7)">
         <header>
-            <div class="container">
+        <div class="row float-right">
+            <ul class="list-inline">
+            <br>
+                <li class="list-inline-item"><button class="btn btn-success btn-sm"><a href="#">Login</a></button></li>
+                <li class="list-inline-item"><button class="btn btn-danger btn-sm" name="trail-btn">Register</button></li>
+            </ul>
+        </div>
+            <!-- <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-8">
                         <img src="/images/logo.png" class="logo" alt="logo website">
@@ -27,7 +34,7 @@
                         <span class="float-right" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </header>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
