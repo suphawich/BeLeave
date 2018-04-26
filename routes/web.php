@@ -67,6 +67,7 @@ Route::get('leave', 'LeavesController@index');
 Route::put('leave','LeavesController@store');
 
 Route::get('graph','AnalyticController@index');
+Route::put('graph','AnalyticController@index');
 
 Route::get('setting', 'DashboardController@index_Setting');
 Route::get('setting/r2sup', 'DashboardController@r2sup');
