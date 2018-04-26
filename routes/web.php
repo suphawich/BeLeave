@@ -73,6 +73,8 @@ Route::get('setting', 'DashboardController@index_Setting');
 Route::get('setting/r2sup', 'DashboardController@r2sup');
 Route::get('request', 'DashboardController@getRequest');
 
+Route::get('account/accounts', 'UsersController@index_account');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

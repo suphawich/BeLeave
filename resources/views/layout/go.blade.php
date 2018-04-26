@@ -81,11 +81,8 @@
                         <a href="/users/{{ Auth::user()->id }}/edit" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Personalization</span>
                         </a>
-                        <a href="/subscription/{{ Auth::user()->id}}" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Subscription</span>
-                        </a>
-                        <a href="/users" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Users</span>
+                        <a href="/account/accounts" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Accounts</span>
                         </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
