@@ -124,11 +124,11 @@ a.username {
 }
 
 .topnav a:hover {
-    background-color: #3DAF2C;
+    background-color: #a7c96b;
 }
 
 .nav {
-    background-color: #8A8B8F;
+    background-color: #1c4769;
     max-height: 50px;
 }
 
@@ -157,7 +157,7 @@ a.username {
 }
 
 .sidebar-default {
-    background-color: #8A8B8F;
+    background-color: #1c4769;
 }
 
 .sidebar-item {
@@ -182,7 +182,7 @@ a.username {
 }
 
 .sidebar-item-hover-default:hover {
-    background-color: #3DAF2C;
+    background-color: #a7c96b;
     text-decoration: none;
     cursor:pointer;
     color: #FFF;

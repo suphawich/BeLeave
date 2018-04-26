@@ -6,6 +6,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+
     @stack('style')
 </head>
 <body>
@@ -31,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid nav fixed-top">
+        <div class="container-fluid nav sticky-top">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 logo-content">
@@ -84,6 +85,9 @@
                         <a href="/account/accounts" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Accounts</span>
                         </a>
+                        <a href="/account/switchuser" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Switch user</span>
+                        </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
                         <span class="menuIcon"><i class="fa fa-signal"></i></span>
@@ -103,8 +107,10 @@
                     </div>
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
-                    <div class="w3-container">
+                    <div class="w3-container" style="margin-top: 50px;">
+
                         @yield('content')
+
                     </div>
                 </div>
             </div>
@@ -183,7 +189,7 @@
                     </a>
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
-                    <div class="w3-container">
+                    <div class="w3-container"  >
                         @yield('content')
                     </div>
                 </div>
@@ -437,6 +443,7 @@
                 @yield('script-methods')
             }
         });
+        @yield('script-query')
     </script>
 </body>
 </html>

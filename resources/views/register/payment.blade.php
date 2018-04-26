@@ -38,6 +38,7 @@
 @endsection
 
 @section('form')
+
     <form id="form-payment" method="get">
         <div class="container">
             <div class="form-content">
@@ -70,7 +71,7 @@
                         <ul class="list-group payment-type-content">
                             <li class="list-group-item payment-type-header">CARD SUMMARY</li>
                             <li class="list-group-item payment-type-item">
-                                <label>Plan A</label>
+                                <label>{{$plan->name}}</label>
                                 <label class="float-right">20.00 usd</label>
                             </li>
                         </ul>

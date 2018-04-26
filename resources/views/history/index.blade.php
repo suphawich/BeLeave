@@ -1,6 +1,21 @@
 @extends('layout.go')
 
 
+@push('style')
+    <style media="screen">
+        button {
+         color       : red;
+         height      : auto;
+         line-height : 21px;
+         text-align  : center;
+         width       : auto;
+         border      : 0px;
+         padding-left:10px;
+         padding-right:10px;
+         min-width:100px;
+        }
+    </style>
+@endpush
 @push('script')
 <script src="//code.jquery.com/jquery-1.12.3.js"></script>
 <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -10,15 +25,12 @@ src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script
 href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet"
 href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+@endpush
 
-
-
-<script>
+@section('script-query')
 $(document).ready(function() {
 $('#table').DataTable();
 } );
-
-
 
 $(document).on('click', '.edit-modal', function() {
     $('#footer_action_button').text(" Update");
@@ -35,25 +47,8 @@ $(document).on('click', '.edit-modal', function() {
     fillmodalData(stuff)
     $('#myModal').modal('show');
 });
-</script>
+@endsection
 
-
-@endpush
-
-
-<style media="screen">
-button {
- color       : red;
- height      : auto;
- line-height : 21px;
- text-align  : center;
- width       : auto;
- border      : 0px;
- padding-left:10px;
- padding-right:10px;
- min-width:100px;
-}
-</style>
 @section('content')
 
 <br>

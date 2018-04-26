@@ -65,6 +65,10 @@ class UsersController extends Controller
         ]);
     }
 
+    public function index_switchuser() {
+        return view('users.index_switchuser');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
