@@ -10,19 +10,23 @@
 <body>
     <div class="container-fluid" style="background-color:rgba(255,255,0,0.7)">
         <header>
-            <div class="container">
+        <div class="row float-right">
+            <ul class="list-inline">
+            <br>
+                <li class="list-inline-item"><button class="btn btn-success btn-sm"><a href="#">Login</a></button></li>
+                <li class="list-inline-item"><button class="btn btn-danger btn-sm" name="trail-btn">Register</button></li>
+            </ul>
+        </div>
+            <!-- <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-8">
-                        Header
+                        <img src="/images/logo.png" class="logo" alt="logo website">
                     </div>
                     <div class="col-md-9 d-none d-sm-none d-md-block">
                         <div class="row float-right">
                             <ul class="list-inline">
-                                <li class="list-inline-item"><a href="#">Menu1</a></li>
-                                <li class="list-inline-item"><a href="#">Menu2</a></li>
-                                <li class="list-inline-item"><a href="#">Menu3</a></li>
-                                <li class="list-inline-item"><a href="#">Menu4</a></li>
-                                <li class="list-inline-item"><button class="btn btn-danger btn-sm" name="trail-btn">Free trail</button></li>
+                                <li class="list-inline-item"><button class="btn btn-success btn-sm"><a href="#">Login</a></button></li>
+                                <li class="list-inline-item"><button class="btn btn-danger btn-sm" name="trail-btn">Register</button></li>
                             </ul>
                         </div>
                     </div>
@@ -30,15 +34,7 @@
                         <span class="float-right" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
                     </div>
                 </div>
-            </div>
-            <div id="mySidenav" class="sidenav">
-                <button type="button" class="close" onclick="closeNav()"><span>×</span></button>
-                <a href="#">Menu1</a>
-                <a href="#">Menu2</a>
-                <a href="#">Menu3</a>
-                <a href="#">Menu4</a>
-                <a class="btn btn-danger btn-sm" name="trail-btn" style="margin-left: 15px; margin-right: 15px;">Free trail</a>
-            </div>
+            </div> -->
         </header>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

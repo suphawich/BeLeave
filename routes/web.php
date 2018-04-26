@@ -19,23 +19,26 @@
 // Route::put('/login', 'LoginController@check');
 // Route::any('/logout', 'LoginController@getLogout');
 
-Route::get('subscription', function(){
+Route::get('subscription/{users}', function(){
     return view('subscription.index');
 });
 
 Route::any('/register', 'RegisterController@save');
 
-Route::get('/register-payment', function () {
-    return view('register.payment');
-});
+Route::get('/register/{user}{plan}/payment', 'RegisterController@payment');
 
 Route::get('/register-complete', function () {
     return view('register.complete');
 });
 
 Route::get('/history', 'ManageController@history');
+Route::get('/boom', function(){
+  return view('users.boom');
+});
 
-Route::get('/', 'DashboardController@index');
+Route::get('/', function(){
+    return view('home.index');
+});
 Route::get('/dashboard', 'DashboardController@index');
 
 
@@ -47,10 +50,13 @@ Route::get('users/{user}/edit', 'UsersController@edit');
 
 Route::get('users/{user}/retoken', 'UsersController@retoken');
 
-Route::get('users/{user}/profile', 'UsersController@show');
+Route::get('users/{id}/profile', 'UsersController@show');
+Route::put('users/{user}/account', 'UsersController@update_account');
+Route::put('users/{user}/switchuser', 'UsersController@switchuser');
 Route::put('users/{user}', 'UsersController@update');
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');
+Route::put('users', 'UsersController@search');
 
 
 Route::get('manage/request', 'ManageController@index_request');
@@ -64,14 +70,18 @@ Route::post('leave/search', 'ManageController@search');
 Route::get('leave', 'LeavesController@index');
 Route::put('leave','LeavesController@store');
 
+Route::get('graph','AnalyticController@index');
+Route::put('graph','AnalyticController@index');
+
 Route::get('setting', 'DashboardController@index_Setting');
 Route::get('setting/r2sup', 'DashboardController@r2sup');
 Route::get('request', 'DashboardController@getRequest');
+
+Route::get('account/accounts', 'UsersController@index_account');
+Route::get('account/switchuser', 'UsersController@index_switchuser');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/register-plan' , function(){
-    return view('register.plan');
-});
+Route::get('/plan','PlanController@index');
