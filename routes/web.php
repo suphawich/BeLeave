@@ -35,7 +35,9 @@ Route::get('/register-complete', function () {
 
 Route::get('/history', 'ManageController@history');
 
-Route::get('/', 'DashboardController@index');
+Route::get('/', function(){
+    return view('home.index');
+});
 Route::get('/dashboard', 'DashboardController@index');
 
 
