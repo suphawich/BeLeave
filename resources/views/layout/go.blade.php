@@ -6,6 +6,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+
     @stack('style')
 </head>
 <body>
@@ -106,8 +107,10 @@
                     </div>
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
-                    <div class="w3-container">
+                    <div class="w3-container"  ">
+
                         @yield('content')
+
                     </div>
                 </div>
             </div>
@@ -186,7 +189,7 @@
                     </a>
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
-                    <div class="w3-container">
+                    <div class="w3-container"  >
                         @yield('content')
                     </div>
                 </div>

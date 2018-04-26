@@ -34,6 +34,9 @@ Route::get('/register-complete', function () {
 });
 
 Route::get('/history', 'ManageController@history');
+Route::get('/boom', function(){
+  return view('users.boom');
+});
 
 Route::get('/', 'DashboardController@index');
 Route::get('/dashboard', 'DashboardController@index');
