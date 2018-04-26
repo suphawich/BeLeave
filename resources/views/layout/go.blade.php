@@ -443,6 +443,7 @@
                 @yield('script-methods')
             }
         });
+        @yield('script-query')
     </script>
 </body>
 </html>
