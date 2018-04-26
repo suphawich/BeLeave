@@ -22,7 +22,23 @@
 
 @section('content')
     <div class="container-fluid body-content">
+        {!! Form::open(['action' => 'AnalyticController@index', 'method' => 'PUT']) !!}
+        {!! Form::select(
+            'year',
+            $years,
+            $year,
+            [
+                'onchange' => 'this.form.submit()'
+            ]
+        ) !!}
+        {!! Form::close() !!}
         <div id="leavepopular"></div>
-        @barchart('LeavePopular', 'leavepopular')
+        @barchart('LeavePopular-'.$year, 'leavepopular')
+
+        <div id="leaveleast"></div>
+        @barchart('LeaveLeast-'.$year, 'leaveleast')
+
+        <div id="leavecount"></div>
+        @piechart('LeaveCount-'.$year, 'leavecount')
     </div>
 @endsection

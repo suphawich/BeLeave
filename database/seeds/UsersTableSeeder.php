@@ -13,6 +13,19 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = new User;
+        $user->email = "admin@example";
+        $user->password = password_hash('password', PASSWORD_DEFAULT);
+        $user->full_name = 'Admin';
+        $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        $user->address = "20 Soi Pichayanunt15 Tiwanont Road";
+        $user->access_level = 'Administrator';
+        $user->tel = '0836429451';
+        $user->company_name = "BeLeave";
+        $user->is_enabled = 1;
+        $user->token = str_random(64);
+        $user->save();
+
+        $user = new User;
         $user->email = "suphawich.s@ku.th";
         $user->password = password_hash('mark', PASSWORD_DEFAULT);
         $user->full_name = 'Suphawich Sungkhavorn';

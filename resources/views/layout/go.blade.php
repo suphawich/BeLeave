@@ -55,6 +55,62 @@
             </div>
         </div>
         @if (Auth::user()->access_level == 'Administrator')
+            <div class="container-fluid">
+                <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
+                        <span class="leftArrowIcon menuIcon-nomargin"><i class="fa fa-chevron-left"></i></span>
+                        <span class="arrowText"></span>
+                    </a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuIcon" v-on:click="lessMoreMenu">
+                        <span class="rightArrowIcon menuIcon"><i class="fa fa-chevron-right"></i></span>
+                        <span class="arrowText"></span>
+                    </a>
+                    <a href="/dashboard" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuHome}" @mouseover="hoverMenuHome" @mouseout="closeMenuHome">
+                        <span class="menuIcon"><i class="fa fa-home"></i></span>
+                        <span class="menuText"> Home</span>
+                    </a>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAccounts}" v-on:click="toggleAccounts" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
+                        <span class="menuIcon"><i class="fa fa-users"></i></span>
+                        <span class="menuText"> Account</span>
+                        <span v-if="isShowMenuList">
+                            <span class="float-right menuIcon-2" v-if="isShowSubMenuAccounts"><i class="fa fa-chevron-up"></i></span>
+                            <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
+                        </span>
+                    </a>
+                    <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAccounts,'subsidebar-icon-toggled': isHoverSubMenuAccounts,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
+                        <a href="/users/{{ Auth::user()->id }}/edit" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Personalization</span>
+                        </a>
+                        <a href="/subscription/{{ Auth::user()->id}}" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Subscription</span>
+                        </a>
+                        <a href="/users" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Users</span>
+                        </a>
+                    </div>
+                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
+                        <span class="menuIcon"><i class="fa fa-signal"></i></span>
+                        <span class="menuText"> Analytics</span>
+                        <span v-if="isShowMenuList">
+                            <span class="float-right menuIcon-2" v-if="isShowSubMenuAnalytics"><i class="fa fa-chevron-up"></i></span>
+                            <span class="float-right menuIcon-2" v-else><i class="fa fa-chevron-down"></i></span>
+                        </span>
+                    </a>
+                    <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAnalytics,'subsidebar-icon-toggled': isHoverSubMenuAnalytics,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
+                        <a href="/graph" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Graph</span>
+                        </a>
+                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Leave tracking</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
+                    <div class="w3-container">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         @elseif (Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Guest')
             <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
