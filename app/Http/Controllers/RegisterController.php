@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Account;
+use App\Plan;
+use Auth;
+use App\User;
 
 class RegisterController extends Controller
 {
@@ -34,7 +37,7 @@ class RegisterController extends Controller
             $user->token = $token;
             $user->save();
 
-            
+
 
             return redirect('/');
         } else {
@@ -43,7 +46,7 @@ class RegisterController extends Controller
     }
 
 
-    
+
 
     private function genePassword() {
         $pwd = "";
@@ -71,5 +74,11 @@ class RegisterController extends Controller
 
     private function defaultAvatarPath() {
         return 'C:\xampp\htdocs\BeLeave\public\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+    }
+
+    public function payment(User $user ,Plan $plan){
+      $plans = Plan::all();
+      $users= Auth::user()->id;
+      return view('register.payment',['user'=>$user,'plan'=>$plan]);
     }
 }

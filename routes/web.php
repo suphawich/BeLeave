@@ -19,15 +19,13 @@
 // Route::put('/login', 'LoginController@check');
 // Route::any('/logout', 'LoginController@getLogout');
 
-Route::get('subscription', function(){
+Route::get('subscription/{users}', function(){
     return view('subscription.index');
 });
 
 Route::any('/register', 'RegisterController@save');
 
-Route::get('/register-payment', function () {
-    return view('register.payment');
-});
+Route::get('/register/{user}{plan}/payment', 'RegisterController@payment');
 
 Route::get('/register-complete', function () {
     return view('register.complete');
@@ -77,6 +75,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/register-plan' , function(){
-    return view('register.plan');
-});
+Route::get('/plan','PlanController@index');
