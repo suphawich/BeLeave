@@ -85,6 +85,9 @@
                         <a href="/account/accounts" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Accounts</span>
                         </a>
+                        <a href="/account/switchuser" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Switch user</span>
+                        </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
                         <span class="menuIcon"><i class="fa fa-signal"></i></span>
@@ -104,7 +107,7 @@
                     </div>
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
-                    <div class="w3-container"  ">
+                    <div class="w3-container" style="margin-top: 50px;">
 
                         @yield('content')
 

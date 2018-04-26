@@ -50,11 +50,11 @@ Route::get('users/{user}/retoken', 'UsersController@retoken');
 
 Route::get('users/{id}/profile', 'UsersController@show');
 Route::put('users/{user}/account', 'UsersController@update_account');
+Route::put('users/{user}/switchuser', 'UsersController@switchuser');
 Route::put('users/{user}', 'UsersController@update');
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');
 Route::put('users', 'UsersController@search');
-
 
 
 Route::get('manage/request', 'ManageController@index_request');
@@ -76,6 +76,7 @@ Route::get('setting/r2sup', 'DashboardController@r2sup');
 Route::get('request', 'DashboardController@getRequest');
 
 Route::get('account/accounts', 'UsersController@index_account');
+Route::get('account/switchuser', 'UsersController@index_switchuser');
 
 Auth::routes();
 
