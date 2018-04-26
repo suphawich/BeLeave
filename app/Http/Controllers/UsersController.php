@@ -58,6 +58,13 @@ class UsersController extends Controller
         return view('users.index', ['subordinates' => $data]);
     }
 
+    public function index_account() {
+        $users = User::paginate(10);
+        return view('users.index_account', [
+            'users' => $users
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -205,6 +212,64 @@ class UsersController extends Controller
         } else {
             $request->session()->flash('error', 'if 1');
             return redirect('/users/'.$user->id.'/edit');
+        }
+    }
+
+    public function update_account(Request $request, User $user)
+    {
+        if ($request->has(['full_name', 'company_name', 'company_email', 'address', 'tel'])) {
+            $companyEmail = $request->input('company_email');
+            $password = $request->session()->get('password');
+            $fullname = $request->input('full_name');
+            $avatar = $request->session()->get('avatar');
+            $address = $request->input('address');
+            $access_level = $request->input('access_level');
+            $tel = $request->input('tel');
+            $companyName = $request->input('company_name');
+
+            if ($request->hasFile('file')) {
+                $avatar = $request->file->store('/images/profiles');
+            }
+            $user->email = $companyEmail;
+            $user->full_name = $fullname;
+            $user->avatar = $avatar;
+            $user->address = $address;
+            $user->tel = $tel;
+            $user->company_name = $companyName;
+            $user->save();
+            // $user = User::where('id', $id)->update($data);
+            // foreach ($data as $key => $value) {
+            //     $request->session()->put($key, $value);
+            // }
+            $request->session()->flash('error', 'Changed profile successfully.');
+            // return redirect('/users/'.$user->id.'/edit');
+            return back();
+            $request->session()->flash('error','E-mail is already used, please try again.');
+            return back();
+        } else if ($request->has(['current_password', 'new_password', 'confirm_password'])) {
+            $current = $request->input('current_password');
+            $new = $request->input('new_password');
+            $confirm = $request->input('confirm_password');
+            if (password_verify($current, Auth::user()->password)) {
+                if ($new == $confirm) {
+                    $user->password = password_hash($new, PASSWORD_DEFAULT);
+                    $user->save();
+                    $request->session()->flash('error', 'Changed Password Successful');
+                    // return redirect('/users/'.$user->id.'/edit');
+                    return back();
+                }
+                $request->session()->flash('status','New password is not match, please try again.');
+                // return redirect('/users/'.$user->id.'/edit');
+                return back();
+            } else {
+                $request->session()->flash('error','Current password is wrong, please try again.');
+                // return redirect('/users/'.$user->id.'/edit');
+                return back();
+            }
+        } else {
+            $request->session()->flash('error', 'if 1');
+            // return redirect('/users/'.$user->id.'/edit');
+            return back();
         }
     }
 

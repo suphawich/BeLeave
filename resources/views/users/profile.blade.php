@@ -10,8 +10,36 @@
 <script src="js/bootstrap-formhelpers.min.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <link rel="shortcut icon" type="image/png" href="img/favicon.ico"/>
-<style type="text/css">
+<!-- <style type="text/css"> -->
 
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<style media="screen">
+.media
+{
+   /*box-shadow:0px 0px 4px -2px #000;*/
+   margin: 20px 0;
+   padding:30px;
+}
+.dp
+{
+   border:10px solid #eee;
+   transition: all 0.2s ease-in-out;
+}
+.dp:hover
+{
+   border:2px solid #eee;
+   transform:rotate(360deg);
+   -ms-transform:rotate(360deg);
+   -webkit-transform:rotate(360deg);
+   /*-webkit-font-smoothing:antialiased;*/
+}
+</style>
 @endpush
 
 
@@ -21,12 +49,17 @@
 
 
 
-            <div class="col-2">
+            <div class="col-3">
 
             </div>
-            <div class="col-8">
-            <img src="{{ $user->avatar }}" class="avatar circle mb-5 mt-4">
+            <div class="col-6 card ">
 
+
+              <div class="" style="text-align:center">
+                <h2 >Profile</h2>
+
+                  <img style="border-radius: 50%; width:200px; height:200px;;"src="{{ $user->avatar }}" class="avatar circle mb-5 mt-4">
+              </div>
               <div class="form-group input-group">
                   <label class="form-topic">Full Name</label>
                    <input type="text" class="form-control" name="full_name" pattern="[A-Za-z][A-Za-z ]+" placeholder="Full name*" required value="{{ $user->full_name }}" readonly="readonly">
@@ -55,12 +88,53 @@
 
 
 
+
+
+
+
+
             <div class="modal-footer">
 
               <a href="/users/{{ $user->id }}/edit"><button  class="btn btn-default">Edit</button></a>
               <button class="btn btn-default">Contact</button>
           </div>
       </div>
+
+
+
+
+
+
+    </div>
+    <div class="row">
+
+
+        <div class="col-lg-5">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object dp img-circle" src="{{ $user->avatar}}" style="width: 100px;height:100px;">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">Hardik Sondagar <small> India</small></h4>
+                    <h5>Software Developer at <a href="http://gridle.in">Gridle.in</a></h5>
+                    <hr style="margin:8px auto">
+
+                    <span class="label label-default">HTML5/CSS3</span>
+                    <span class="label label-default">jQuery</span>
+                    <span class="label label-info">CakePHP</span>
+                    <span class="label label-default">Android</span>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
 
 
 
