@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid nav fixed-top">
+        <div class="container-fluid nav sticky-top">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 logo-content">
