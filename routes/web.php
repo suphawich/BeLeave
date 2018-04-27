@@ -79,9 +79,33 @@ Route::get('setting', 'DashboardController@index_Setting');
 Route::get('setting/r2sup', 'DashboardController@r2sup');
 Route::get('request', 'DashboardController@getRequest');
 
+
+
 Route::get('account/accounts', 'UsersController@index_account');
 Route::put('account/accounts', 'UsersController@search_account');
 Route::get('account/switchuser', 'UsersController@index_switchuser');
+
+Route::get('read/manage/request/leave/{user}', 'NotificationsController@markAsRead_manageRequestLeave');
+Route::get('noti', function () {
+
+    $user = Auth::user();
+    $user->notify(new \App\Notifications\RequestLeaveNotification($user));
+
+});
+
+Route::get('noti/receive', function () {
+
+    $user = Auth::user();
+    echo "<pre>";
+    print_r($user->notifications);
+    echo "</pre>";
+    // foreach ($user->unreadnotifications as $noti) {
+    //     print_r($noti->data);
+    // }
+
+});
+
+
 
 Auth::routes();
 

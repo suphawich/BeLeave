@@ -9,6 +9,7 @@ use Auth;
 use App\Leave;
 use App\User;
 use App\Task;
+use App\Department;
 
 class LeavesController extends Controller
 {
@@ -107,6 +108,10 @@ class LeavesController extends Controller
         $leave->depart_at = $request->input('depart_at');
         $leave->arrive_at = $request->input('arrive_at');
         $leave->save();
+
+        $user = Auth::user();
+        $sp_user = User::where('id', Department::where('subordinate_id', $user->id)->first()->supervisor_id)->first();
+        $sp_user->notify(new \App\Notifications\RequestLeaveNotification($user, $leave));
         $request->session()->flash('leave_status', 'Request leave to your supervisor successful.');
         return back();
     }
