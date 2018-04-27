@@ -1,5 +1,6 @@
 <?php
 
+use App\Plan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +34,10 @@ Route::get('/register-complete', function () {
 
 Route::get('/history', 'ManageController@history');
 Route::get('/boom', function(){
-  return view('users.boom');
+  $plans  = Plan::all();
+    
+  return view('users.boom', ['plans' => $plans]);
+
 });
 
 Route::get('/', function(){
