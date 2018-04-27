@@ -10,6 +10,7 @@ use App\User;
 use App\Supervisor_detail;
 use App\Supervisor_plan;
 use App\Transaction;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -102,6 +103,7 @@ class RegisterController extends Controller
         $supervisor_plans= new Supervisor_plan;
         $supervisor_plans->supervisor_id=Auth::user()->id;
         $supervisor_plans->plan=$plan->name;
+        $supervisor_plans->exprie_plan=Carbon::now()->addDays($plan->exprie)->toDateTimeString();
         $supervisor_plans->save();
         $transaction= new Transaction;
         $transaction->supervisor_id=Auth::user()->id;

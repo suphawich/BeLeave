@@ -146,6 +146,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -216,6 +217,7 @@ return [
         'Table' => 'Gbrock\Table\Facades\Table',
         'ResourceTable' => 'Msieprawski\ResourceTable\ResourceTable',
         'Lava' => 'Khill\Lavacharts\Laravel\LavachartsFacade',
+
     ],
 
 ];
