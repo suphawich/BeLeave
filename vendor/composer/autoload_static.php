@@ -374,6 +374,7 @@ class ComposerStaticInitf945c99c69d5987f1ad5a61ccd07bb71
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Subscription' => __DIR__ . '/../..' . '/app/Subscription.php',
         'App\\Supervisoe_detail' => __DIR__ . '/../..' . '/app/Supervisoe_detail.php',
+        'App\\SupervisorPlans' => __DIR__ . '/../..' . '/app/SupervisorPlans.php',
         'App\\Supervisor_detail' => __DIR__ . '/../..' . '/app/Supervisor_detail.php',
         'App\\Supervisor_plan' => __DIR__ . '/../..' . '/app/Supervisor_plan.php',
         'App\\System_log' => __DIR__ . '/../..' . '/app/System_log.php',

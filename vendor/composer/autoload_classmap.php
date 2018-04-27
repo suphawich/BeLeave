@@ -40,6 +40,7 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Subscription' => $baseDir . '/app/Subscription.php',
     'App\\Supervisoe_detail' => $baseDir . '/app/Supervisoe_detail.php',
+    'App\\SupervisorPlans' => $baseDir . '/app/SupervisorPlans.php',
     'App\\Supervisor_detail' => $baseDir . '/app/Supervisor_detail.php',
     'App\\Supervisor_plan' => $baseDir . '/app/Supervisor_plan.php',
     'App\\System_log' => $baseDir . '/app/System_log.php',
