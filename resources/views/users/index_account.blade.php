@@ -3,17 +3,7 @@
 @push('style')
     <link href="{{ asset('css/accounts.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-@endpush
 
-@push('script')
-
-@endpush
-
-@section('title')
-    Accounts
-@endsection
-
-@section('script-data')
 
 @endsection
 
@@ -23,11 +13,13 @@
 
 @section('script-query')
 
+
 @endsection
 
 @section('content')
     <div class="container-fluid body-content">
         <div class="row">
+
             @if (count($errors) > 0)
                 <div class="col-12 alert alert-danger text-center">
                     @foreach ($errors->all() as $error)
@@ -60,12 +52,14 @@
             </div>
         </div>
         <div class="row">
+
             <div class="row table-row table-header" >
                 <div class="col-1">#</div>
                 <div class="col">Full Name</div>
                 <div class="col">Company Name</div>
                 <div class="col">Type</div>
             </div>
+
             @if (count($users) > 0)
                 @foreach ($users as $user)
                 <div class="row table-row table-body" data-toggle="collapse" data-target="#c-{{ $user->id }}">
@@ -137,6 +131,7 @@
                     <div class="col-12 mt-5 mb-5">No found account.</div>
                 </div>
             @endif
+
         </div>
         <div class="row">
             <div class="col-2 ml-auto mr-auto mt-5">
@@ -144,6 +139,7 @@
             </div>
         </div>
         <div class="row">
+
         </div>
     </div>
 @endsection
