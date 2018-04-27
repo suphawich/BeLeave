@@ -101,8 +101,11 @@
                         <a href="/graphadmin" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Graph</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Leave tracking</span>
+                        <a href="/logs/user" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">User log</span>
+                        </a>
+                        <a href="/logs/system" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">System log</span>
                         </a>
                     </div>
                 </div>

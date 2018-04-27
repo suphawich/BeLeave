@@ -43,13 +43,7 @@ Route::get('/dashboard', 'DashboardController@index');
 
 
 Route::get('users/{user}/edit', 'UsersController@edit');
-
-
-
-
-
 Route::get('users/{user}/retoken', 'UsersController@retoken');
-
 Route::get('users/{user}/delete', 'UsersController@destroy');
 Route::get('users/{id}/profile', 'UsersController@show');
 Route::put('users/{user}/account', 'UsersController@update_account');
@@ -75,6 +69,10 @@ Route::put('graph','AnalyticController@index');
 Route::get('graphadmin','AnalyticController@index_admin');
 Route::put('graphadmin','AnalyticController@index_admin');
 Route::get('detailadmin','AnalyticController@index_detail_admin');
+Route::get('logs/user', 'LogsController@index_userlog');
+Route::put('logs/user', 'LogsController@index_userlog');
+Route::get('logs/system', 'LogsController@index_systemlog');
+Route::put('logs/system', 'LogsController@index_systemlog');
 
 
 Route::get('setting', 'DashboardController@index_Setting');
