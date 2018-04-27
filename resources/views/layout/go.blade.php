@@ -56,7 +56,7 @@
             </div>
         </div>
         @if (Auth::user()->access_level == 'Administrator')
-            <div class="container-fluid" style="margin-top: 50px;">
+            <div class="container-fluid">
                 <div class="sidebar sidebar-default" v-bind:class="{'sidebar-toggled': isShowMenuIcon}">
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-if="isShowMenuList" v-on:click="lessMoreMenu">
                         <span class="leftArrowIcon menuIcon-nomargin"><i class="fa fa-chevron-left"></i></span>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
-                    <div class="w3-container" style="margin-top: 50px;">
+                    <div class="w3-container">
 
                         @yield('content')
 
