@@ -3,11 +3,14 @@
 @push('style')
     <link href="{{ asset('css/accounts.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 @endpush
 
 @push('script')
     <script src="https://cdn.jsdelivr.net/npm/vue-clickaway@2.2.2/dist/vue-clickaway.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 @endpush
 
 @section('title')
@@ -37,9 +40,14 @@
     }
 @endsection
 
+@section('script-query')
+
+@endsection
+
 @section('content')
     <div class="container-fluid body-content">
         <div class="row">
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <div class="row table-row table-header" >
                 <div class="col-1">#</div>
                 <div class="col">Full Name</div>
@@ -100,7 +108,6 @@
             </div>
         </div>
         <div class="row">
-
         </div>
     </div>
 @endsection
