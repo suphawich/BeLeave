@@ -85,9 +85,6 @@
                         <a href="/account/accounts" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Accounts</span>
                         </a>
-                        <a href="/account/switchuser" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Switch user</span>
-                        </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
                         <span class="menuIcon"><i class="fa fa-signal"></i></span>
@@ -98,7 +95,10 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAnalytics,'subsidebar-icon-toggled': isHoverSubMenuAnalytics,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
-                        <a href="/graph" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/detailadmin" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Detail</span>
+                        </a>
+                        <a href="/graphadmin" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Graph</span>
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">
