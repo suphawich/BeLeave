@@ -6,6 +6,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+
     @stack('style')
 </head>
 <body>
@@ -31,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid nav">
+        <div class="container-fluid nav sticky-top">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 logo-content">
@@ -81,11 +82,8 @@
                         <a href="/users/{{ Auth::user()->id }}/edit" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Personalization</span>
                         </a>
-                        <a href="/subscription/{{ Auth::user()->id}}" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Subscription</span>
-                        </a>
-                        <a href="/users" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Users</span>
+                        <a href="/account/accounts" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Accounts</span>
                         </a>
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAnalytics}" v-on:click="toggleAnalytics" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
@@ -97,7 +95,10 @@
                         </span>
                     </a>
                     <div class="subsidebar subsidebar-default" v-bind:class="{'subsidebar-toggled': isShowSubMenuAnalytics,'subsidebar-icon-toggled': isHoverSubMenuAnalytics,'subsidebar-transition': !isShowMenuIcon}" @mouseover="hoverMenuAnalytics" @mouseout="closeMenuAnalytics">
-                        <a href="/graph" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/detailadmin" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">Detail</span>
+                        </a>
+                        <a href="/graphadmin" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Graph</span>
                         </a>
                         <a href="#" class="sidebar-item sidebar-item-hover-default">
@@ -107,7 +108,9 @@
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
                     <div class="w3-container">
+
                         @yield('content')
+
                     </div>
                 </div>
             </div>
@@ -186,7 +189,7 @@
                     </a>
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
-                    <div class="w3-container">
+                    <div class="w3-container"  >
                         @yield('content')
                     </div>
                 </div>
@@ -440,6 +443,7 @@
                 @yield('script-methods')
             }
         });
+        @yield('script-query')
     </script>
 </body>
 </html>
