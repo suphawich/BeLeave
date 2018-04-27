@@ -50,9 +50,9 @@ Route::get('users/{user}/edit', 'UsersController@edit');
 
 Route::get('users/{user}/retoken', 'UsersController@retoken');
 
+Route::get('users/{user}/delete', 'UsersController@destroy');
 Route::get('users/{id}/profile', 'UsersController@show');
 Route::put('users/{user}/account', 'UsersController@update_account');
-Route::put('users/{user}/switchuser', 'UsersController@switchuser');
 Route::put('users/{user}', 'UsersController@update');
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');
@@ -72,12 +72,17 @@ Route::put('leave','LeavesController@store');
 
 Route::get('graph','AnalyticController@index');
 Route::put('graph','AnalyticController@index');
+Route::get('graphadmin','AnalyticController@index_admin');
+Route::put('graphadmin','AnalyticController@index_admin');
+Route::get('detailadmin','AnalyticController@index_detail_admin');
+
 
 Route::get('setting', 'DashboardController@index_Setting');
 Route::get('setting/r2sup', 'DashboardController@r2sup');
 Route::get('request', 'DashboardController@getRequest');
 
 Route::get('account/accounts', 'UsersController@index_account');
+Route::put('account/accounts', 'UsersController@search_account');
 Route::get('account/switchuser', 'UsersController@index_switchuser');
 
 Auth::routes();
