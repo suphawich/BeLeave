@@ -34,21 +34,21 @@
                           </ul>
                           <div class="carousel-inner">
                             <div class="carousel-item active">
-                              <img src="images/BGtest.jpg" alt="Los Angeles" width="1100" height="500">
+                              <img src="images/cover/person.png" alt="Los Angeles" width="1100" height="500">
                               <div class="carousel-caption">
                                 <h3><a href="/history">Los Angeles</a></h3>
                                 <p>We had such a great time in LA!</p>
                               </div>
                             </div>
                             <div class="carousel-item">
-                              <img src="images/slide1.jpg" alt="Chicago" width="1100" height="500">
+                              <img src="images/cover/summer.png" alt="Chicago" width="1100" height="500">
                               <div class="carousel-caption">
                                 <h3>Chicago</h3>
                                 <p>Thank you, Chicago!</p>
                               </div>
                             </div>
                             <div class="carousel-item">
-                              <img src="images/slide2.jpg" alt="New York" width="1100" height="500">
+                              <img src="images/cover/sick.jpg" alt="New York" width="1100" height="500">
                               <div class="carousel-caption">
                                 <h3>New York</h3>
                                 <p>We love the Big Apple!</p>

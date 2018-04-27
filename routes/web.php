@@ -43,7 +43,6 @@ Route::get('/dashboard', 'DashboardController@index');
 
 
 Route::get('users/{user}/edit', 'UsersController@edit');
-<<<<<<< HEAD
 
 
 
@@ -52,8 +51,8 @@ Route::get('users/{user}/edit', 'UsersController@edit');
 
 
 
-=======
->>>>>>> ce9b05c08bf64277c3c0a712db011bd15f1dcb06
+
+
 Route::get('users/{user}/retoken', 'UsersController@retoken');
 Route::get('users/{user}/delete', 'UsersController@destroy');
 Route::get('users/{id}/profile', 'UsersController@show');
