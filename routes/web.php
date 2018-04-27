@@ -1,6 +1,6 @@
 <?php
 
-use App\Plan;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,12 +34,7 @@ Route::get('/register-complete', function () {
 Route::put('/register/{user}/payments/{plan}/update', 'RegisterController@updatepayment');
 
 Route::get('/history', 'ManageController@history');
-Route::get('/boom', function(){
-  $plans  = Plan::all();
-    
-  return view('users.boom', ['plans' => $plans]);
 
-});
 
 Route::get('/', function(){
     return view('home.index');
@@ -48,6 +43,9 @@ Route::get('/dashboard', 'DashboardController@index');
 
 
 Route::get('users/{user}/edit', 'UsersController@edit');
+
+
+
 
 
 
