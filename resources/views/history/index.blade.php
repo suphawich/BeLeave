@@ -60,6 +60,8 @@ $(document).on('click', '.edit-modal', function() {
           <th>Description</th>
           <th>Substitute Name</th>
           <th>Leave Type</th>
+          <!-- <th>Date</th>
+          <th>Day</th> -->
           <th>Enable</th>
           <th>Approve</th>
 
