@@ -1,4 +1,4 @@
-@extends('layout.form_account')
+  @extends('layout.form_account')
 
 @push('style')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -48,10 +48,10 @@
                     Completed registration, you can sign in to dashboard for
                     management, update profile, generate link for subordinate or more.
                     <br><br>
-                    Your package plan is A, price is 20.00 usd/month
+                    Your package plan is {{$plan->name}}, price is {{$plan->price}} Bath
                     <br>
                 </label>
-                <a href="#" class="btn btn-primary m-auto">Go to HomePage</a>
+                <a href="/home" class="btn btn-primary m-auto">Go to HomePage</a>
             </div>
         </div>
     </div>
