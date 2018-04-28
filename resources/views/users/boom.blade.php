@@ -308,7 +308,7 @@ h1 {
                       <!-- Pied de la carte -->
                       <br>
                       <div class="card-body-footer">
-                        <button type="button" class="form-control" name="button"><a href="/register/{{ Auth::user()->id}}/payment/{{$plan->id}}">Buy Packgage</a></button>
+                        <button type="button" class="form-control" name="button"><a href="/register/{{ Auth::user()->id}}/payment/{{$plan->id}">Buy Packgage</a></button>
 
                       </div>
 

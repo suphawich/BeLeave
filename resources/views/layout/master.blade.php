@@ -17,9 +17,10 @@
 /* Make the image fully responsive */
 
 
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed');
+
 .carousel-inner img {
-    width: 105%;
+    width: 100%;
+    height: 30%;
     
 }
 
@@ -36,9 +37,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-size: 12vw;
-  color: white;
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-size: 10vw;
 }
 span {
   text-shadow: 5px 2px #000000;
@@ -111,10 +110,6 @@ span:hover{
 }
 .btn-outline-info , .btn-outline-primary  {
         width: 40%;
-        color: white;
-        font-size: 30px;
-        border: 3px solid #4CAF50; /* Green */
-        box-shadow: 0 20px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
         
 }
 
@@ -146,6 +141,7 @@ span:hover{
                     <span>Le</span>
                     <span>av</span>
                     <span>e!</span>
+                    
                     <div class="carousel-caption">
                         <a href="/home"><button class="btn btn-outline-info text-light btn-lg">Login</button></a>
                         <a href="/register"><button class="btn btn-outline-primary text-light btn-lg"  name="trail-btn">Register</button></a>
