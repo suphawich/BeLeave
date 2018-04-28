@@ -38,7 +38,6 @@
   align-items: center;
   height: 100vh;
   font-size: 10vw;
-  color: white;
 }
 span {
   text-shadow: 5px 2px #000000;

@@ -41,7 +41,20 @@
                     <div class="col"></div>
                     <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">
                         <div class="row float-right topnav">
-                            <a href="#"><span><i class="fa fa-bell"></i></span><span class="badge badge-pill badge-dark">2</span> </a>
+                            {{-- <a href="#"><span><i class="fa fa-bell"></i></span><span class="badge badge-pill badge-dark">2</span> </a> --}}
+                            <a href="#" data-toggle="dropdown">
+                                <span><i class="fa fa-bell"></i></span>
+                                <span class="badge badge-pill badge-dark">
+                                    @if (count(Auth::user()->unreadnotifications) > 0)
+                                        {{ count(Auth::user()->unreadnotifications) }}
+                                    @endif
+                                </span>
+                            </a>
+                            <div class="dropdown-menu">
+                            @foreach (Auth::user()->unreadnotifications as $noti)
+                                <a class="dropdown-item" href="{{ $noti->data['route'] }}" style="color: black;">{{ $noti->data['message'] }}</a>
+                            @endforeach
+                            </div>
                             <a href="/users/{{ Auth::user()->id }}/edit" class="username"><span><i class="fa fa-user"></i></span><span>{{ Auth::user()->full_name }}</span></a>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -101,8 +114,11 @@
                         <a href="/graphadmin" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Graph</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
-                            <span class="menuText">Leave tracking</span>
+                        <a href="/logs/user" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">User log</span>
+                        </a>
+                        <a href="/logs/system" class="sidebar-item sidebar-item-hover-default">
+                            <span class="menuText">System log</span>
                         </a>
                     </div>
                 </div>
