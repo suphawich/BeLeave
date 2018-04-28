@@ -21,21 +21,22 @@
 .carousel-inner img {
     width: 105%;
     
+    
 }
 
 
-.carousel-inner{
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  -o-filter: blur(3px);
-  -ms-filter: blur(3px);
-  filter: blur(3px);
-}
+/* .carousel-inner{
+  -webkit-filter: blur(1.5px);
+  -moz-filter: blur(1.5px);
+  -o-filter: blur(0px);
+  -ms-filter: blur(0px);
+  filter: blur(2px);
+} */
 .animate_words{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 125vh;
   font-size: 12vw;
   color: white;
   font-family: 'IBM Plex Sans Condensed', sans-serif;
@@ -159,7 +160,7 @@ span:hover{
 
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="images/kik 10-11 Apr 18_180425_0200.jpg" alt="Los Angeles" >
+                    <img src="images/photo1.JPG" alt="Los Angeles" class="width:100px;" >
                 </div>
                 
                 <!-- <div class="carousel-item">

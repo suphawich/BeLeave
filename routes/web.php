@@ -18,6 +18,7 @@
 // Route::get('/login', 'LoginController@index');
 // Route::put('/login', 'LoginController@check');
 // Route::any('/logout', 'LoginController@getLogout');
+Route::get('/getPDF','PDFController@getPDF');
 
 Route::get('subscription/{users}', function(){
     return view('subscription.index');
