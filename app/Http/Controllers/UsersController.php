@@ -61,6 +61,14 @@ class UsersController extends Controller
         return view('users.index', ['subordinates' => $data]);
     }
 
+    public function index_account() {
+        $users = User::paginate(10);
+        return view('users.index_account', [
+            'users' => $users
+        ]);
+    }
+
+    
     /**
      * Show the form for creating a new resource.
      *
