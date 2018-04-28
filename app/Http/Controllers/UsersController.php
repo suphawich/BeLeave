@@ -55,8 +55,16 @@ class UsersController extends Controller
         // set url path for generted links
         $data->setPath($request->url());
 
+        $isFull = 0;
+        if (Auth::user()->access_level == 'Guest' and count($data) >= 3) {
+            $isFull = 1;
+        }
+
         // return $news;
-        return view('users.index', ['subordinates' => $data]);
+        return view('users.index', [
+            'subordinates' => $data,
+            'isFull' => $isFull
+        ]);
     }
 
     public function index_account() {
@@ -365,14 +373,6 @@ class UsersController extends Controller
         return false;
     }
 
-    public function getPDFUser(){
-        $leaves = Leave::all();
-        $supervisor_id = Auth::user()->id;
-        $leaves = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->get();
-        $users = User::all();        
-        $pdf=PDF::loadView('history.pdf',['leaves' => $leaves , 'users' => $users]);
-        return $pdf->stream('pdf.pdf');
-    }
 
 
 

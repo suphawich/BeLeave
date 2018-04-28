@@ -10,7 +10,7 @@ use App\User;
 use App\User_setting;
 use App\Leave;
 use App\Department;
-use PDF;
+use App\Task;
 
 class ManageController extends Controller
 {
@@ -22,13 +22,6 @@ class ManageController extends Controller
         $supervisor_id = Auth::user()->id;
         $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('user_settings', 'departments.subordinate_id', '=', 'user_settings.user_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('users.*','user_settings.*')->where('is_r2sup', '1')->paginate(15);
         return view('manage.request', ['settings' => $settings]);
-    }
-
-    public function getPDFRequest(){
-        $supervisor_id = Auth::user()->id;
-        $settings = Department::where('supervisor_id', $supervisor_id, 'desc')->join('user_settings', 'departments.subordinate_id', '=', 'user_settings.user_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('users.*','user_settings.*')->where('is_r2sup', '1')->paginate(15);
-        $pdf=PDF::loadView('manage.pdfRequest',['settings' => $settings]);
-        return $pdf->stream('pdfRequest.pdf');
     }
 
     public function index_request_leave() {
@@ -50,26 +43,6 @@ class ManageController extends Controller
         $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->paginate(10);
         return view('manage.request_leave', ['requests' => $requests, 'users' => $users]);
         // return $requests;
-    }
-    public function getPDFRequestLeave(){
-        $supervisor_id = Auth::user()->id;
-        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name');
-        $users = [];
-        foreach ($requests->get() as $request) {
-            $u = User::where('id', $request->subordinate_id)->first();
-            $obj['id'] = $u->id;
-            $obj['full_name'] = $u->full_name;
-            $obj['leave_count'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->count();
-            $obj['leave_vacation_count'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->where('leave_type', 'Vacation')->count();
-            $obj['leave_personal_errand_count'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->where('leave_type', 'Personal Errand')->count();
-            $obj['leave_sick_count'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->where('leave_type', 'Sick')->count();
-            $obj['leave_latest_depart'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->latest()->first()->depart_at;
-            $obj['leave_latest_arrive'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->latest()->first()->arrive_at;
-            $users[$request->subordinate_id] = (object) $obj;
-        }
-        $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->paginate(10);
-        $pdf=PDF::loadView('manage.pdfRequestLeave',['requests' => $requests, 'users' => $users]);
-        return $pdf->stream('pdfRequestLeave.pdf');
     }
 
     public function r2sup_accept($user_id) {
@@ -113,7 +86,17 @@ class ManageController extends Controller
     }
 
     public function search(Request $request) {
-        $users = User::where('full_name', 'LIKE', $request->keyword.'%')->join('tasks', 'users.id', '=', 'tasks.subordinate_id')->select('users.full_name','users.token','tasks.task')->where('token', '!=', Auth::user()->token)->get();
+        $mytask = Task::where('subordinate_id', Auth::user()->id)->first()->task;
+        $mysup = Department::where('subordinate_id', Auth::user()->id)->first();
+        $users = User::where('company_name', Auth::user()->company_name)
+                ->where('full_name', 'LIKE', $request->keyword.'%')
+                ->join('tasks', 'users.id', '=', 'tasks.subordinate_id')
+                ->join('departments', 'users.id', '=', 'departments.subordinate_id')
+                ->select('users.full_name','users.token','tasks.task','departments.supervisor_id')
+                ->where('tasks.task', 'LIKE', '%'.$mytask.'%')
+                ->where('departments.supervisor_id', $mysup->supervisor_id)
+                ->where('token', '!=', Auth::user()->token)
+                ->get();
         return response()->json($users);
     }
 
@@ -130,13 +113,5 @@ class ManageController extends Controller
       // $leaves = Leave::sorted()->get();
       return view('history.index',['leaves' => $leaves , 'users' => $users]);
 
-    }
-    public function getPDFHistory(){
-        $leaves = Leave::all();
-        $supervisor_id = Auth::user()->id;
-        $leaves = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->get();
-        $users = User::all();        
-        $pdf=PDF::loadView('history.pdf',['leaves' => $leaves , 'users' => $users]);
-        return $pdf->stream('pdf.pdf');
     }
 }
