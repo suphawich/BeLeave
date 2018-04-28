@@ -162,6 +162,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        
+        Barryvdh\DomPDF\ServiceProvider::class,
+
     ],
 
     /*
@@ -216,6 +219,7 @@ return [
         'Table' => 'Gbrock\Table\Facades\Table',
         'ResourceTable' => 'Msieprawski\ResourceTable\ResourceTable',
         'Lava' => 'Khill\Lavacharts\Laravel\LavachartsFacade',
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

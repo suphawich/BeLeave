@@ -73,7 +73,7 @@ $(document).on('click', '.edit-modal', function() {
     <tr class="item{{$item->id}}">
 
       <td>{{ $loop->iteration }}</td>
-      <td><button class="form-control " style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->full_name }}</a></botton></td>
+      <td><button class="form-control " style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->full_name }}</td>
       <td>{{ $item->description }}</td>
       @foreach($users as $user)
       @if($user->id === $item->substitute_id)
