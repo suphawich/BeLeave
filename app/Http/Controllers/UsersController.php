@@ -61,14 +61,56 @@ class UsersController extends Controller
         return view('users.index', ['subordinates' => $data]);
     }
 
-    public function index_account() {
-        $users = User::paginate(10);
-        return view('users.index_account', [
-            'users' => $users
-        ]);
-    }
 
-    
+        public function index_account() {
+            $type = [
+                'full_name' => 'Full Name',
+                'company_name' => 'Company Name',
+                'access_level' => 'Type'
+            ];
+            $access_level = [
+                'Administrator' => 'Administrator',
+                'Manager' => 'Manager',
+                'Supervisor' => 'Supervisor',
+                'Subordinate' => 'Subordinate',
+                'Guest' => 'Guest'
+            ];
+            $users = User::paginate(10);
+            return view('users.index_account', [
+                'users' => $users,
+                'access_level' => $access_level,
+                'type' => $type
+            ]);
+        }
+        public function search_account(Request $request) {
+            $type = [
+                'full_name' => 'Full Name',
+                'company_name' => 'Company Name',
+                'access_level' => 'Type'
+            ];
+            $access_level = [
+                'Administrator' => 'Administrator',
+                'Manager' => 'Manager',
+                'Supervisor' => 'Supervisor',
+                'Subordinate' => 'Subordinate',
+                'Guest' => 'Guest'
+            ];
+            $request->validate([
+                'search' => 'required|string|max:100|alpha',
+            ]);
+            $search_type = $request->input('search_type');
+            $word = $request->input('search');
+            $users = User::where($search_type, 'LIKE', $word.'%')->paginate(10);
+            return view('users.index_account', [
+                'users' => $users,
+                'access_level' => $access_level,
+                'type' => $type,
+                'search_type' => $search_type,
+                'search' => $word
+            ]);
+        }
+
+
     /**
      * Show the form for creating a new resource.
      *
