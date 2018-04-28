@@ -60,8 +60,9 @@ $(document).on('click', '.edit-modal', function() {
           <th>Description</th>
           <th>Substitute Name</th>
           <th>Leave Type</th>
-          <!-- <th>Date</th>
-          <th>Day</th> -->
+          <th>Depart Date</th>
+          <th>Arrive Date</th>
+          <th>Day</th>
           <th>Enable</th>
           <th>Approve</th>
 
@@ -89,6 +90,10 @@ $(document).on('click', '.edit-modal', function() {
 
       <td><button class="form-control "  style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->substitute_id }}</a></button></td>
       <td>{{ $item->leave_type }}</td>
+    <td>{{ date_format(date_create($item->depart_at),"m/d/Y") }}</td>
+    <td>{{ date_format(date_create($item->arrive_at),"m/d/Y") }}</td>
+          <td>{{date_diff(date_create($item->depart_at), date_create($item->arrive_at))->format(" %a ")}}</td>
+
       <td>{!! $item->is_enabled ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' !!}</td>
       <td>{!! $item->is_approved ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' !!}</td>
 
