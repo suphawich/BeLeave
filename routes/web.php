@@ -112,3 +112,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/plan','PlanController@index');
+
+
+//pdf
+Route::get('/getPDFRequestLeave','ManageController@getPDFRequestLeave');
+Route::get('/getPDFRequest','ManageController@getPDFRequest');
+Route::get('/getPDFHistory','ManageController@getPDFHistory');
+Route::get('/getPDFUsers','UsersController@getPDFUser');

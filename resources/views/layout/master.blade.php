@@ -3,7 +3,7 @@
   <head>
 
     <meta charset="utf-8">
-    <title>Bootstrap Example</title>
+    <title>BeLeave</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -19,25 +19,24 @@
 
 
 .carousel-inner img {
-    width: 100%;
-    height: 30%;
-    
+    width: 105%;
 }
 
 
-.carousel-inner{
+/* .carousel-inner{
   -webkit-filter: blur(3px);
   -moz-filter: blur(3px);
   -o-filter: blur(3px);
   -ms-filter: blur(3px);
   filter: blur(3px);
-}
+} */
 .animate_words{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 110vh;
   font-size: 10vw;
+  color: white;
 }
 span {
   text-shadow: 5px 2px #000000;
@@ -110,6 +109,10 @@ span:hover{
 }
 .btn-outline-info , .btn-outline-primary  {
         width: 40%;
+        color: white;
+        font-size: 30px;
+        border: 3px solid #4CAF50; /* Green */
+        box-shadow: 0 20px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
         
 }
 
@@ -155,7 +158,7 @@ span:hover{
 
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="images/kik 10-11 Apr 18_180425_0200.jpg" alt="Los Angeles" >
+                    <img src="images/photo1.JPG" alt="Los Angeles" >
                 </div>
                 
                 <!-- <div class="carousel-item">
