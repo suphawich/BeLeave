@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Controllers\Controller;
-use Table;
 use Auth;
 use App\User;
 use App\User_setting;
@@ -60,54 +59,14 @@ class UsersController extends Controller
     }
 
     public function index_account() {
-        $type = [
-            'full_name' => 'Full Name',
-            'company_name' => 'Company Name',
-            'access_level' => 'Type'
-        ];
-        $access_level = [
-            'Administrator' => 'Administrator',
-            'Manager' => 'Manager',
-            'Supervisor' => 'Supervisor',
-            'Subordinate' => 'Subordinate',
-            'Guest' => 'Guest'
-        ];
-
         $users = User::paginate(10);
         return view('users.index_account', [
-            'users' => $users,
-            'access_level' => $access_level,
-            'type' => $type
+            'users' => $users
         ]);
     }
 
-    public function search_account(Request $request) {
-        $type = [
-            'full_name' => 'Full Name',
-            'company_name' => 'Company Name',
-            'access_level' => 'Type'
-        ];
-        $access_level = [
-            'Administrator' => 'Administrator',
-            'Manager' => 'Manager',
-            'Supervisor' => 'Supervisor',
-            'Subordinate' => 'Subordinate',
-            'Guest' => 'Guest'
-        ];
-        $request->validate([
-            'search' => 'required|string|max:100|alpha',
-        ]);
-        $search_type = $request->input('search_type');
-        $word = $request->input('search');
-        $users = User::where($search_type, 'LIKE', $word.'%')->paginate(10);
-
-        return view('users.index_account', [
-            'users' => $users,
-            'access_level' => $access_level,
-            'type' => $type,
-            'search_type' => $search_type,
-            'search' => $word
-        ]);
+    public function index_switchuser() {
+        return view('users.index_switchuser');
     }
 
     /**
@@ -178,6 +137,9 @@ class UsersController extends Controller
      */
     public function show(User $id)
     {
+
+      // $user = User::where('id','=','$id');
+      // dd( $user->id );
       return view('users.profile', ['user' => $id]);
         //
     }
@@ -259,38 +221,60 @@ class UsersController extends Controller
 
     public function update_account(Request $request, User $user)
     {
-        if ($user->email === $request->input('company_email')) {
-            $request->validate([
-                'full_name' => 'required|string|max:50',
-                'address' => 'required|string|max:100',
-                'tel' => 'required|numeric',
-                'company_name' => 'required|string|max:50',
-            ]);
+        if ($request->has(['full_name', 'company_name', 'company_email', 'address', 'tel'])) {
+            $companyEmail = $request->input('company_email');
+            $password = $request->session()->get('password');
+            $fullname = $request->input('full_name');
+            $avatar = $request->session()->get('avatar');
+            $address = $request->input('address');
+            $access_level = $request->input('access_level');
+            $tel = $request->input('tel');
+            $companyName = $request->input('company_name');
+
+            if ($request->hasFile('file')) {
+                $avatar = $request->file->store('/images/profiles');
+            }
+            $user->email = $companyEmail;
+            $user->full_name = $fullname;
+            $user->avatar = $avatar;
+            $user->address = $address;
+            $user->tel = $tel;
+            $user->company_name = $companyName;
+            $user->save();
+            // $user = User::where('id', $id)->update($data);
+            // foreach ($data as $key => $value) {
+            //     $request->session()->put($key, $value);
+            // }
+            $request->session()->flash('error', 'Changed profile successfully.');
+            // return redirect('/users/'.$user->id.'/edit');
+            return back();
+            $request->session()->flash('error','E-mail is already used, please try again.');
+            return back();
+        } else if ($request->has(['current_password', 'new_password', 'confirm_password'])) {
+            $current = $request->input('current_password');
+            $new = $request->input('new_password');
+            $confirm = $request->input('confirm_password');
+            if (password_verify($current, Auth::user()->password)) {
+                if ($new == $confirm) {
+                    $user->password = password_hash($new, PASSWORD_DEFAULT);
+                    $user->save();
+                    $request->session()->flash('error', 'Changed Password Successful');
+                    // return redirect('/users/'.$user->id.'/edit');
+                    return back();
+                }
+                $request->session()->flash('status','New password is not match, please try again.');
+                // return redirect('/users/'.$user->id.'/edit');
+                return back();
+            } else {
+                $request->session()->flash('error','Current password is wrong, please try again.');
+                // return redirect('/users/'.$user->id.'/edit');
+                return back();
+            }
         } else {
-            $request->validate([
-                'company_email' => 'required|email|unique:users,email',
-                'full_name' => 'required|string|max:50|alpha',
-                'address' => 'required|string|max:100',
-                'tel' => 'required|numeric',
-                'company_name' => 'required|string|max:50',
-            ]);
+            $request->session()->flash('error', 'if 1');
+            // return redirect('/users/'.$user->id.'/edit');
+            return back();
         }
-
-        $user->email = $request->input('company_email');
-        $user->full_name = $request->input('full_name');
-        if ($request->hasFile('file')) {
-            $user->avatar = $request->file->store('/images/profiles');
-        }
-        $user->address = $request->input('address');
-        if ($request->has('access_level')) {
-            $user->access_level = $request->input('access_level');
-        }
-        $user->tel = $request->input('tel');
-        $user->company_name = $request->input('company_name');
-        $user->save();
-
-        $request->session()->flash('error', 'Changed '.$user->full_name.' information successful.');
-        return back();
     }
 
     /**
@@ -302,9 +286,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        // $user->is_enabled = 0;
-        // $user->save();
-        return back();
+        return redirect('/users');
     }
 
     public function search(Request $request) {
