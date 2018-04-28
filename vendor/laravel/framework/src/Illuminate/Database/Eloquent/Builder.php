@@ -786,7 +786,7 @@ class Builder
      * Increment a column's value by a given amount.
      *
      * @param  string  $column
-     * @param  float|int  $amount
+     * @param  int  $amount
      * @param  array  $extra
      * @return int
      */
@@ -801,7 +801,7 @@ class Builder
      * Decrement a column's value by a given amount.
      *
      * @param  string  $column
-     * @param  float|int  $amount
+     * @param  int  $amount
      * @param  array  $extra
      * @return int
      */

@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -88,8 +88,8 @@ class RegisterController extends Controller
         Mail::to($user->email)->send(new DemoMail($user));
 
         return $user;
-
+        
 
     }
-
+   
 }
