@@ -6,12 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Lava;
-use DateTime;
 use App\Leave;
 use App\User;
 use App\Department;
-use App\Plan;
-use App\Supervisor_plan;
 
 class AnalyticController extends Controller
 {
@@ -36,75 +33,6 @@ class AnalyticController extends Controller
         return view('analytic.graph', [
             'years' => $years,
             'year' => $year
-        ]);
-    }
-
-    public function index_admin(Request $request) {
-        $years = array();
-        foreach (User::get() as $user) {
-            $year = $user->created_at->year;
-            $years[$year] = $year;
-        }
-        if ($request->has('year')) {
-            $year = $request->input('year');
-        } else {
-            $year = \Carbon\Carbon::now()->year;
-        }
-        $this->makeCharts_admin($year);
-        return view('analytic.index_admin', [
-            'years' => $years,
-            'year' => $year
-        ]);
-    }
-
-    public function index_detail_admin(Request $request) {
-        $data_website = [
-            'Domain Name' => $request->getHost(),
-            'Company Name' => 'BeLeave',
-        ];
-        $nou = User::get()->count();
-        $noua = User::where('access_level', 'Administrator')->get()->count();
-        $noum = User::where('access_level', 'Manager')->get()->count();
-        $nousv = User::where('access_level', 'Supervisor')->get()->count();
-        $nousb = User::where('access_level', 'Subordinate')->get()->count();
-        $noug = User::where('access_level', 'Guest')->get()->count();
-        $data_user = [
-            'Number of Administrator' => $noua,
-            'Number of Manager' => $noum,
-            'Number of Supervisor' => $nousv,
-            'Number of Subordinate' => $nousb,
-            'Number of Guest' => $noug,
-            'Number of Users' => $nou,
-        ];
-
-        $data_plan = [];
-        $data_price_plan = [];
-        foreach (Plan::get() as $plan) {
-            $data_plan[$plan->name] = 0;
-            $data_price_plan[$plan->name] = $plan->price;
-        }
-        foreach (Supervisor_plan::get() as $sp) {
-            $data_plan[$sp->plan] = $data_plan[$sp->plan] + 1;
-        }
-        $total_price = 0;
-        foreach ($data_plan as $key => $value) {
-            $price = $data_price_plan[$key];
-            $arr_price[0] = $data_price_plan[$key];
-            $arr_price[1] = $value*$price;
-            $total_price += $value*$price;
-            $data_price_plan[$key] = $arr_price;
-        }
-        $data_plan['Total Plan'] = Supervisor_plan::get()->count();
-        $data_price_plan['Total Plan'] = [
-            '0' => '',
-            '1' => $total_price
-        ];
-
-        return view('analytic.detail_admin', [
-            'data_website' => $data_website,
-            'data_user' => $data_user,
-            'data_plan' => $data_plan,
-            'data_price_plan' => $data_price_plan,
         ]);
     }
 
@@ -191,24 +119,5 @@ class AnalyticController extends Controller
             //     ['offset' => 0.3]
             // ]
         ]);
-    }
-
-    private function makeCharts_admin($year) {
-        $users = User::whereYear('created_at', $year);
-        $created = Lava::DataTable()
-                ->addNumberColumn('Month')
-                ->addNumberColumn('Number of new users');
-        for ($i=1; $i <= 12; $i++) {
-             $nou = User::whereYear('created_at', $year)->whereMonth('created_at', $i)->count();
-             // $dateObj = DateTime::createFromFormat('!m', $i);
-             $created->addRow([$i, $nou]);
-        }
-        Lava::AreaChart('number_of_created_users-'.$year, $created, [
-            'title' => 'New Users',
-            'legend' => [
-                'position' => 'in'
-            ]
-        ]);
-
     }
 }
