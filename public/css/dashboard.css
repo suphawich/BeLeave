@@ -124,11 +124,11 @@ a.username {
 }
 
 .topnav a:hover {
-    background-color: #a7c96b;
+    background-color: #bbd3eb;
 }
 
 .nav {
-    background-color: #1c4769;
+    background-color: #343a40;
     max-height: 50px;
 }
 
@@ -144,7 +144,7 @@ a.username {
 .sidebar {
     left: 0;
     height: 100%;
-    width: 300px;
+    width: 200px;
     position: fixed!important;
     display: block;
     z-index: 1;
@@ -157,7 +157,7 @@ a.username {
 }
 
 .sidebar-default {
-    background-color: #1c4769;
+    background-color: #343a40;
 }
 
 .sidebar-item {
@@ -177,12 +177,12 @@ a.username {
 }
 
 .sidebar-item-toggled-hover {
-    background-color: #8A8B8F;
-    width: 300px;
+    background-color: #bbd3eb;
+    width: 200px;
 }
 
 .sidebar-item-hover-default:hover {
-    background-color: #a7c96b;
+    background-color: #bbd3eb;
     text-decoration: none;
     cursor:pointer;
     color: #FFF;
@@ -190,7 +190,7 @@ a.username {
 
 .subsidebar {
     left: 0;
-    width: 300px;
+    width: 200px;
     max-height: 0;
     /* position: fixed !important; */
     z-index: 0;
@@ -208,15 +208,15 @@ a.username {
 .subsidebar-icon-toggled {
     margin-top: -6px;
     margin-left: 50px;
-    width: 250px;
+    width: 200px;
 }
 
 .subsidebar-default {
-    background-color: #ADAEB0;
+    background-color: #805281;
 }
 
 .content {
-    margin-left: 300px;
+    margin-left: 200px;
     transition: 0.5s;
 }
 
@@ -254,8 +254,8 @@ a.username {
 }
 
 .w3-container {
-    margin-left: -10px;
-    margin-right: -10px;
+    /* margin-left: -10px;
+    margin-right: -10px; */
 }
 
 .body-content {
