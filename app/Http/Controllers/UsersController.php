@@ -10,6 +10,9 @@ use App\User;
 use App\User_setting;
 use App\Task;
 use App\Department;
+// use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+use Curl;
 
 class UsersController extends Controller
 {
@@ -279,6 +282,36 @@ class UsersController extends Controller
     }
 
 
+    public function hello(Request $request) {
+        $data = [
+            'grant_type' => 'authorization_code',
+            'code' => $request->input('code'),
+            'redirect_uri' => 'http://localhost:7000/line2',
+            'client_id' => '1577161245',
+            'client_secret' => '2cd5df01ba44cfcf3e0e3b0ada97aa4e'
+        ];
+        $client = new Client();
+        // $client = new Client(['base_uri' => 'https://api.line.me/v2/oauth/accessToken']);
+        // $response = $client->request('POST', 'https://api.line.me/oauth2/v2.1/token', [
+        //     'form_params' => [
+        //         'grant_type' => 'authorization_code',
+        //         'code' => $request->input('code'),
+        //         'client_id' => '1577161245',
+        //         'client_secret' => '2cd5df01ba44cfcf3e0e3b0ada97aa4e',
+        //         'redirect_uri' => 'http://localhost:7000/line'
+        //     ]
+        // ]);
+        // $response = Curl::to('https://api.line.me/v2/oauth/accessToken')
+        $response = Curl::to('https://api.line.me/oauth2/v2.1/token')
+            ->withContentType('application/x-www-form-urlencoded')
+            ->withData( $data )
+            ->post();
+        return $response;
+    }
+
+    public function hello2(Request $request) {
+        return $request;
+    }
 
 
 }

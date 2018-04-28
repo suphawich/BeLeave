@@ -118,65 +118,64 @@ Route::get('noti/receive', function () {
 
 });
 
-Route::get('line', function (Illuminate\Http\Request $request) {
-    $code = $request->input('code');
-    // $state = $request->input('state');
-    //
-    // $header = [
-    //     'Content-type: application/x-www-form-urlencoded',
-    // ];
-    $post_field = [
-        'grant_type' => $code,
-        'code' => $code,
-        'redirect_uri' => 'http://localhost:7000/line2',
-        'client_id' => '1577161245',
-        'client_secret' => 'e4972f1ad230526f98a204206a019f41'
-    ];
-    //
-    // $ch = curl_init();
-    // curl_setopt($ch, CURLOPT_URL,"https://api.line.me/oauth2/v2.1/token");
-    // // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    // // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-    // curl_setopt($ch, CURLOPT_POST, 1);
-    // curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-    // curl_setopt($ch, CURLOPT_POSTFIELDS, $post_field);
-    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    // $data = curl_exec($ch);
+// Route::get('line', function (Illuminate\Http\Request $request) {
+//     $code = $request->input('code');
+//     // $state = $request->input('state');
+//     //
+//     // $header = [
+//     //     'Content-type: application/x-www-form-urlencoded',
+//     // ];
+//     $post_field = [
+//         'grant_type' => $code,
+//         'code' => $code,
+//         'redirect_uri' => 'http://localhost:7000/line2',
+//         'client_id' => '1577161245',
+//         'client_secret' => 'e4972f1ad230526f98a204206a019f41'
+//     ];
+//     //
+//     // $ch = curl_init();
+//     // curl_setopt($ch, CURLOPT_URL,"https://api.line.me/oauth2/v2.1/token");
+//     // // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+//     // // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+//     // curl_setopt($ch, CURLOPT_POST, 1);
+//     // curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+//     // curl_setopt($ch, CURLOPT_POSTFIELDS, $post_field);
+//     // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//     // $data = curl_exec($ch);
+//
+// //     $curl = curl_init();
+// //
+// //     curl_setopt_array($curl, array(
+// //       CURLOPT_URL => "https://api.line.me/v2/oauth/accessToken",
+// //       CURLOPT_RETURNTRANSFER => true,
+// //       CURLOPT_ENCODING => "",
+// //       CURLOPT_MAXREDIRS => 10,
+// //       CURLOPT_TIMEOUT => 30,
+// //       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+// //       CURLOPT_CUSTOMREQUEST => "POST",
+// //       CURLOPT_POSTFIELDS => http_build_query($post_field),
+// // //       CURLOPT_POSTFIELDS => 'grant_type=authorization_code&code='.$code.'&client_id=1577161245&client_secret=921f418b2e4838baa4f8b0662e98f6ac
+// // // &redirect_uri=http://localhost:7000/line2',
+// //       // CURLOPT_POSTFIELDS => "{\"grant_type\":\"authorization_code\",\"client_id\": \"1577161245\",\"client_secret\": \"921f418b2e4838baa4f8b0662e98f6ac\",\"code\": \"".$code."\",\"redirect_uri\": \"http://localhost:7000/line2\"}",
+// //       // CURLOPT_HTTPHEADER => array(
+// //       //   "content-type: application/x-www-form-urlencoded"
+// //       //   // "content-type: application/json"
+// //       // ),
+// //       CURLOPT_HTTPHEADER => array(
+// //         "content-type: application/x-www-form-urlencoded"
+// //         // "content-type: application/json"
+// //       ),
+// //     ));
+//
+//     // $response = curl_exec($curl);
+//     // $err = curl_error($curl);
+//     // curl_close($curl);
+//
+//     // return $response;
+// });
 
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-      CURLOPT_URL => "https://api.line.me/v2/oauth/accessToken",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => "",
-      CURLOPT_MAXREDIRS => 10,
-      CURLOPT_TIMEOUT => 30,
-      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => "POST",
-      CURLOPT_POSTFIELDS => http_build_query($post_field),
-//       CURLOPT_POSTFIELDS => 'grant_type=authorization_code&code='.$code.'&client_id=1577161245&client_secret=921f418b2e4838baa4f8b0662e98f6ac
-// &redirect_uri=http://localhost:7000/line2',
-      // CURLOPT_POSTFIELDS => "{\"grant_type\":\"authorization_code\",\"client_id\": \"1577161245\",\"client_secret\": \"921f418b2e4838baa4f8b0662e98f6ac\",\"code\": \"".$code."\",\"redirect_uri\": \"http://localhost:7000/line2\"}",
-      // CURLOPT_HTTPHEADER => array(
-      //   "content-type: application/x-www-form-urlencoded"
-      //   // "content-type: application/json"
-      // ),
-      CURLOPT_HTTPHEADER => array(
-        "content-type: application/x-www-form-urlencoded"
-        // "content-type: application/json"
-      ),
-    ));
-
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
-    curl_close($curl);
-
-    return $response;
-});
-
-Route::any('line2', function (Illuminate\Http\Request $request) {
-    return $request;
-});
+Route::get('line', 'UsersController@hello');
+Route::any('line2', 'UsersController@hello2');
 
 
 
