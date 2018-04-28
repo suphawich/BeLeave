@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Controllers\Controller;
+use Table;
 use Auth;
 use App\User;
 use App\User_setting;
@@ -56,6 +57,57 @@ class UsersController extends Controller
 
         // return $news;
         return view('users.index', ['subordinates' => $data]);
+    }
+
+    public function index_account() {
+        $type = [
+            'full_name' => 'Full Name',
+            'company_name' => 'Company Name',
+            'access_level' => 'Type'
+        ];
+        $access_level = [
+            'Administrator' => 'Administrator',
+            'Manager' => 'Manager',
+            'Supervisor' => 'Supervisor',
+            'Subordinate' => 'Subordinate',
+            'Guest' => 'Guest'
+        ];
+
+        $users = User::paginate(10);
+        return view('users.index_account', [
+            'users' => $users,
+            'access_level' => $access_level,
+            'type' => $type
+        ]);
+    }
+
+    public function search_account(Request $request) {
+        $type = [
+            'full_name' => 'Full Name',
+            'company_name' => 'Company Name',
+            'access_level' => 'Type'
+        ];
+        $access_level = [
+            'Administrator' => 'Administrator',
+            'Manager' => 'Manager',
+            'Supervisor' => 'Supervisor',
+            'Subordinate' => 'Subordinate',
+            'Guest' => 'Guest'
+        ];
+        $request->validate([
+            'search' => 'required|string|max:100|alpha',
+        ]);
+        $search_type = $request->input('search_type');
+        $word = $request->input('search');
+        $users = User::where($search_type, 'LIKE', $word.'%')->paginate(10);
+
+        return view('users.index_account', [
+            'users' => $users,
+            'access_level' => $access_level,
+            'type' => $type,
+            'search_type' => $search_type,
+            'search' => $word
+        ]);
     }
 
     /**
@@ -126,9 +178,6 @@ class UsersController extends Controller
      */
     public function show(User $id)
     {
-
-      // $user = User::where('id','=','$id');
-      // dd( $user->id );
       return view('users.profile', ['user' => $id]);
         //
     }
@@ -208,6 +257,42 @@ class UsersController extends Controller
         }
     }
 
+    public function update_account(Request $request, User $user)
+    {
+        if ($user->email === $request->input('company_email')) {
+            $request->validate([
+                'full_name' => 'required|string|max:50',
+                'address' => 'required|string|max:100',
+                'tel' => 'required|numeric',
+                'company_name' => 'required|string|max:50',
+            ]);
+        } else {
+            $request->validate([
+                'company_email' => 'required|email|unique:users,email',
+                'full_name' => 'required|string|max:50|alpha',
+                'address' => 'required|string|max:100',
+                'tel' => 'required|numeric',
+                'company_name' => 'required|string|max:50',
+            ]);
+        }
+
+        $user->email = $request->input('company_email');
+        $user->full_name = $request->input('full_name');
+        if ($request->hasFile('file')) {
+            $user->avatar = $request->file->store('/images/profiles');
+        }
+        $user->address = $request->input('address');
+        if ($request->has('access_level')) {
+            $user->access_level = $request->input('access_level');
+        }
+        $user->tel = $request->input('tel');
+        $user->company_name = $request->input('company_name');
+        $user->save();
+
+        $request->session()->flash('error', 'Changed '.$user->full_name.' information successful.');
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -217,7 +302,9 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect('/users');
+        // $user->is_enabled = 0;
+        // $user->save();
+        return back();
     }
 
     public function search(Request $request) {

@@ -10,6 +10,7 @@
     @stack('style')
 </head>
 <body>
+
     <div id="dashboard">
         <div class="container-fluid navSecondary">
             <div class="container-fluid">
@@ -51,7 +52,9 @@
                                 @csrf
                             </form>
                         </div>
+                        
                     </div>
+
                 </div>
             </div>
         </div>
