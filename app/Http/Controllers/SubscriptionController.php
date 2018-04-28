@@ -14,11 +14,9 @@ class SubscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Supervisor_plan $supervisor_plans)
+    public function index()
     {
         $users= Auth::user()->id;
-        // $supervisor_plans=Supervisor_plan::findOrFail($supervisor_plans);
-
         return view('subscription.index');
     }
 

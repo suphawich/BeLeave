@@ -89,7 +89,6 @@
                 <input type="file" class="form-control form-file mb-4 ml-auto mr-auto" name="file">
                 <button type="button" name="change-password" class="btn btn-primary mb-5" v-on:click="showChangepwd">Change password</button>
             </div>
-            <a href="https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1577161245&redirect_uri=http://localhost:7000/line&state={{ csrf_token() }}&scope=profile">Line Login</a>
         </div>
         <div class="row float-right d-block d-sm-block d-md-block d-lg-none d-xl-none submit-content">
             <button type="submit" class="btn btn-secondary mr-2" name="save2" v-if="isShowChangePassword">Change password</button>
