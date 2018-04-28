@@ -15,7 +15,7 @@
 <div class="jumbotron">
   <h1 class="lead">Packgage:{{$plan->name }}</h1>
   <p>Detail:{{$plan->detail}}<p>
-  <p>capacity:{{$plan->capacity}}</p>
+  <p>capacity:{{$plan->capacity}} person</p>
   <p>price:{{$plan->price}} bath</p>
   <p>exprie:{{$plan->exprie}} day</p>
   <br>

@@ -195,8 +195,7 @@
     </p>
   </div>
   <footer class="card__footer">
-    <span class="icon icon--time"></span>6 min
-    <span class="icon icon--comment"></span><a href="#">39 comments</a>
+    <button type="button" class="form-control" name="button"></button>
   </footer>
 </article>
 
