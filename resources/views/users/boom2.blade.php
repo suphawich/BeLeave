@@ -8,9 +8,7 @@
   position: absolute;
   overflow: hidden;
   top: 50%;
-  left: 90%;
-
-  top: 100%;
+  left: 20%;
   width: 370px;
   transform: translateX(-50%) translateY(-50%);
   background-color: #fff;
