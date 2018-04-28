@@ -10,6 +10,7 @@ use App\User;
 use App\User_setting;
 use App\Leave;
 use App\Department;
+use App\Task;
 
 class ManageController extends Controller
 {
@@ -85,7 +86,17 @@ class ManageController extends Controller
     }
 
     public function search(Request $request) {
-        $users = User::where('full_name', 'LIKE', $request->keyword.'%')->join('tasks', 'users.id', '=', 'tasks.subordinate_id')->select('users.full_name','users.token','tasks.task')->where('token', '!=', Auth::user()->token)->get();
+        $mytask = Task::where('subordinate_id', Auth::user()->id)->first()->task;
+        $mysup = Department::where('subordinate_id', Auth::user()->id)->first();
+        $users = User::where('company_name', Auth::user()->company_name)
+                ->where('full_name', 'LIKE', $request->keyword.'%')
+                ->join('tasks', 'users.id', '=', 'tasks.subordinate_id')
+                ->join('departments', 'users.id', '=', 'departments.subordinate_id')
+                ->select('users.full_name','users.token','tasks.task','departments.supervisor_id')
+                ->where('tasks.task', 'LIKE', '%'.$mytask.'%')
+                ->where('departments.supervisor_id', $mysup->supervisor_id)
+                ->where('token', '!=', Auth::user()->token)
+                ->get();
         return response()->json($users);
     }
 

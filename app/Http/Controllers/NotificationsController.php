@@ -10,7 +10,7 @@ use App\User;
 class NotificationsController extends Controller
 {
     public function markAsRead_manageRequestLeave(Request $request) {
-        Auth::user()->unreadnotifications->markAsRead();
+        // Auth::user()->unreadnotifications->markAsRead();
         return redirect('/manage/request/leave');
         // return $user;
     }

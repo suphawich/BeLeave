@@ -39,7 +39,7 @@ Route::get('/boom', function(){
 Route::get('/', function(){
     return view('home.index');
 });
-Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 
 Route::get('users/{user}/edit', 'UsersController@edit');
@@ -59,10 +59,12 @@ Route::get('r2sup/decline/{user_id}', 'ManageController@r2sup_decline');
 Route::get('manage/request/leave', 'ManageController@index_request_leave');
 Route::get('manage/request/leave/{subordinate_id}/accept', 'ManageController@leave_accept');
 Route::get('manage/request/leave/{subordinate_id}/decline', 'ManageController@leave_decline');
-Route::post('leave/search', 'ManageController@search');
 
+
+Route::post('leave/search', 'ManageController@search');
 Route::get('leave', 'LeavesController@index');
 Route::put('leave','LeavesController@store');
+
 
 Route::get('graph','AnalyticController@index');
 Route::put('graph','AnalyticController@index');

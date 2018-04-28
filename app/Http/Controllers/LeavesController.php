@@ -78,31 +78,28 @@ class LeavesController extends Controller
      */
     public function store(Request $request)
     {
+        $leave = new Leave;
         if (Leave::where('subordinate_id', Auth::user()->id)->where('is_enabled', '1')->count() == 1) {
             $v = Validator::make([], []);
-            // $v->errors()->add('some_field', 'some_translated_error_key');
             $v->getMessageBag()->add('interfere', 'Can\'t send more than one leave letter.');
             return redirect()->back()->withErrors($v);
-        } else if ($request->input('token') === '') {
+        } else if ($request->input('substitute_token') == '') {
             $validatedData = $request->validate([
-                'depart_at' => 'required|date|after_or_equal:today',
+                'depart_at' => 'required|date|after_or_equal:tomorrow',
                 'arrive_at' => 'required|date|after_or_equal:depart_at',
-                'description' => 'required|max:500'
+                'description' => 'required|string|max:100'
             ]);
         } else {
             $validatedData = $request->validate([
-                'depart_at' => 'required|date|after_or_equal:today',
+                'depart_at' => 'required|date|after_or_equal:tomorrow',
                 'arrive_at' => 'required|date|after_or_equal:depart_at',
-                'description' => 'required|max:500',
+                'description' => 'required|string|max:100',
                 'substitute_token' => 'exists:users,token'
             ]);
-        }
-
-        $leave = new Leave;
-        $leave->subordinate_id = Auth::user()->id;
-        if ($request->input('token') !== '') {
             $leave->substitute_id = User::where('token', $request->input('substitute_token'))->first()->id;
         }
+
+        $leave->subordinate_id = Auth::user()->id;
         $leave->description = $request->input('description');
         $leave->leave_type = $request->input('leave_type');
         $leave->depart_at = $request->input('depart_at');
