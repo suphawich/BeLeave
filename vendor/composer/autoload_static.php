@@ -382,6 +382,7 @@ class ComposerStaticInitf945c99c69d5987f1ad5a61ccd07bb71
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LeavesController' => __DIR__ . '/../..' . '/app/Http/Controllers/LeavesController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
+        'App\\Http\\Controllers\\LogsController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogsController.php',
         'App\\Http\\Controllers\\ManageController' => __DIR__ . '/../..' . '/app/Http/Controllers/ManageController.php',
         'App\\Http\\Controllers\\PlanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PlanController.php',
         'App\\Http\\Controllers\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterController.php',
