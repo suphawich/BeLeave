@@ -146,7 +146,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
@@ -154,7 +153,6 @@ return [
         'Msieprawski\ResourceTable\ResourceTableServiceProvider',
         'Gbrock\Table\Providers\TableServiceProvider',
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
-        Ixudra\Curl\CurlServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -218,7 +216,6 @@ return [
         'Table' => 'Gbrock\Table\Facades\Table',
         'ResourceTable' => 'Msieprawski\ResourceTable\ResourceTable',
         'Lava' => 'Khill\Lavacharts\Laravel\LavachartsFacade',
-        'Curl' => Ixudra\Curl\Facades\Curl::class,
     ],
 
 ];

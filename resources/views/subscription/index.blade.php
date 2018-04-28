@@ -18,11 +18,9 @@
 
 
   <p>PACKAGE:</p>
-  @if(Auth::user()->access_level == 'Manager' or Auth::user()->access_level == 'Guest' )
+
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="/plan" role="button">BUY PACKAGE</a>
   </p>
-@endif
 </div>
-
 @endsection
