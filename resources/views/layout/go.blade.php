@@ -36,7 +36,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3 col-xl-3 logo-content">
-                        <a href="dashboard"><img src="/images/logo.png" class="logo" alt="logo website"></a>
+                        <a href="/dashboard"><img src="/images/logo.png" class="logo" alt="logo website"></a>
                     </div>
                     <div class="col"></div>
                     <div class="col-lg-5 col-xl-4 d-none d-sm-none d-md-none d-lg-block">

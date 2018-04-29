@@ -19,9 +19,7 @@
 // Route::put('/login', 'LoginController@check');
 // Route::any('/logout', 'LoginController@getLogout');
 
-Route::get('subscription/{users}', function(){
-    return view('subscription.index');
-});
+Route::get('subscription/{users}', 'SubscriptionController@index');
 
 Route::any('/register', 'RegisterController@save');
 
@@ -32,13 +30,9 @@ Route::get('/register-complete', function () {
 });
 
 Route::get('/history', 'ManageController@history');
-Route::get('/boom', function(){
-  return view('users.boom');
-});
 
-Route::get('/', function(){
-    return view('home.index');
-});
+
+Route::get('/', 'DashboardController@index');
 Route::get('/dashboard', 'DashboardController@index');
 
 
@@ -119,4 +113,3 @@ Route::get('/getPDFRequestLeave','ManageController@getPDFRequestLeave');
 Route::get('/getPDFRequest','ManageController@getPDFRequest');
 Route::get('/getPDFHistory','ManageController@getPDFHistory');
 Route::get('/getPDFUsers','UsersController@getPDFUser');
-

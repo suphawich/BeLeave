@@ -58,7 +58,7 @@
               <div class="" style="text-align:center">
                 <h2 >Profile</h2>
 
-                  <img style="border-radius: 50%; width:200px; height:200px;;"src="{{ $user->avatar }}" class="avatar circle mb-5 mt-4">
+                  <img style="border-radius: 50%; width:200px; height:200px;;"src="{{ $user->avatar ?? '/images/profiles/user_default.jpg' }}" class="avatar circle mb-5 mt-4">
               </div>
               <div class="form-group input-group">
                   <label class="form-topic">Full Name</label>

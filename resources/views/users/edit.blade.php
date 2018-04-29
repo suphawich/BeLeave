@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 avatar-content text-center">
-                <img src="{{ $user->avatar }}" class="avatar circle mb-5 mt-4">
+                <img src="{{ $user->avatar ?? '/images/profiles/user_default.jpg' }}" class="avatar circle mb-5 mt-4">
                 <input type="file" class="form-control form-file mb-4 ml-auto mr-auto" name="file">
                 <button type="button" name="change-password" class="btn btn-primary mb-5" v-on:click="showChangepwd">Change password</button>
             </div>

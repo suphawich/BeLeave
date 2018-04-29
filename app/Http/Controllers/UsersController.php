@@ -409,7 +409,7 @@ class UsersController extends Controller
         $data= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         // set url path for generted links
         $data->setPath($request->url());
-    
+
         $pdf=PDF::loadView('users.pdf',['subordinates' => $data]);
 
         return $pdf->stream('pdf.pdf');
