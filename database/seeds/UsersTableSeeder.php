@@ -25,12 +25,24 @@ class UsersTableSeeder extends Seeder
         $user->save();
 
         $user = new User;
-        $user->email = "jobsan@bnk48official";
+        $user->email = "jirath@bnk48official";
         $user->password = password_hash('jobsan', PASSWORD_DEFAULT);
-        $user->full_name = 'Jobsan';
+        $user->full_name = 'JIRATH PAVARAVADHANA';
         // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
         $user->address = "Bangkok";
         $user->access_level = 'Manager';
+        $user->tel = '0848484848';
+        $user->company_name = "BNK48";
+        $user->token = str_random(64);
+        $user->save();
+
+        $user = new User;
+        $user->email = "jobsan@bnk48official";
+        $user->password = password_hash('jobsan', PASSWORD_DEFAULT);
+        $user->full_name = 'NATAPHOL PAVARAVADHANA';
+        // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        $user->address = "Bangkok";
+        $user->access_level = 'Supervisor';
         $user->tel = '0848484848';
         $user->company_name = "BNK48";
         $user->token = str_random(64);
@@ -230,19 +242,11 @@ class UsersTableSeeder extends Seeder
                 'company_name' => 'BNK48'
             ],
             (Object) [
-                'email' => 'piam@bnk48official',
-                'full_name' => 'RINRADA INTHAISONG',
-                'password' => 'piam',
-                'address' => 'Saraburi',
-                'tel' => '0842141121',
-                'company_name' => 'BNK48'
-            ],
-            (Object) [
                 'email' => 'pupe@bnk48official',
                 'full_name' => 'JIRADAPA INTAJAK',
                 'password' => 'pupe',
                 'address' => 'Chiang Mai',
-                'tel' => '0842141122',
+                'tel' => '0842141121',
                 'company_name' => 'BNK48'
             ],
             (Object) [
@@ -250,7 +254,7 @@ class UsersTableSeeder extends Seeder
                 'full_name' => 'SAWITCHAYA KAJONRUNGSILP',
                 'password' => 'satchan',
                 'address' => 'Bangkok',
-                'tel' => '0842141123',
+                'tel' => '0842141122',
                 'company_name' => 'BNK48'
             ],
             (Object) [
@@ -258,7 +262,7 @@ class UsersTableSeeder extends Seeder
                 'full_name' => 'ISARAPA THAWATPAKDEE',
                 'password' => 'tarwaan',
                 'address' => 'Nakhon Pathom',
-                'tel' => '0842141124',
+                'tel' => '0842141123',
                 'company_name' => 'BNK48'
             ],
         ];
