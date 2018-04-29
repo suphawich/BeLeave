@@ -23,7 +23,7 @@ class DashboardController extends Controller
     }
 
     public function index(Request $request) {
-        $plans = Plan::all();
+        $plans = Plan::paginate(4);
         $supervisor_id = Auth::user()->id;
         $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name');
         $users = [];
