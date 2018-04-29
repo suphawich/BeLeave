@@ -1,7 +1,36 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <body>
-        <table class="table" id="table">
+<head>
+<title>HistoryPDF</title>
+<style>
+.table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table td, .table th {
+    border: 1px solid #000000;
+    padding: 8px;
+}
+
+.table tr:nth-child(even){background-color: LemonChiffon ;}
+
+
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: LightSeaGreen ;
+    color: white;
+}
+</style>
+</head>
+<body>
+<h1 style="text-align: center;">BeLeave!</h1>
+<h2 style="text-align: center;">History</h2>
+<table class="table" id="table">
     <thead>
         <tr>
           <th>Number</th>
@@ -43,6 +72,5 @@
     @endforeach
     </tbody>
 </table>
-        </body>
-    </head>
+</body>
 </html>
