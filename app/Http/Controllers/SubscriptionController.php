@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Department;
 use Auth;
+use App\Supervisor_plan;
+use Carbon\Carbon;
 
 class SubscriptionController extends Controller
 {
@@ -18,11 +20,26 @@ class SubscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $users= Auth::user()->id;
+
 
 
 
         $supervisor_id = Auth::user()->id;
+
+        $now = Carbon::now()->toDateTimeString();
+
+
+
+
+
+
+        $plan = Supervisor_plan::where('supervisor_id', $supervisor_id, 'desc')->join('plans','plans.name', '=' , 'supervisor_plans.plan')->select('supervisor_plans.*','plans.capacity')->get();
+        if(count($plan) > 0 ){
+          $day_left = date_diff(date_create($now), date_create($plan[0]->exprie_plan))->format(" %a days");
+        }
+        else{
+          $day_left = 0;
+        }
         $word = $request->input('search');
 
         $data = array();
@@ -54,7 +71,8 @@ class SubscriptionController extends Controller
         $data->setPath($request->url());
 
         // return $data;
-        return view('subscription.index', ['subordinates' => $data]);
+
+        return view('subscription.index', ['subordinates' => $data, 'plan' => $plan,'day_left' => $day_left]);
 
     }
 
