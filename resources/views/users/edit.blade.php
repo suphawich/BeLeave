@@ -24,7 +24,7 @@
 @section('content')
     <div class="container-fluid profile-content">
         <form action="/users/{{ $user->id }}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="_token" value={{ csrf_token() }}>
+        @csrf
         @method('PUT')
         <div class="row float-right d-none d-sm-none d-md-none d-lg-block">
             <button type="submit" class="btn btn-secondary mr-2" name="save" v-if="isShowChangePassword">Change password</button>
@@ -35,17 +35,25 @@
         {{-- <p>{{session()->get('status')}}</p> --}}
         <div class="row" v-if="isShowChangePassword">
             <div class="col-xl-8 col-md-6 info-content">
+                @if (session()->has('error') || count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>{{ session()->get('error') }}</strong>
+                        @foreach ($errors->all() as $message)
+                            <strong>{{ $message }}</strong>
+                        @endforeach
+                    </div>
+                @endif
                 <div class="form-group input-group">
                     <label class="form-topic">Current Password</label>
                     <input type="password" class="form-control form-field" name="current_password" pattern="[A-Za-z][A-Za-z ]+" placeholder="Current Password*" required>
                 </div>
                 <div class="form-group input-group">
                     <label class="form-topic">New Password</label>
-                    <input type="password" class="form-control form-field" name="new_password" pattern="[A-Za-z][A-Za-z ]+" placeholder="New Password*" required>
+                    <input type="password" class="form-control form-field" name="password" pattern="[A-Za-z][A-Za-z ]+" placeholder="New Password*" required>
                 </div>
                 <div class="form-group input-group">
                     <label class="form-topic">Confirm Password</label>
-                    <input type="password" class="form-control form-field" name="confirm_password" pattern="[A-Za-z][A-Za-z ]+" placeholder="Confirm Password*" required>
+                    <input type="password" class="form-control form-field" name="password_confirm" pattern="[A-Za-z][A-Za-z ]+" placeholder="Confirm Password*" required>
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 avatar-content text-center">
@@ -53,9 +61,12 @@
         </div>
         <div class="row" v-else>
             <div class="col-xl-8 col-md-6 info-content">
-                @if (session()->has('error'))
+                @if (session()->has('error') || count($errors) > 0)
                     <div class="alert alert-danger">
                         <strong>{{ session()->get('error') }}</strong>
+                        @foreach ($errors->all() as $message)
+                            <strong>{{ $message }}</strong>
+                        @endforeach
                     </div>
                 @endif
                 {{-- <p>{{session()->get('status')}}</p> --}}
