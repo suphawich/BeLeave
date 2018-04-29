@@ -119,3 +119,4 @@ Route::get('/getPDFRequestLeave','ManageController@getPDFRequestLeave');
 Route::get('/getPDFRequest','ManageController@getPDFRequest');
 Route::get('/getPDFHistory','ManageController@getPDFHistory');
 Route::get('/getPDFUsers','UsersController@getPDFUser');
+

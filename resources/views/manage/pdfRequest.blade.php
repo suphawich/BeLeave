@@ -1,7 +1,36 @@
 
+<!DOCTYPE html>
 <html>
-    <head>
-        <body>
+<head>
+    <title>RequestPDF</title>
+<style>
+.table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table td, .table th {
+    border: 1px solid #000000;
+    padding: 8px;
+}
+
+.table tr:nth-child(even){background-color: LemonChiffon ;}
+
+
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: LightSeaGreen ;
+    color: white;
+}
+</style>
+</head>
+<body>
+<h1 style="text-align: center;">BeLeave!</h1>
+<h2 style="text-align: center;">Request</h2>
         <div class="container-fluid body-content">
         <div class="row">
             <div class="col-12">
@@ -53,6 +82,5 @@
             </div>
         @endforeach --}}
     </div>
-        </body>
-    </head>
+</body>
 </html>

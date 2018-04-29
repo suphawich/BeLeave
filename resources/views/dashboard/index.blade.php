@@ -162,7 +162,7 @@
       <a class="nav-link" style="font-size:30px" href="#">Leave Request</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link mt-3 ml-2" href="#">view all</a>
+      <a class="nav-link mt-3 ml-2" href="manage/request/leave">view all</a>
     </li>
 
   </ul>
@@ -175,7 +175,7 @@
 
 @foreach ($requests as $request)
 
-@if($request->is_enabled)
+
 
 
 
@@ -186,32 +186,29 @@
     <div class="card-image">
 
       <img src=" {{ $request->avatar }} " style="width:100%;height:200px;">
-      <p class="card-title ml-2">{{ $request->leave_type }}</p>
+      <h2 class="card-title ml-2">{{ $request->leave_type }}</h2>
     </div>
-    <div class="card-content">
-      <p class="ml-2 ">{{$request->full_name}}</p>
+    <div class="card-content" style="padding:20px">
+      <h5 class="ml-2 ">{{$request->full_name}}</h5>
       <p class="ml-2">Depart Date: {{ date_format(date_create($request->depart_at),"m/d/Y") }}</p>
       <p class="ml-2">Day: {{date_diff(date_create($request->depart_at), date_create($request->arrive_at))->format(" %a ")}}</p>
 
     </div>
     <div class="card-action row">
-
+      @if($request->is_enabled)
       <div class="col-12">
 
         <div class="row">
-          <div class="col-1">
+          <div class="col-2">
 
           </div>
-          <div class="col-5">
-              <button type="button" class="form-control" name="button" >Approve</button>
+          <div class="col-8">
+              <button type="button" href="/manage/request/leave/{{ $request->id }}" onclick="myFunction({{$request->subordinate_id}})" id="approve{{$request->subordinate_id}}" class="btn btn-outline-dark" name="button" id="app" style="width:100%" >Approve</button>
 
           </div>
 
-          <div class="col-5">
-              <button type="button" class="form-control" name="button" >Cancle</button>
 
-          </div>
-          <div class="col-1">
+          <div class="col-2">
 
           </div>
 
@@ -221,13 +218,37 @@
 
         <br>
         </div>
+        @else
+
+        <div class="col-12">
+
+          <div class="row">
+            <div class="col-2">
+
+            </div>
 
 
+            <div class="col-8">
+                <button type="button" class="btn btn-outline-dark" name="button" style="width:100%" disabled >Approved</button>
+
+            </div>
+            <div class="col-2">
+
+            </div>
+
+          </div>
+
+
+
+          <br>
+          </div>
+
+        @endif
     </div>
   </div>
 </div>
 </div>
-@endif
+
 
 
 @endforeach
@@ -239,4 +260,110 @@
 
 
 
+
+
+
+
+
+<div class="">
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" style="font-size:30px" href="#">Packet</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link mt-3 ml-2" href="plan">view all</a>
+    </li>
+
+  </ul>
+</nav>
+
+
+
+<div class="row mt-2">
+
+
+@foreach ($plans as $plan)
+@if ($plan->id != 1)
+
+
+
+
+
+  <div class="row col-4 ml-1">
+
+<div class="col-s3 m7">
+  <div class="card">
+    <div class="card-image">
+
+      <img src=" /images/slide3.jpg " style="width:100%;height:200px;">
+      <h2 class="card-title ml-2">{{ $plan->name }}</h2>
+    </div>
+    <div class="card-content" style="padding:20px">
+      <p>Price:{{$plan->price}} Baht</p>
+
+
+      Description: {{$plan->detail}}<br>
+      <p>Capacity: {{$plan->capacity}}</p>
+
+      <p>Expire: {{$plan->exprie}} day</p>
+    </div>
+    <div class="card-action row">
+
+
+
+        <div class="col-12">
+
+          <div class="row">
+            <div class="col-2">
+
+            </div>
+
+
+            <div class="col-8">
+                <button type="button" class="btn btn-outline-dark" name="button" style="width:100%" >Buy Packet</button>
+
+            </div>
+            <div class="col-2">
+
+            </div>
+
+          </div>
+
+
+
+          <br>
+          </div>
+
+
+    </div>
+  </div>
+</div>
+</div>
+@endif
+
+
+
+@endforeach
+
+</div>
+
+</div>
+
+
+
+
 @endsection
+
+
+
+
+
+<script>
+function myFunction(index) {
+  console.log("approve"+index);
+  document.getElementById("approve"+index).disabled = true;
+  document.getElementById("approve"+index).innerHTML = "Approved";
+}
+</script>

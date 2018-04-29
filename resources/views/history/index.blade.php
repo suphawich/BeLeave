@@ -102,6 +102,8 @@ $(document).on('click', '.edit-modal', function() {
     @endforeach
     </tbody>
 </table>
+<a href="/getPDFHistory"><button style="float: right;" type="button" class="btn btn-info">Create PDF</button></a>
+
 
 
 
