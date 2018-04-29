@@ -24,7 +24,39 @@ class UsersTableSeeder extends Seeder
         $user->token = str_random(64);
         $user->save();
 
-        $members = [
+        foreach ($this->getMembers() as $member) {
+            $user = new User;
+            $user->email = $member->email;
+            $user->password = password_hash($member->password, PASSWORD_DEFAULT);
+            $user->full_name = $member->full_name;
+            // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+            $user->address = $member->address;
+            $user->access_level = 'Subordinate';
+            $user->tel = $member->tel;
+            $user->company_name = $member->company_name;
+            $user->token = str_random(64);
+            $user->save();
+        }
+
+
+
+        $user = new User;
+        $user->email = "suphawich.s@ku.th";
+        $user->password = password_hash('mark', PASSWORD_DEFAULT);
+        $user->full_name = 'Suphawich Sungkhavorn';
+        $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        $user->address = "20 Soi Pichayanunt15 Tiwanont Road";
+        $user->access_level = 'Manager';
+        $user->tel = '0836429451';
+        $user->company_name = "Suphawich";
+        $user->is_enabled = 0;
+        $user->token = str_random(64);
+        $user->save();
+        factory(App\User::class, 10)->create();
+    }
+
+    private function getMembers() {
+        return [
             (Object) [
                 'email' => 'cherprang@bnk48official',
                 'full_name' => 'CHERPRANG AREEKUL',
@@ -70,7 +102,7 @@ class UsersTableSeeder extends Seeder
                 'full_name' => 'NAPAPHAT WORRAPHUTTANON',
                 'password' => 'jaa',
                 'address' => 'Bangkok',
-                'tel' => '0842141107',
+                'tel' => '0842141106',
                 'company_name' => 'BNK48'
             ],
             (Object) [
@@ -78,7 +110,7 @@ class UsersTableSeeder extends Seeder
                 'full_name' => 'KUNJIRANUT INTARASIN',
                 'password' => 'jane',
                 'address' => 'Pathum Thani',
-                'tel' => '0842141108',
+                'tel' => '0842141107',
                 'company_name' => 'BNK48'
             ],
             (Object) [
@@ -86,7 +118,7 @@ class UsersTableSeeder extends Seeder
                 'full_name' => 'SUCHAYA SAENKHOT',
                 'password' => 'jib',
                 'address' => 'Lopburi',
-                'tel' => '0842141109',
+                'tel' => '0842141108',
                 'company_name' => 'BNK48'
             ],
             (Object) [
@@ -94,39 +126,33 @@ class UsersTableSeeder extends Seeder
                 'full_name' => 'NATRUJA CHUTIWANSOPON',
                 'password' => 'kaew',
                 'address' => 'Chonburi',
+                'tel' => '0842141109',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'kaimook@bnk48official',
+                'full_name' => 'WARATTAYA DEESOMLERT',
+                'password' => 'kaimook',
+                'address' => 'Bangkok',
                 'tel' => '0842141110',
                 'company_name' => 'BNK48'
             ],
+            (Object) [
+                'email' => 'kate@bnk48official',
+                'full_name' => 'KORAPAT NILPRAPA',
+                'password' => 'kate',
+                'address' => 'Phayao',
+                'tel' => '0842141111',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'korn@bnk48official',
+                'full_name' => 'VATHUSIRI PHUWAPUNYASIRI',
+                'password' => 'korn',
+                'address' => 'Bangkok',
+                'tel' => '0842141112',
+                'company_name' => 'BNK48'
+            ],
         ];
-
-        foreach ($members as $member) {
-            $user = new User;
-            $user->email = $member->email;
-            $user->password = password_hash($member->password, PASSWORD_DEFAULT);
-            $user->full_name = $member->full_name;
-            // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-            $user->address = $member->address;
-            $user->access_level = 'Subordinate';
-            $user->tel = $member->tel;
-            $user->company_name = $member->company_name;
-            $user->token = str_random(64);
-            $user->save();
-        }
-
-
-
-        $user = new User;
-        $user->email = "suphawich.s@ku.th";
-        $user->password = password_hash('mark', PASSWORD_DEFAULT);
-        $user->full_name = 'Suphawich Sungkhavorn';
-        $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-        $user->address = "20 Soi Pichayanunt15 Tiwanont Road";
-        $user->access_level = 'Manager';
-        $user->tel = '0836429451';
-        $user->company_name = "Suphawich";
-        $user->is_enabled = 0;
-        $user->token = str_random(64);
-        $user->save();
-        factory(App\User::class, 10)->create();
     }
 }
