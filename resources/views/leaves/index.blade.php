@@ -195,7 +195,7 @@
 
         <div class="row">
             <div class="col-12 pl-0 pr-0 mt-2">
-                @if ($isPending or $isSubstitute)
+                @if ($action)
                     <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm" disabled>
                 @else
                     <button type="button" class="btn btn-light float-right mb-2" data-toggle="modal" data-target="#modalLeaveForm">
@@ -209,6 +209,9 @@
                 <table class="table table-hover">
                     <thead class="table-text">
                         <tr>
+                            <th colspan="5" style="background-color: #E4E4E4;">Leaves History</th>
+                        </tr>
+                        <tr>
                             <th scope="col">Type</th>
                             <th scope="col">Depart date</th>
                             <th scope="col">Arrive date</th>
@@ -217,50 +220,73 @@
                         </tr>
                     </thead>
                     <tbody class="tbody-text">
-                        @foreach ($leaves as $leave)
-                            <tr>
-                                <td>{{ $leave->leave_type }}</td>
-                                <td >{{ date_format(date_create($leave->depart_at),"m/d/Y") }}</td>
-                                <td>{{ date_format(date_create($leave->arrive_at),"m/d/Y").date_diff(date_create($leave->depart_at), date_create($leave->arrive_at))->format(" (%a days)") }}</td>
-                                <td>{{ $substitutes_name[$leave->substitute_id] ?? '-' }}</td>
-                                @if ($leave->is_approved)
-                                    <td>Approved</td>
-                                @else
-                                    @if ($leave->is_enabled)
-                                        <td>Pending</td>
+                        @if (count($leaves) == 0)
+                            <td colspan="5" class="text-center pt-5 pb-5">Not found your leave history.</td>
+                        @else
+                            @foreach ($leaves as $leave)
+                                <tr>
+                                    <td>{{ $leave->leave_type }}</td>
+                                    <td >{{ date_format(date_create($leave->depart_at),"m/d/Y") }}</td>
+                                    <td>{{ date_format(date_create($leave->arrive_at),"m/d/Y").date_diff(date_create($leave->depart_at), date_create($leave->arrive_at))->format(" (%a days)") }}</td>
+                                    <td>{{ $substitutes_name[$leave->substitute_id] ?? '-' }}</td>
+                                    @if ($leave->is_approved)
+                                        <td>Approved</td>
                                     @else
-                                        <td>Decline</td>
+                                        @if ($leave->is_enabled)
+                                            <td>Pending</td>
+                                        @else
+                                            <td>Decline</td>
+                                        @endif
                                     @endif
-                                @endif
-                            </tr>
-                        @endforeach
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-8 col-12 pl-0 pr-0" >
-                <div class="card mt-5">
-                    <div class="card-header">
-                        <span>Substitute Task</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div>
-                                @if ($isSubstitute)
-                                    <span>From: {{ $subordinate->full_name }}</span>
-                                    <br>
-                                    <span>Task: {{ $subordinate->task }}</span>
-                                    <br>
-                                    <span>Work Date: {{ date_format(date_create($substitute->depart_at),"m/d/Y") }}</span>
-                                    <span>-> {{ date_format(date_create($substitute->arrive_at),"m/d/Y").date_diff(date_create($substitute->depart_at), date_create($substitute->arrive_at))->format(" (%a days)") }}</span>
-                                @else
-                                    <span>You have no substitute task</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <hr>
+        <div class="row mt-5">
+            <div class="col-12 table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-text">
+                        <tr>
+                            <th colspan="5" style="background-color: #E4E4E4;">Next substitute task</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">From</th>
+                            <th scope="col">Task</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-text">
+                        @if (count($substitutes) == 0)
+                            <td colspan="5" class="text-center pt-5 pb-5">You have no substitute task from another subordinate.</td>
+                        @else
+                            @foreach ($substitutes as $s)
+                                <tr>
+                                    <td>{{ $s->full_name }}</td>
+                                    <td>{{ $s->task ?? '-' }}</td>
+                                    <td>{{ date_format(date_create($s->depart_at),"m/d/Y") }}</td>
+                                    <td>
+                                        {{
+                                            date_format(date_create($s->arrive_at),"m/d/Y")
+                                            .date_diff(date_create($s->depart_at), date_create($s->arrive_at))
+                                            ->format(" (%a days)")
+                                        }}
+                                    </td>
+                                    <td>
+                                        {{-- @if ()
+
+                                        @endif --}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
