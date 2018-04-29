@@ -1,3 +1,6 @@
+
+use Auth;
+
 @extends('layout.go')
 
 
@@ -202,7 +205,7 @@
 
 
             <div class="col-8">
-                <button type="button" class="form-control" name="button" style="width:100%" >Buy Packet</button>
+                <a href="/subscription/{{ Auth::user()->id }}"><button type="button" class="form-control" name="button" style="width:100%"  >Buy Packet</button></a>
 
             </div>
             <div class="col-2">
