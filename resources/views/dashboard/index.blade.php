@@ -310,30 +310,8 @@
       <p>Expire: {{$plan->exprie}} day</p>
     </div>
     <div class="card-action row">
-      @if($request->is_enabled)
-      <div class="col-12">
-
-        <div class="row">
-          <div class="col-2">
-
-          </div>
-          <div class="col-8">
-              <button type="button" href="/manage/request/leave/{{ $request->id }}" onclick="myFunction({{$request->subordinate_id}})" id="approve{{$request->subordinate_id}}" class="btn btn-outline-dark" name="button" id="app" style="width:100%" >Approve</button>
-
-          </div>
 
 
-          <div class="col-2">
-
-          </div>
-
-        </div>
-
-
-
-        <br>
-        </div>
-        @else
 
         <div class="col-12">
 
@@ -344,7 +322,7 @@
 
 
             <div class="col-8">
-                <button type="button" class="btn btn-outline-dark" name="button" style="width:100%" disabled >Approved</button>
+                <button type="button" class="btn btn-outline-dark" name="button" style="width:100%" >Buy Packet</button>
 
             </div>
             <div class="col-2">
@@ -358,7 +336,7 @@
           <br>
           </div>
 
-        @endif
+
     </div>
   </div>
 </div>
