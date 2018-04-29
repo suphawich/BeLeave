@@ -18,14 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('full_name');
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('/images/profiles/user.png');
             $table->string('address')->nullable();
             $table->enum('access_level', [
                 'Guest', 'Subordinate', 'Supervisor', 'Manager','Administrator'
             ]);
             $table->string('tel');
             $table->string('company_name');
-            $table->boolean('is_enabled');
+            $table->boolean('is_enabled')->default(true);
             $table->string('token', 100);
             $table->rememberToken();
             $table->timestamps();

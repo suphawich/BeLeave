@@ -61,7 +61,11 @@
         </div>
         <div class="row">
             <div class="col-12 pl-0 pr-0 mt-2">
-                <button type="button" name="newUser" class="btn btn-light float-right mb-2" v-on:click="clickNewUser"><i class="fa fa-plus"></i> Add New User</button>
+                @if ($isFull)
+                    <button type="button" name="newUser" class="btn btn-light float-right mb-2" v-on:click="clickNewUser" disabled><i class="fa fa-plus"></i> Add New User</button>
+                @else
+                    <button type="button" name="newUser" class="btn btn-light float-right mb-2" v-on:click="clickNewUser"><i class="fa fa-plus"></i> Add New User</button>
+                @endif
                 <form action="/users" method="post">
                 @csrf
                 @method('PUT')

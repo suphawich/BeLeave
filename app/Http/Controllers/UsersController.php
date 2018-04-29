@@ -55,8 +55,16 @@ class UsersController extends Controller
         // set url path for generted links
         $data->setPath($request->url());
 
+        $isFull = 0;
+        if (Auth::user()->access_level == 'Guest' and count($data) >= 3) {
+            $isFull = 1;
+        }
+
         // return $news;
-        return view('users.index', ['subordinates' => $data]);
+        return view('users.index', [
+            'subordinates' => $data,
+            'isFull' => $isFull
+        ]);
     }
 
     public function index_account() {
@@ -205,8 +213,15 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         if ($request->has(['full_name', 'company_name', 'company_email', 'address', 'tel'])) {
+            $validatedData = $request->validate([
+                'company_name' => 'required',
+                'company_email' => 'required|email',
+                'full_name' => 'required|string',
+                'address' => 'required|max:100',
+                'tel' => 'required|numeric',
+            ]);
+
             $companyEmail = $request->input('company_email');
-            $password = $request->session()->get('password');
             $fullname = $request->input('full_name');
             $avatar = $request->session()->get('avatar');
             $address = $request->input('address');
@@ -225,34 +240,32 @@ class UsersController extends Controller
                 $user->tel = $tel;
                 $user->company_name = $companyName;
                 $user->save();
-                // $user = User::where('id', $id)->update($data);
-                // foreach ($data as $key => $value) {
-                //     $request->session()->put($key, $value);
-                // }
+
                 $request->session()->flash('error', 'Changed profile successfully.');
                 return redirect('/users/'.$user->id.'/edit');
             }
             $request->session()->flash('error','E-mail is already used, please try again.');
-            return redirect('profile');
-        } else if ($request->has(['current_password', 'new_password', 'confirm_password'])) {
+            return redirect('/profile');
+        } else if ($request->has(['current_password', 'password', 'password_confirm'])) {
+            $validatedData = $request->validate([
+                'current_password' => 'required',
+                'password' => 'required',
+                'password_confirm' => 'required|same:password',
+            ]);
             $current = $request->input('current_password');
-            $new = $request->input('new_password');
-            $confirm = $request->input('confirm_password');
+            $new = $request->input('password');
+            $confirm = $request->input('password_confirm');
             if (password_verify($current, Auth::user()->password)) {
-                if ($new == $confirm) {
-                    $user->password = password_hash($new, PASSWORD_DEFAULT);
-                    $user->save();
-                    $request->session()->flash('error', 'Changed Password Successful');
-                    return redirect('/users/'.$user->id.'/edit');
-                }
-                $request->session()->flash('status','New password is not match, please try again.');
+                $user->password = password_hash($new, PASSWORD_DEFAULT);
+                $user->save();
+                $request->session()->flash('error', 'Changed Password Successful');
                 return redirect('/users/'.$user->id.'/edit');
             } else {
                 $request->session()->flash('error','Current password is wrong, please try again.');
                 return redirect('/users/'.$user->id.'/edit');
             }
         } else {
-            $request->session()->flash('error', 'if 1');
+            $request->session()->flash('error', 'Error action type.');
             return redirect('/users/'.$user->id.'/edit');
         }
     }
@@ -369,11 +382,8 @@ class UsersController extends Controller
         $leaves = Leave::all();
         $supervisor_id = Auth::user()->id;
         $leaves = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->get();
-        $users = User::all();        
+        $users = User::all();
         $pdf=PDF::loadView('history.pdf',['leaves' => $leaves , 'users' => $users]);
         return $pdf->stream('pdf.pdf');
     }
-
-
-
 }
