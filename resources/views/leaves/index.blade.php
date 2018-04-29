@@ -185,7 +185,7 @@
             <div class="row">
                 <div class="col-12 alert alert-danger text-center">
                     @foreach ($errors->all() as $message)
-                        <div>{{ $message }}</div>
+                        <div>{!! nl2br($message) !!}</div>
                     @endforeach
                 </div>
             </div>
