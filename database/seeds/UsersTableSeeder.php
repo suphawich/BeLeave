@@ -13,17 +13,107 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = new User;
-        $user->email = "admin@example";
+        $user->email = "admin@beleave";
         $user->password = password_hash('password', PASSWORD_DEFAULT);
-        $user->full_name = 'Admin';
-        $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-        $user->address = "20 Soi Pichayanunt15 Tiwanont Road";
+        $user->full_name = 'Administrator';
+        // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        $user->address = "BeLeave Company Ltd";
         $user->access_level = 'Administrator';
         $user->tel = '0836429451';
         $user->company_name = "BeLeave";
-        $user->is_enabled = 1;
         $user->token = str_random(64);
         $user->save();
+
+        $members = [
+            (Object) [
+                'email' => 'cherprang@bnk48official',
+                'full_name' => 'CHERPRANG AREEKUL',
+                'password' => 'cherprang',
+                'address' => 'Bangkok',
+                'tel' => '0842141101',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'pun@bnk48official',
+                'full_name' => 'PUNSIKORN TIYAKORN',
+                'password' => 'pun',
+                'address' => 'Bangkok',
+                'tel' => '0842141102',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'jennis@bnk48official',
+                'full_name' => 'JENNIS OPRASERT',
+                'password' => 'jennis',
+                'address' => 'Petchaburi',
+                'tel' => '0842141103',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'can@bnk48official',
+                'full_name' => 'NAYIKA SRINIAN',
+                'password' => 'can',
+                'address' => 'Bangkok',
+                'tel' => '0842141104',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'izurina@bnk48official',
+                'full_name' => 'RINA IZUTA',
+                'password' => 'izurina',
+                'address' => 'Saitama, Japan',
+                'tel' => '0842141105',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'jaa@bnk48official',
+                'full_name' => 'NAPAPHAT WORRAPHUTTANON',
+                'password' => 'jaa',
+                'address' => 'Bangkok',
+                'tel' => '0842141107',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'jane@bnk48official',
+                'full_name' => 'KUNJIRANUT INTARASIN',
+                'password' => 'jane',
+                'address' => 'Pathum Thani',
+                'tel' => '0842141108',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'jib@bnk48official',
+                'full_name' => 'SUCHAYA SAENKHOT',
+                'password' => 'jib',
+                'address' => 'Lopburi',
+                'tel' => '0842141109',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'kaew@bnk48official',
+                'full_name' => 'NATRUJA CHUTIWANSOPON',
+                'password' => 'kaew',
+                'address' => 'Chonburi',
+                'tel' => '0842141110',
+                'company_name' => 'BNK48'
+            ],
+        ];
+
+        foreach ($members as $member) {
+            $user = new User;
+            $user->email = $member->email;
+            $user->password = password_hash($member->password, PASSWORD_DEFAULT);
+            $user->full_name = $member->full_name;
+            // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+            $user->address = $member->address;
+            $user->access_level = 'Subordinate';
+            $user->tel = $member->tel;
+            $user->company_name = $member->company_name;
+            $user->token = str_random(64);
+            $user->save();
+        }
+
+
 
         $user = new User;
         $user->email = "suphawich.s@ku.th";
