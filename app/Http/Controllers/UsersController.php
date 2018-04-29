@@ -199,6 +199,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $user->supervisor_name = User::where('id', Department::where('subordinate_id', $user->id)->first()->supervisor_id)
+                                    ->first()->full_name;
         return view('users.edit', [
             'user' => $user
         ]);

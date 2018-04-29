@@ -107,13 +107,13 @@
                           <div class="form-group input-group">
                               {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
                               <label class="input-title">Depart date</label>
-                              {{ Form::date('depart_at', \Carbon\Carbon::now(), ['class' => 'form-control date', 'required']) }}
+                              {{ Form::date('depart_at', \Carbon\Carbon::tomorrow(), ['class' => 'form-control date', 'required']) }}
                           </div>
                           <hr>
                           <div class="form-group input-group">
                               {{-- <input type="date" name="depart_at" class="form-control" value=""> --}}
                               <label class="input-title">Arrive date</label>
-                              {!! Form::date('arrive_at', null, [
+                              {!! Form::date('arrive_at', \Carbon\Carbon::tomorrow(), [
                                   'class' => 'form-control date',
                                   'ref' => 'arrive_at',
                                   'required'
