@@ -1,6 +1,4 @@
 
-use Auth;
-
 @extends('layout.go')
 
 
