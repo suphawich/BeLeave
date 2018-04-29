@@ -32,6 +32,9 @@ Route::get('/register-complete', function () {
 Route::get('/history', 'ManageController@history');
 
 
+
+
+
 Route::get('/', 'DashboardController@index');
 Route::get('/dashboard', 'DashboardController@index');
 
