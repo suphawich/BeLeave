@@ -57,6 +57,7 @@ $(document).on('click', '.edit-modal', function() {
         <tr>
           <th>Number</th>
           <th>Subordinate Name</th>
+          <th>Position</th>
           <th>Description</th>
           <th>Substitute Name</th>
           <th>Leave Type</th>
@@ -75,6 +76,12 @@ $(document).on('click', '.edit-modal', function() {
 
       <td>{{ $loop->iteration }}</td>
       <td><button class="form-control " style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->full_name }}</td>
+        @foreach($tasks as $task)
+        @if( $task->subordinate_id == $item->subordinate_id )
+        <td>{{ $task->task }}</td>
+        @endif
+
+        @endforeach
       <td>{{ $item->description }}</td>
       @foreach($users as $user)
       @if($user->id === $item->substitute_id)
@@ -84,9 +91,12 @@ $(document).on('click', '.edit-modal', function() {
        $item->substitute_id = $user->full_name;
        ?>
 
+
       @endif
 
       @endforeach
+
+
 
       <td><button class="form-control "  style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->substitute_id }}</a></button></td>
       <td>{{ $item->leave_type }}</td>
@@ -102,7 +112,7 @@ $(document).on('click', '.edit-modal', function() {
     @endforeach
     </tbody>
 </table>
-<a href="/getPDFHistory"><button style="float: right;" type="button" class="btn btn-info">Create PDF</button></a>
+<a href="/getPDFHistory"><button style="float: right;" type="button" class="btn btn-default">Create PDF</button></a>
 
 
 

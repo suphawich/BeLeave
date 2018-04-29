@@ -199,6 +199,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $user->supervisor_name = User::where('id', Department::where('subordinate_id', $user->id)->first()->supervisor_id)
+                                    ->first()->full_name;
         return view('users.edit', [
             'user' => $user
         ]);
@@ -409,7 +411,7 @@ class UsersController extends Controller
         $data= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         // set url path for generted links
         $data->setPath($request->url());
-    
+
         $pdf=PDF::loadView('users.pdf',['subordinates' => $data]);
 
         return $pdf->stream('pdf.pdf');

@@ -45,11 +45,10 @@ class HomeController extends Controller
           $obj['leave_latest_arrive'] = Leave::where('subordinate_id', $request->subordinate_id)->whereYear('created_at', \Carbon\Carbon::now()->year)->latest()->first()->arrive_at;
           $users[$request->subordinate_id] = (object) $obj;
       }
-      $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name','users.avatar')->paginate(10);
+      $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('leaves.*', 'users.full_name','users.avatar','tasks.task')->paginate(5);
 
 
       return view('dashboard.index' , ['requests' => $requests, 'users' => $users , 'plans' => $plans]);
-
 
     }
 }

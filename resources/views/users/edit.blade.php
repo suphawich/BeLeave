@@ -90,13 +90,19 @@
                     <label class="form-topic">Phone Number</label>
                     <input type="tel" class="form-control form-field" name="tel" placeholder="Phone" pattern="[0-9][0-9+]+" required value="{{ $user->tel }}">
                 </div>
+                @if ($user->access_level != 'Administrator' or $user->access_level != 'Manager')
+                    <div class="form-group input-group">
+                        <label class="form-topic">Supervisor name</label>
+                        <input type="text" class="form-control form-field" name="supervisor_name" disabled value="{{ $user->supervisor_name }}">
+                    </div>
+                @endif
                 <div class="form-group input-group">
                     <label class="form-topic">Access Level</label>
                     <input type="text" class="form-control form-field" name="access_level" disabled value="{{ Auth::user()->access_level }}">
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 avatar-content text-center">
-                <img src="{{ $user->avatar }}" class="avatar circle mb-5 mt-4">
+                <img src="{{ $user->avatar ?? '/images/profiles/user_default.jpg' }}" class="avatar circle mb-5 mt-4">
                 <input type="file" class="form-control form-file mb-4 ml-auto mr-auto" name="file">
                 <button type="button" name="change-password" class="btn btn-primary mb-5" v-on:click="showChangepwd">Change password</button>
             </div>
