@@ -10,6 +10,7 @@ use App\Leave;
 use App\User;
 use App\Task;
 use App\Department;
+use \Carbon\Carbon;
 
 class LeavesController extends Controller
 {
@@ -36,7 +37,7 @@ class LeavesController extends Controller
         }
         $leaves = Leave::where('subordinate_id', Auth::user()->id)->orderby('created_at', 'desc')->paginate(10);
 
-        $substitute_task = Leave::where([['substitute_id', Auth::user()->id],['is_approved', '1']])->latest()->whereDate('depart_at', '<=', \Carbon\Carbon::now())->whereDate('arrive_at', '>=', \Carbon\Carbon::now())->get();
+        $substitute_task = Leave::where([['substitute_id', Auth::user()->id],['is_approved', '1']])->latest()->whereDate('depart_at', '>=', \Carbon\Carbon::now())->whereDate('depart_at', '<=', new Carbon('next week'))->get();
         $subordinate = [];
         $isSubstitute = 0;
         if (count($substitute_task) == 1) {
@@ -46,7 +47,8 @@ class LeavesController extends Controller
         }
 
         $isPending = 0;
-        if (Leave::where('subordinate_id', Auth::user()->id)->where('is_enabled', '1')->count() == 1) {
+        if (Leave::where('subordinate_id', Auth::user()->id)->where('is_enabled', '1')->count() == 1 or
+            Leave::where('subordinate_id', Auth::user()->id)->where('is_approved', '1')->whereDate('arrive_at', '>', Carbon::now())->count() == 1) {
             $isPending = 1;
         }
         return view('leaves.index', [
@@ -78,6 +80,7 @@ class LeavesController extends Controller
      */
     public function store(Request $request)
     {
+        $leave = new Leave;
         if (Leave::where('subordinate_id', Auth::user()->id)->where('is_enabled', '1')->count() == 1) {
             $v = Validator::make([], []);
             // $v->errors()->add('some_field', 'some_translated_error_key');
@@ -85,24 +88,21 @@ class LeavesController extends Controller
             return redirect()->back()->withErrors($v);
         } else if ($request->input('token') === '') {
             $validatedData = $request->validate([
-                'depart_at' => 'required|date|after_or_equal:today',
+                'depart_at' => 'required|date|after_or_equal:tomorrow',
                 'arrive_at' => 'required|date|after_or_equal:depart_at',
-                'description' => 'required|max:500'
+                'description' => 'required|max:100'
             ]);
         } else {
             $validatedData = $request->validate([
-                'depart_at' => 'required|date|after_or_equal:today',
+                'depart_at' => 'required|date|after_or_equal:tomorrow',
                 'arrive_at' => 'required|date|after_or_equal:depart_at',
-                'description' => 'required|max:500',
+                'description' => 'required|max:100',
                 'substitute_token' => 'exists:users,token'
             ]);
-        }
-
-        $leave = new Leave;
-        $leave->subordinate_id = Auth::user()->id;
-        if ($request->input('token') !== '') {
             $leave->substitute_id = User::where('token', $request->input('substitute_token'))->first()->id;
         }
+
+        $leave->subordinate_id = Auth::user()->id;
         $leave->description = $request->input('description');
         $leave->leave_type = $request->input('leave_type');
         $leave->depart_at = $request->input('depart_at');

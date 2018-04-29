@@ -8,13 +8,27 @@
   position: absolute;
   overflow: hidden;
   top: 50%;
-  left: 50%;
+  left: 20%;
   width: 370px;
   transform: translateX(-50%) translateY(-50%);
   background-color: #fff;
   box-shadow: 0px 0px 20px rgba(0,0,0, 0.1);
   transition: box-shadow $duration;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .card a{
   color:inherit;
