@@ -106,5 +106,13 @@
                 </div>
             </div>
         @endforeach --}}
+        @forelse($requests as $request)
+        @if ($request->is_enabled)
+        <a href="/getPDFRequestLeave"><button style="float: right;" type="button" class="btn btn-info">Create PDF</button></a>
+        @endif
+        @empty
+            
+        @endforelse
+
     </div>
 @endsection

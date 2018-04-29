@@ -126,5 +126,7 @@
                 {{ $subordinates->appends(['sort' => request()->sort])->links() }}
             </div>
         </div>
+        <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-info">Create PDF</button></a>
+
     </div>
 @endsection
