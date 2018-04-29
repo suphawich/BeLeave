@@ -93,8 +93,18 @@ class LeavesController extends Controller
                 or Leave::where('substitute_id', $leave->substitute_id)
                     ->whereDate('arrive_at', '>=', $request->input('depart_at'))
                     ->whereDate('arrive_at', '<=', $request->input('arrive_at'))
-                    ->count() > 0
-                or Leave::where('subordinate_id', $leave->substitute_id)
+                    ->count() > 0 )
+            {
+                $sl = Leave::where('substitute_id', $leave->substitute_id)->latest()->first();
+                $su = User::where('id', $leave->substitute_id)->first();
+                $v = Validator::make([], []);
+                $v->getMessageBag()->add('interfere', 'Date was overlap with him/her leave or task.'
+                                                    .'<br />'.$su->full_name.' has been substitute task since ' .date_format(date_create($sl->depart_at),"m/d/Y").' to '
+                                                    .date_format(date_create($sl->arrive_at),"m/d/Y").'.');
+                return redirect()->back()->withErrors($v);
+            }
+
+            if (Leave::where('subordinate_id', $leave->substitute_id)
                     ->whereDate('depart_at', '>=', $request->input('depart_at'))
                     ->whereDate('depart_at', '<=', $request->input('arrive_at'))
                     ->count() > 0
@@ -103,8 +113,12 @@ class LeavesController extends Controller
                     ->whereDate('arrive_at', '<=', $request->input('arrive_at'))
                     ->count() > 0 )
             {
+                $sl = Leave::where('subordinate_id', $leave->substitute_id)->latest()->first();
+                $su = User::where('id', $leave->substitute_id)->first();
                 $v = Validator::make([], []);
-                $v->getMessageBag()->add('interfere', 'Date was overlap with him/her leave or task.');
+                $v->getMessageBag()->add('interfere', 'Date was overlap with him/her leave or task.'
+                                                    .'<br />'.$su->full_name.' has been leave since ' .date_format(date_create($sl->depart_at),"m/d/Y").' to '
+                                                    .date_format(date_create($sl->arrive_at),"m/d/Y").'.');
                 return redirect()->back()->withErrors($v);
             }
         }
