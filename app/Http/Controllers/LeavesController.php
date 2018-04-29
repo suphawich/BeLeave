@@ -37,7 +37,7 @@ class LeavesController extends Controller
         }
         $leaves = Leave::where('subordinate_id', Auth::user()->id)->orderby('created_at', 'desc')->paginate(10);
 
-        $substitute_task = Leave::where([['substitute_id', Auth::user()->id],['is_approved', '1']])->latest()->whereDate('depart_at', '>=', \Carbon\Carbon::now())->whereDate('depart_at', '<=', new Carbon('next week'))->get();
+        $substitute_task = Leave::where([['substitute_id', Auth::user()->id],['is_approved', '1']])->latest()->whereDate('depart_at', '>=', \Carbon\Carbon::now())->get();
         $subordinate = [];
         $isSubstitute = 0;
         if (count($substitute_task) == 1) {

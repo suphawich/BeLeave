@@ -153,6 +153,22 @@ class UsersTableSeeder extends Seeder
                 'tel' => '0842141112',
                 'company_name' => 'BNK48'
             ],
+            (Object) [
+                'email' => 'miori@bnk48official',
+                'full_name' => 'MIORI OHKUBO',
+                'password' => 'miori',
+                'address' => 'Ibaraki, Japan',
+                'tel' => '0842141113',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'mobile@bnk48official',
+                'full_name' => 'PIMRAPAT PHADUNGWATANACHOK',
+                'password' => 'mobile',
+                'address' => 'Bangkok',
+                'tel' => '0842141114',
+                'company_name' => 'BNK48'
+            ],
         ];
     }
 }
