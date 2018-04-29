@@ -10,7 +10,14 @@
 
 @section('content')
 @csrf
-<div class="jumbotron">
+<div class="row mt-4 ">
+  <div class="col-3">
+
+
+  </div>
+
+
+<div class="card col-6">
 
   <p class="lead">Full name:{{ Auth::user()->full_name }}</p>
   <p class="lead">Company:{{ Auth::user()->company_name }}</p>
@@ -20,7 +27,13 @@
   <p>PACKAGE:</p>
 
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="/plan" role="button">BUY PACKAGE</a>
+    <a class="btn btn-outline-dark" href="/plan" role="button">BUY PACKAGE</a>
+    <button type="button" class="form-control" name="button">{{ count($subordinates)}}</button>
   </p>
+</div>
+<div class="col-3">
+
+</div>
+
 </div>
 @endsection

@@ -72,7 +72,7 @@
 @if(count($requests) > 0)
 
 
-<div class="mt-2">
+<div class="mt-5 card">
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
@@ -98,12 +98,12 @@
 
     <div class="col-lg-5">
         <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object dp img-circle" src="{{ $request->avatar }}" style="width: 100px;height:100px;">
+            <a class="pull-left" href="{{ url('/users/' . $request->subordinate_id.'/profile') }}">
+                <img class="media-object dp img-circle" src="{{ $request->avatar ?? '/images/profiles/user_default.jpg' }}" style="width: 100px;height:100px;">
             </a>
             <div class="media-body">
                 <h4 class="media-heading">{{ $request->full_name}} <small> {{ $request->leave_type}}</small></h4>
-                <h5>Software Developer      <a href="{{ url('/users/' . $request->subordinate_id.'/profile') }}" >profile</a></h5>
+                <h5>{{ $request->task}}      <a href="{{ url('/users/' . $request->subordinate_id.'/profile') }}" >profile</a></h5>
                 <p>Arrive Date : {{ date_format(date_create($request->depart_at),"m/d/Y") }}</p>
                 <p>Day : {{date_diff(date_create($request->depart_at), date_create($request->arrive_at))->format(" %a ")}}</p>
                 <p>Description : {{ $request->description}}</p>
@@ -147,12 +147,12 @@
 
 
 
-<div class="mt-2">
+<div class="mt-4">
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <li class="nav-item active">
-      <a class="nav-link" style="font-size:30px" href="#">Packet</a>
+      <a class="nav-link" style="font-size:30px" href="#">Package</a>
     </li>
     <li class="nav-item">
       <a class="nav-link mt-2 ml-2" href="plan">view all</a>

@@ -139,9 +139,12 @@ class ManageController extends Controller
     }
 
     public function history(){
+
       // $rows = Leave::get();
 
       $leaves = Leave::all();
+      $tasks = Task::all();
+    
       $supervisor_id = Auth::user()->id;
       $leaves = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->select('leaves.*', 'users.full_name')->get();
       $users = User::all();
@@ -149,7 +152,7 @@ class ManageController extends Controller
       // $u = User::all()->pluck('full_name','id');
       // $table = Table::create($rows);
       // $leaves = Leave::sorted()->get();
-      return view('history.index',['leaves' => $leaves , 'users' => $users]);
+      return view('history.index',['leaves' => $leaves , 'users' => $users ,'tasks' => $tasks]);
 
     }
 }

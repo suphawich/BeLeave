@@ -91,7 +91,7 @@
                             <th scope="col">Full name</th>
                             <th scope="col" v-if="!isShowNewUser">Supervisor name</th>
                             <th scope="col">Task</th>
-                            <th scope="col">E-mail</th>
+                            <th scope="col">E-m ail</th>
                             <th scope="col">Phone number</th>
                         </tr>
                     </thead>
@@ -126,7 +126,8 @@
                 {{ $subordinates->appends(['sort' => request()->sort])->links() }}
             </div>
         </div>
-        <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-info">Create PDF</button></a>
+        <p> INDEDEDE  : {{ count($subordinates) }}</p>
+        <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-default">Create PDF</button></a>
 
     </div>
 @endsection
