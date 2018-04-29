@@ -24,6 +24,18 @@ class UsersTableSeeder extends Seeder
         $user->token = str_random(64);
         $user->save();
 
+        $user = new User;
+        $user->email = "jobsan@bnk48official";
+        $user->password = password_hash('jobsan', PASSWORD_DEFAULT);
+        $user->full_name = 'Jobsan';
+        // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        $user->address = "Bangkok";
+        $user->access_level = 'Manager';
+        $user->tel = '0848484848';
+        $user->company_name = "BNK48";
+        $user->token = str_random(64);
+        $user->save();
+
         foreach ($this->getMembers() as $member) {
             $user = new User;
             $user->email = $member->email;
@@ -151,6 +163,102 @@ class UsersTableSeeder extends Seeder
                 'password' => 'korn',
                 'address' => 'Bangkok',
                 'tel' => '0842141112',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'miori@bnk48official',
+                'full_name' => 'MIORI OHKUBO',
+                'password' => 'miori',
+                'address' => 'Ibaraki, Japan',
+                'tel' => '0842141113',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'mobile@bnk48official',
+                'full_name' => 'PIMRAPAT PHADUNGWATANACHOK',
+                'password' => 'mobile',
+                'address' => 'Bangkok',
+                'tel' => '0842141114',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'music@bnk48official',
+                'full_name' => 'PRAEWA SUTHAMPHONG',
+                'password' => 'music',
+                'address' => 'Bangkok',
+                'tel' => '0842141115',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'namneung@bnk48official',
+                'full_name' => 'MILIN DOKTHIAN',
+                'password' => 'namneung',
+                'address' => 'Sing Buri',
+                'tel' => '0842141116',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'namsai@bnk48official',
+                'full_name' => 'PICHAYAPA NATHA',
+                'password' => 'namsai',
+                'address' => 'Chiang Mai',
+                'tel' => '0842141117',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'nink@bnk48official',
+                'full_name' => 'PICHAYAPA NATHA',
+                'password' => 'nink',
+                'address' => 'Samut Sakorn',
+                'tel' => '0842141118',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'noey@bnk48official',
+                'full_name' => 'KANTEERA WADCHARATHADSANAKUL',
+                'password' => 'noey',
+                'address' => 'Samut Prakan',
+                'tel' => '0842141119',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'orn@bnk48official',
+                'full_name' => 'PATCHANAN JIAJIRACHOTE',
+                'password' => 'orn',
+                'address' => 'Bangkok',
+                'tel' => '0842141120',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'piam@bnk48official',
+                'full_name' => 'RINRADA INTHAISONG',
+                'password' => 'piam',
+                'address' => 'Saraburi',
+                'tel' => '0842141121',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'pupe@bnk48official',
+                'full_name' => 'JIRADAPA INTAJAK',
+                'password' => 'pupe',
+                'address' => 'Chiang Mai',
+                'tel' => '0842141122',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'satchan@bnk48official',
+                'full_name' => 'SAWITCHAYA KAJONRUNGSILP',
+                'password' => 'satchan',
+                'address' => 'Bangkok',
+                'tel' => '0842141123',
+                'company_name' => 'BNK48'
+            ],
+            (Object) [
+                'email' => 'tarwaan@bnk48official',
+                'full_name' => 'ISARAPA THAWATPAKDEE',
+                'password' => 'tarwaan',
+                'address' => 'Nakhon Pathom',
+                'tel' => '0842141124',
                 'company_name' => 'BNK48'
             ],
         ];

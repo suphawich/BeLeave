@@ -85,7 +85,7 @@ Route::get('account/accounts', 'UsersController@index_account');
 Route::put('account/accounts', 'UsersController@search_account');
 Route::get('account/switchuser', 'UsersController@index_switchuser');
 
-Route::get('read/manage/request/leave/{user}', 'NotificationsController@markAsRead_manageRequestLeave');
+Route::get('read/manage/request/leave', 'NotificationsController@markAsRead_manageRequestLeave');
 Route::get('noti', function () {
 
     $user = Auth::user();
