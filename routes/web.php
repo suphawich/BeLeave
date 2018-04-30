@@ -39,7 +39,10 @@ Route::get('/history', 'ManageController@history');
 
 
 
-Route::get('/', 'DashboardController@index');
+// Route::get('/', 'DashboardController@index');
+Route::get('/', function () {
+    return view('layout.master');
+});
 Route::get('/dashboard', 'DashboardController@index');
 
 
@@ -122,6 +125,7 @@ Route::get('sendmail', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'LoginController@logout');
 
 Route::get('/plan','PlanController@index');
 

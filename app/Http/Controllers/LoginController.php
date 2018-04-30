@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\User_log;
 
 class LoginController extends Controller
 {
@@ -39,8 +41,13 @@ class LoginController extends Controller
         // }
     }
 
-    public function getLogout(Request $request) {
-        $request->session()->flush();
-        return redirect('login');
+    public function logout(Request $request) {
+        $user_log = new User_log;
+        $user_log->user_id = Auth::user()->id;
+        $user_log->action_type = "Logout";
+        $user_log->save();
+        Auth::logout();
+        return redirect('/');
+        // return "Hello";
     }
 }

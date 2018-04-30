@@ -10,6 +10,7 @@ use App\Leave;
 use App\User;
 use App\Task;
 use App\Department;
+use App\System_log;
 use \Carbon\Carbon;
 
 class LeavesController extends Controller
@@ -143,6 +144,11 @@ class LeavesController extends Controller
         $leave->depart_at = $request->input('depart_at');
         $leave->arrive_at = $request->input('arrive_at');
         $leave->save();
+
+        $sysl = new System_log;
+        $sysl->action_type = "Insert";
+        $sysl->description = $leave->id.' created leave table.';
+        $sysl->save();
 
         $user = Auth::user();
         $sp_user = User::where('id', Department::where('subordinate_id', $user->id)->first()->supervisor_id)->first();
