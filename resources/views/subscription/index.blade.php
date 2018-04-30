@@ -41,7 +41,7 @@
 
         <div class="col-12 ml-3">
 
-          @if(count($plan) > 0)
+          @if(count($plan) > 0 || $day_left > 0 )
 
           <p class="lead">Package: {{ $plan[0]->plan }}</p>
           <p class="lead">Members: {{ count($subordinates)}}/{{ $plan[0]->capacity }}</p>

@@ -35,7 +35,7 @@ class SubscriptionController extends Controller
 
         $plan = Supervisor_plan::where('supervisor_id', $supervisor_id, 'desc')->join('plans','plans.name', '=' , 'supervisor_plans.plan')->select('supervisor_plans.*','plans.capacity')->get();
         if(count($plan) > 0 ){
-          $day_left = date_diff(date_create($now), date_create($plan[0]->exprie_plan))->format(" %a days");
+          $day_left = date_diff(date_create($now), date_create($plan[0]->exprie_plan))->format("%a");
         }
         else{
           $day_left = 0;
