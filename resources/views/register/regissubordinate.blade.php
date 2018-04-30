@@ -50,7 +50,13 @@
 @endsection
 
 @section('form')
-    <form id="form-register" action="register" method="post">
+    <form id="form-register" action="/register/regissubordinate/" method="post">
+
+      @csrf
+        @method('PUT')
+
+        <input type="hidden" name="supervisor_detail" value='{{ $supervisor_detail->supervisor_id }}'>
+        <input type="hidden" name="user" value='{{ $user->id }}'>
         <input type="hidden" name="_token" value={{ csrf_token() }}>
         <div class="container">
             <div class="form-content">
@@ -66,26 +72,65 @@
                         <span class="input-group-text"><i class="fa fa-times"></i></span>
                     </div> --}}
                 </div>
+<!--
                 <div class="form-group input-group">
-                    <input type="text" class="form-control" name="company_name" pattern="[A-Za-z][A-Za-z ]+" placeholder="Company name*" required>
+                    {{__('Password:')}}
+
+                    <input type="password" class="form-control" name="password" placeholder="password" required>
                 </div>
+                @if ($errors->has('password'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
                 <div class="form-group input-group">
-                    <input type="email" class="form-control" name="company_email" placeholder="Company email*" required>
+                    <input type="password-confirm" class="form-control" name="password_confirmation" placeholder="" required>
+                </div> -->
+                <div class="form-group input-group">
+                    <input type="hidden" class="form-control" name="company_name" pattern="[A-Za-z][A-Za-z ]+" placeholder="Company name*" value="{{ $user->company_name }}" >
                 </div>
+                @if ($errors->has('company_name'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('company_name') }}</strong>
+                    </span>
+                @endif
+                <div class="form-group input-group">
+                    <input type="email" class="form-control" name="email" placeholder="email*" required>
+                </div>
+                @if ($errors->has('email'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
                 <div class="form-group input-group">
                     <input type="text" class="form-control" name="address" placeholder="Address" required>
                 </div>
+                @if ($errors->has('address'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('address') }}</strong>
+                    </span>
+                @endif
                 <div class="form-group input-group">
                     <input type="tel" class="form-control" name="tel" placeholder="Phone" pattern="[0-9][0-9+]+" required>
                 </div>
+                @if ($errors->has('tel'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('tel') }}</strong>
+                    </span>
+                @endif
                 <div class="form-check">
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input agree-checkbox" name="agree" required>
                         I agree to the <a href="#">term</a> and <a href="#">data policy</a>.
                     </label>
                 </div>
+                @if ($errors->has('agree'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('agree') }}</strong>
+                    </span>
+                @endif
                 <div id="register-container" class="form-group">
-                    <button type="submit" class="form-control btn btn-danger"><i class="fa fa-sign-in"></i> Get a account now</button>
+                    <button type="submit"  class="form-control btn btn-danger"><i class="fa fa-sign-in"></i> Get a account now</button>
                 </div>
                 <div class="center-block"><div class="connect-dashed login-dashed-margin-top"></div></div>
             </div>
