@@ -17,6 +17,8 @@ use App\System_log;
 
 class UsersController extends Controller
 {
+    protected $user;
+    
     public function __construct() {
         $this->middleware('auth');
     }
@@ -182,6 +184,19 @@ class UsersController extends Controller
         $task->subordinate_id = $user->id;
         $task->task = $request->input('task');
         $task->save();
+
+        $this->user = $user;
+          $data = array(
+              'user' => $user,
+              'pass' => $pass
+          );
+
+          Mail::send('email.email', $data, function ($message) {
+              // $message->to('suphawich.s@ku.th', 'Suphawich')
+              $message->to($this->user->email, $this->user->full_name)
+                      ->subject('Regitered');
+              $message->from('beleavemanagement@gmail.com', 'BeLeaveMaster');
+          });
 
         $sysl = new System_log;
         $sysl->action_type = "Insert";

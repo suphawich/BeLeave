@@ -228,6 +228,19 @@ class RegisterController extends Controller
           $sysl->description = $user->id.' had create subordinate in user table.';
           $sysl->save();
 
+          $this->user = $user;
+            $data = array(
+                'user' => $user,
+                'pass' => $pass
+            );
+
+            Mail::send('email.email', $data, function ($message) {
+                // $message->to('suphawich.s@ku.th', 'Suphawich')
+                $message->to($this->user->email, $this->user->full_name)
+                        ->subject('Regitered');
+                $message->from('beleavemanagement@gmail.com', 'BeLeaveMaster');
+            });
+
 
             $department = new Department;
             $supervisor_detail=Supervisor_detail::all()->where('supervisor_id',"LIKE", $request->input('supervisor_detail'))->first();
