@@ -29,7 +29,12 @@ class UsersController extends Controller
         $supervisor_id = Auth::user()->id;
 
         $data = array();
-        $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('users.*', 'tasks.task')->get()->toArray();
+        $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')
+                    ->join('users', 'departments.subordinate_id', '=', 'users.id')
+                    ->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')
+                    ->select('users.*', 'tasks.task')
+                    ->get()
+                    ->toArray();
         while (count($subordinates) > 0) {
             $subordinate = array_shift($subordinates);
             if (!array_key_exists('supervisor_name', $subordinate)) {
