@@ -15,6 +15,7 @@ use App\Department;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use App\System_log;
+use App\User_setting;
 use Mail;
 
 
