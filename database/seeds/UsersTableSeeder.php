@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
         // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
         $user->address = "Bangkok";
         $user->access_level = 'Manager';
-        $user->tel = '0848484848';
+        $user->tel = '0818151905';
         $user->company_name = "BNK48";
         $user->token = str_random(64);
         $user->save();
@@ -87,7 +87,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'cherprang',
                 'address' => 'Bangkok',
                 'tel' => '0842141101',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'backline'
             ],
             (Object) [
                 'email' => 'pun@bnk48official',
@@ -95,7 +96,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'pun',
                 'address' => 'Bangkok',
                 'tel' => '0842141102',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'backline'
             ],
             (Object) [
                 'email' => 'jennis@bnk48official',
@@ -103,7 +105,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'jennis',
                 'address' => 'Petchaburi',
                 'tel' => '0842141103',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'middleline'
             ],
             (Object) [
                 'email' => 'can@bnk48official',
@@ -127,7 +130,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'jaa',
                 'address' => 'Bangkok',
                 'tel' => '0842141106',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'frontline'
             ],
             (Object) [
                 'email' => 'jane@bnk48official',
@@ -135,7 +139,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'jane',
                 'address' => 'Pathum Thani',
                 'tel' => '0842141107',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'backline'
             ],
             (Object) [
                 'email' => 'jib@bnk48official',
@@ -151,7 +156,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'kaew',
                 'address' => 'Chonburi',
                 'tel' => '0842141109',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'middleline'
             ],
             (Object) [
                 'email' => 'kaimook@bnk48official',
@@ -159,7 +165,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'kaimook',
                 'address' => 'Bangkok',
                 'tel' => '0842141110',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'middleline'
             ],
             (Object) [
                 'email' => 'kate@bnk48official',
@@ -175,7 +182,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'korn',
                 'address' => 'Bangkok',
                 'tel' => '0842141112',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'frontline'
             ],
             (Object) [
                 'email' => 'miori@bnk48official',
@@ -191,7 +199,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'mobile',
                 'address' => 'Bangkok',
                 'tel' => '0842141114',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'frontline'
             ],
             (Object) [
                 'email' => 'music@bnk48official',
@@ -199,7 +208,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'music',
                 'address' => 'Bangkok',
                 'tel' => '0842141115',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'frontline'
             ],
             (Object) [
                 'email' => 'namneung@bnk48official',
@@ -207,7 +217,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'namneung',
                 'address' => 'Sing Buri',
                 'tel' => '0842141116',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'middleline'
             ],
             (Object) [
                 'email' => 'namsai@bnk48official',
@@ -231,7 +242,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'noey',
                 'address' => 'Samut Prakan',
                 'tel' => '0842141119',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'middleline'
             ],
             (Object) [
                 'email' => 'orn@bnk48official',
@@ -239,7 +251,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'orn',
                 'address' => 'Bangkok',
                 'tel' => '0842141120',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'backline'
             ],
             (Object) [
                 'email' => 'pupe@bnk48official',
@@ -247,7 +260,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'pupe',
                 'address' => 'Chiang Mai',
                 'tel' => '0842141121',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'middleline'
             ],
             (Object) [
                 'email' => 'satchan@bnk48official',
@@ -255,7 +269,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'satchan',
                 'address' => 'Bangkok',
                 'tel' => '0842141122',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'backline'
             ],
             (Object) [
                 'email' => 'tarwaan@bnk48official',
@@ -263,7 +278,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'tarwaan',
                 'address' => 'Nakhon Pathom',
                 'tel' => '0842141123',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'frontline'
             ],
         ];
     }
