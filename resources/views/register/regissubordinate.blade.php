@@ -59,6 +59,15 @@
         <input type="hidden" name="user" value='{{ $user->id }}'>
         <input type="hidden" name="_token" value={{ csrf_token() }}>
         <div class="container">
+          @if (count($errors) > 0)
+              <div class="row">
+                  <div class="col-12 alert alert-danger text-center">
+                      @foreach ($errors->all() as $message)
+                          <div>{!! nl2br($message) !!}</div>
+                      @endforeach
+                  </div>
+              </div>
+            @endif
             <div class="form-content">
                 <div class="form-group text-center">
                     <img src="/images/logo.png" class="logo" alt="logo website">
@@ -72,20 +81,7 @@
                         <span class="input-group-text"><i class="fa fa-times"></i></span>
                     </div> --}}
                 </div>
-<!--
-                <div class="form-group input-group">
-                    {{__('Password:')}}
 
-                    <input type="password" class="form-control" name="password" placeholder="password" required>
-                </div>
-                @if ($errors->has('password'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
-                <div class="form-group input-group">
-                    <input type="password-confirm" class="form-control" name="password_confirmation" placeholder="" required>
-                </div> -->
                 <div class="form-group input-group">
                     <input type="hidden" class="form-control" name="company_name" pattern="[A-Za-z][A-Za-z ]+" placeholder="Company name*" value="{{ $user->company_name }}" >
                 </div>
@@ -103,7 +99,15 @@
                     </span>
                 @endif
                 <div class="form-group input-group">
-                    <input type="text" class="form-control" name="address" placeholder="Address" required>
+                    <input type="text" class="form-control" name="task" placeholder="task*" required>
+                </div>
+                @if ($errors->has('task'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('task') }}</strong>
+                    </span>
+                @endif
+                <div class="form-group input-group">
+                    <input type="text" class="form-control" name="address" placeholder="Address*" required>
                 </div>
                 @if ($errors->has('address'))
                     <span class="invalid-feedback">

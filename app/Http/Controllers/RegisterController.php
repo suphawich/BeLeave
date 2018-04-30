@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\Plan;
 use Auth;
+use App\Task;
 use App\User;
 use App\Supervisor_detail;
 use App\Supervisor_plan;
@@ -175,7 +176,12 @@ class RegisterController extends Controller
       public function regissub(Request $request){
 
 
-        if ($request->has(['full_name', 'company_name', 'email', 'address','tel','agree'])) {
+        if ($request->validate(['full_name'=>'required|min:5|max:150',
+          'email'=>'required|email|unique:users,email',
+           'address',
+           'tel'=>'required|min:10|max:10',
+           'agree'=>'required',
+           'task'=>'required'])) {
             $email = $request->input('email');
             $password = $this->genePassword();
             $password = password_hash($password, PASSWORD_DEFAULT);
@@ -187,6 +193,7 @@ class RegisterController extends Controller
             $companyName = $request->input('company_name');
             $is_enabled = 1;
             $token = $this->geneToken();
+            $task1=$request->input('task');
 
             // $request->validate(['full_name'=>'required|min:5|max:150|',
             //
@@ -210,13 +217,19 @@ class RegisterController extends Controller
             $user->token = $token;
             $user->save();
 
-            $sysl = new System_log;
-            $sysl->action_type = "Create";
-            $sysl->description = $user->id.' had create subordinate in user table.';
-            $sysl->save();
+
+          $task = new Task;
+          $task->subordinate_id=$user->id;
+          $task->task=$task1;
+          $task->save();
+
+          $sysl = new System_log;
+          $sysl->action_type = "Create";
+          $sysl->description = $user->id.' had create subordinate in user table.';
+          $sysl->save();
+
 
             $department = new Department;
-
             $supervisor_detail=Supervisor_detail::all()->where('supervisor_id',"LIKE", $request->input('supervisor_detail'))->first();
             // dd($supervisor_detail);
             $department->supervisor_id=$supervisor_detail->supervisor_id;

@@ -96,9 +96,9 @@ class RegisterController extends Controller
             // $message->to('suphawich.s@ku.th', 'Suphawich')
             $message->to($this->user->email, $this->user->full_name)
                     ->subject('Regitered');
-            $message->from('beleavemanagement@gmail.com', 'Suphawich');
+            $message->from('beleavemanagement@gmail.com', 'BeLeaveMaster');
         });
-        
+
         // Mail::to($user->email)->send(new DemoMail($user));
 
         return $user;
