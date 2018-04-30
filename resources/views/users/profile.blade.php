@@ -57,10 +57,20 @@
             </div>
             <div class="col-6 card ">
 
+                              <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                                <ul class="navbar-nav">
+                                  <li class="nav-item active">
+                                    <a class="nav-link" style="font-size:30px" >Profile</a>
+                                  </li>
 
 
-              <div class="" style="text-align:center">
-                <h2 >Profile</h2>
+                                </ul>
+                              </nav>
+
+
+
+
+                <div class="" style="text-align:center">
 
                   <img style="border-radius: 50%; width:200px; height:200px;;"src="{{ $user->avatar ?? '/images/profiles/user_default.jpg' }}" class="avatar circle mb-5 mt-4">
               </div>
@@ -94,15 +104,8 @@
 
 
 
+        <br>
 
-
-              @if(Auth::user()->$access_level = 'Manager')
-            <div class="modal-footer">
-
-              <a href="/users/{{ $user->id }}/edit"><button  class="btn btn-default">Edit</button></a>
-
-          </div>
-          @endif
       </div>
 
 
