@@ -98,7 +98,7 @@ class RegisterController extends Controller
                     ->subject('Regitered');
             $message->from('beleavemanagement@gmail.com', 'BeLeaveMaster');
         });
-        
+
         // Mail::to($user->email)->send(new DemoMail($user));
 
         return $user;

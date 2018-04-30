@@ -45,15 +45,15 @@
                 @endif
                 <div class="form-group input-group">
                     <label class="form-topic">Current Password</label>
-                    <input type="password" class="form-control form-field" name="current_password" pattern="[A-Za-z][A-Za-z ]+" placeholder="Current Password*" required>
+                    <input type="password" class="form-control form-field" name="current_password" pattern="[A-Za-z0-9][A-Za-z0-9 ]+" placeholder="Current Password*" required>
                 </div>
                 <div class="form-group input-group">
                     <label class="form-topic">New Password</label>
-                    <input type="password" class="form-control form-field" name="password" pattern="[A-Za-z][A-Za-z ]+" placeholder="New Password*" required>
+                    <input type="password" class="form-control form-field" name="password" pattern="[A-Za-z0-9][A-Za-z0-9 ]+" placeholder="New Password*" required>
                 </div>
                 <div class="form-group input-group">
                     <label class="form-topic">Confirm Password</label>
-                    <input type="password" class="form-control form-field" name="password_confirm" pattern="[A-Za-z][A-Za-z ]+" placeholder="Confirm Password*" required>
+                    <input type="password" class="form-control form-field" name="password_confirm" pattern="[A-Za-z0-9][A-Za-z0-9 ]+" placeholder="Confirm Password*" required>
                 </div>
             </div>
             <div class="col-xl-4 col-md-6 avatar-content text-center">
