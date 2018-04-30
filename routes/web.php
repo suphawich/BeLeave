@@ -107,7 +107,7 @@ Route::get('sendmail', function () {
     $data = array('name' => 'Mark');
     Mail::send('email.email', $data, function ($message) {
         // $message->to('suphawich.s@ku.th', 'Suphawich')
-        $message->to('suphawichtsd@gmail.com', 'Suphawich')
+        $message->to('tanya.pa@ku.th', 'Suphawich')
                 ->subject('Regitered');
         $message->from('beleavemanagement@gmail.com', 'Suphawich');
     });
