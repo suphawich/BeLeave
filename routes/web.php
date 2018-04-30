@@ -19,9 +19,7 @@
 // Route::put('/login', 'LoginController@check');
 // Route::any('/logout', 'LoginController@getLogout');
 
-Route::get('subscription/{users}', function(){
-    return view('subscription.index');
-});
+Route::get('subscription/{users}', 'SubscriptionController@index');
 
 Route::any('/register', 'RegisterController@save');
 Route::put('/register/regissubordinate','RegisterController@regissub');
@@ -36,13 +34,12 @@ Route::get('/register-complete', function () {
 });
 
 Route::get('/history', 'ManageController@history');
-Route::get('/boom', function(){
-  return view('users.boom');
-});
 
-Route::get('/', function(){
-    return view('home.index');
-});
+
+
+
+
+Route::get('/', 'DashboardController@index');
 Route::get('/dashboard', 'DashboardController@index');
 
 
@@ -89,7 +86,7 @@ Route::get('account/accounts', 'UsersController@index_account');
 Route::put('account/accounts', 'UsersController@search_account');
 Route::get('account/switchuser', 'UsersController@index_switchuser');
 
-Route::get('read/manage/request/leave/{user}', 'NotificationsController@markAsRead_manageRequestLeave');
+Route::get('read/manage/request/leave', 'NotificationsController@markAsRead_manageRequestLeave');
 Route::get('noti', function () {
 
     $user = Auth::user();
@@ -110,9 +107,27 @@ Route::get('noti/receive', function () {
 });
 
 
+Route::get('sendmail', function () {
+    $data = array('name' => 'Mark');
+    Mail::send('email.email', $data, function ($message) {
+        // $message->to('suphawich.s@ku.th', 'Suphawich')
+        $message->to('tanya.pa@ku.th', 'Suphawich')
+                ->subject('Regitered');
+        $message->from('beleavemanagement@gmail.com', 'Suphawich');
+    });
+    echo "Sent email, compelete";
+});
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/plan','PlanController@index');
+
+
+//pdf
+Route::get('/getPDFRequestLeave','ManageController@getPDFRequestLeave');
+Route::get('/getPDFRequest','ManageController@getPDFRequest');
+Route::get('/getPDFHistory','ManageController@getPDFHistory');
+Route::get('/getPDFUsers','UsersController@getPDFUser');

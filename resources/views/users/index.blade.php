@@ -65,7 +65,11 @@
         </div>
         <div class="row">
             <div class="col-12 pl-0 pr-0 mt-2">
-                <button type="button" name="newUser" class="btn btn-light float-right mb-2" v-on:click="clickNewUser"><i class="fa fa-plus"></i> Add New User</button>
+                @if ($isFull)
+                    <button type="button" name="newUser" class="btn btn-light float-right mb-2" v-on:click="clickNewUser" disabled><i class="fa fa-plus"></i> Add New User</button>
+                @else
+                    <button type="button" name="newUser" class="btn btn-light float-right mb-2" v-on:click="clickNewUser"><i class="fa fa-plus"></i> Add New User</button>
+                @endif
                 <form action="/users" method="post">
                 @csrf
                 @method('PUT')
@@ -91,7 +95,7 @@
                             <th scope="col">Full name</th>
                             <th scope="col" v-if="!isShowNewUser">Supervisor name</th>
                             <th scope="col">Task</th>
-                            <th scope="col">E-mail</th>
+                            <th scope="col">E-m ail</th>
                             <th scope="col">Phone number</th>
                         </tr>
                     </thead>
@@ -126,5 +130,8 @@
                 {{ $subordinates->appends(['sort' => request()->sort])->links() }}
             </div>
         </div>
+        <p> INDEDEDE  : {{ count($subordinates) }}</p>
+        <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-default">Create PDF</button></a>
+
     </div>
 @endsection

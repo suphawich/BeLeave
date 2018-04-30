@@ -19,6 +19,26 @@
         vertical-align: baseline;
     }
 
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-widt-, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style >
+  iframes,
+    h1, h2, h3, h4, h5, h6, p{
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
 
 
 
@@ -252,105 +272,72 @@ h1 {
     </h2>
     </button>
     </div>
+
+
+
     <div class="container">
-      @if(Auth::user()->access_level ==  'Guest' )
           <div class="row">
-
     @foreach($plans as $plan)
     @if ($plan->id != 1 )
+
+
+
                   <div class="col-6 mt-5">
                   <div class="card" style="top:300px;left:300px;">
+
                   <!-- En-tête de la carte -->
                   <div class="card-header" style="background: url(images/slide2.jpg) no-repeat;background-size: 369px 235px">
+
                       <!-- Le masque pour l'effet d'assombrissement lors du survol -->
                       <div class="card-header-mask">
                           <div class="card-header-date">
                               <div class="card-header-date-month">{{$plan->capacity}} user</div>
+
                               <div class="card-header-date-month">{{$plan->exprie}} day</div>
                           </div>
                       </div>
+
                   </div>
+
                   <!-- Corps de la carte -->
                   <div class="card-body">
+
                       <!-- En-tête du corps -->
                       <div class="card-body-header">
                           <div class="card-body-category">Packgage</div>
                           <h1>{{$plan->name }}</h1>
                           <p class="card-body-sentence">
                               <span></span>BeMark Production<span></span>
+
                           </p>
                           <p>Price:{{$plan->price}} Baht</p>
+
                       </div>
+
                       <!-- Description cachée par l'en-tête -->
                       <br>
                       <p class="card-body-description">
                           Description: {{$plan->detail}}<br>
                           <p>Capacity: {{$plan->capacity}}</p>
+
                           <p>Expire: {{$plan->exprie}} day</p>
+
                       </p>
+
                       <!-- Pied de la carte -->
                       <br>
                       <div class="card-body-footer">
-                        <button type="button" class="form-control" name="button"><a href="/register/{{ Auth::user()->id}}/payment/{{$plan->id}}">Buy Packgage</a></button>
+                        <button type="button" class="form-control" name="button"><a href="/register/{{ Auth::user()->id}}/payment/{{$plan->id}}" >Buy Packgage</a></button>
+
                       </div>
+
                   </div>
+
               </div>
             </div>
             @endif
             @endforeach
           </div>
-          @endif
-
-
-
-
-@if(Auth::user()->access_level ==  'Manager' )
-          <div class="row">
-
-    @foreach($plans as $plan)
-    @if ($plan->id != 1 )
-                  <div class="col-6 mt-5">
-                  <div class="card" style="top:300px;left:300px;">
-                  <!-- En-tête de la carte -->
-                  <div class="card-header" style="background: url(images/slide2.jpg) no-repeat;background-size: 369px 235px">
-                      <!-- Le masque pour l'effet d'assombrissement lors du survol -->
-                      <div class="card-header-mask">
-                          <div class="card-header-date">
-                              <div class="card-header-date-month">{{$plan->capacity}} user</div>
-                              <div class="card-header-date-month">{{$plan->exprie}} day</div>
-                          </div>
-                      </div>
-                  </div>
-                  <!-- Corps de la carte -->
-                  <div class="card-body">
-                      <!-- En-tête du corps -->
-                      <div class="card-body-header">
-                          <div class="card-body-category">Packgage</div>
-                          <h1>{{$plan->name }}</h1>
-                          <p class="card-body-sentence">
-                              <span></span>BeMark Production<span></span>
-                          </p>
-                          <p>Price:{{$plan->price}} Baht</p>
-                      </div>
-                      <!-- Description cachée par l'en-tête -->
-                      <br>
-                      <p class="card-body-description">
-                          Description: {{$plan->detail}}<br>
-                          <p>Capacity: {{$plan->capacity}}</p>
-                          <p>Expire: {{$plan->exprie}} day</p>
-                      </p>
-                      <!-- Pied de la carte -->
-                      <br>
-                      <div class="card-body-footer">
-                        <button type="button" class="form-control" name="button"><a href="/register/{{ Auth::user()->id}}/payment/{{$plan->id}}">Buy Packgage More</a></button>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            @endif
-            @endforeach
-          </div>
-          @endif
   </div>
 
 
