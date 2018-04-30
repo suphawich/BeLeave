@@ -22,8 +22,12 @@
 Route::get('subscription/{users}', 'SubscriptionController@index');
 
 Route::any('/register', 'RegisterController@save');
+Route::put('/register/regissubordinate','RegisterController@regissub');
+Route::get('/register/{user}/payment/{plan}', 'RegisterController@payment');
+Route::put('/register/{user}/payments/{plan}/update', 'RegisterController@updatepayment');
+Route::put('/register/{user}/payments/{plan}/edit', 'RegisterController@editpro');
+Route::any('/register/{token}','RegisterController@registoken');
 
-Route::get('/register/{user}{plan}/payment', 'RegisterController@payment');
 
 Route::get('/register-complete', function () {
     return view('register.complete');

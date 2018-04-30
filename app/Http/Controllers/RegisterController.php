@@ -7,11 +7,20 @@ use App\Account;
 use App\Plan;
 use Auth;
 use App\User;
+use App\Supervisor_detail;
+use App\Supervisor_plan;
+use App\Transaction;
+use App\Department;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
     public function save(Request $request) {
-        if ($request->has(['full_name', 'company_name', 'company_email', 'address', 'tel'])) {
+        if (
+
+          $request->has(['full_name', 'company_name', 'company_email', 'address', 'tel'])) {
             $companyEmail = $request->input('company_email');
             $password = $this->genePassword();
             $password = password_hash($password, PASSWORD_DEFAULT);
@@ -24,7 +33,7 @@ class RegisterController extends Controller
             $is_enabled = 0;
             $token = $this->geneToken();
 
-            $user = new Account;
+            $user = new User;
             $user->email = $companyEmail;
             $user->password = $password;
             $user->full_name = $fullname;
@@ -81,4 +90,120 @@ class RegisterController extends Controller
       $users= Auth::user()->id;
       return view('register.payment',['user'=>$user,'plan'=>$plan]);
     }
+    public function updatepayment(Request $request, $user,$plan)
+    {
+      $request->validate(['payment_type'=>'required']);
+
+
+        $user = User::findOrFail($user);
+        $plan = Plan::findOrFail($plan);
+        $user->access_level='Manager';
+
+        $user->save();
+        $supervisor_detail= new Supervisor_detail;
+        $supervisor_detail->supervisor_id=Auth::user()->id;
+        $supervisor_detail->subordinate_amount=0;
+        $supervisor_detail->is_api=true;
+        $supervisor_detail->is_line_noti=true;
+        $supervisor_detail->subordinate_capacity=$plan->capacity;
+        $supervisor_detail->link_create_subordinate=$user->token;
+        $supervisor_detail->save();
+        $supervisor_plans= new Supervisor_plan;
+        $supervisor_plans->supervisor_id=Auth::user()->id;
+        $supervisor_plans->plan=$plan->name;
+
+        $supervisor_plans->exprie_plan=Carbon::now()->addDays($plan->exprie)->toDateTimeString();
+
+        $supervisor_plans->save();
+
+        $transaction= new Transaction;
+
+        $transaction->supervisor_id=Auth::user()->id;
+        $transaction->plan_id=$plan->id;
+        $transaction->payment_type= $request->payment_type;
+        $transaction->save();
+
+        return view('register.complete',['plan'=>$plan]);
+    }
+    public function editpro(Request $request,$user,$plan){
+      $user = User::findOrFail($user);
+      $plan = Plan::findOrFail($plan);
+      $supervisor_plans = Supervisor_plan::all()->where('supervisor_id','LIKE',Auth::user()->id)->first();
+      $supervisor_plans->plan=$plan->name;
+      $supervisor_plans->save();
+      $transaction= new Transaction;
+      $transaction->supervisor_id=Auth::user()->id;
+      $transaction->plan_id=$plan->id;
+      $transaction->payment_type= $request->payment_type;
+      $transaction->save();
+      return view('register.complete',['plan'=>$plan]);
+
+
+    }
+    public function registoken(String $token,Supervisor_detail $supervisor_detail,User $user){
+        $supervisor_detail=Supervisor_detail::all()->where('link_create_subordinate',"LIKE",$token)->first();
+        $user=User::all()->where('token',"LIKE",$token)->first();
+
+
+          return view('/register/regissubordinate',['supervisor_detail' => $supervisor_detail,'user'=>$user]);
+      }
+
+      public function regissub(Request $request){
+
+
+        if ($request->has(['full_name', 'company_name', 'email', 'address','tel','agree'])) {
+            $email = $request->input('email');
+            $password = $this->genePassword();
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            $fullname = $request->input('full_name');
+            $avatar = $this->defaultAvatarPath();
+            $address = $request->input('address');
+            $access_level = "Subordinate";
+            $tel = $request->input('tel');
+            $companyName = $request->input('company_name');
+            $is_enabled = 1;
+            $token = $this->geneToken();
+
+            // $request->validate(['full_name'=>'required|min:5|max:150|',
+            //
+            //         'address'=>'required|min:10|max:150|',
+            //         'email' => 'required|string|email|max:255|unique:users,email',
+            //         'tel'=>'required|integer|min:9|max:10'
+                  //
+                  //
+                  // ]);
+
+            $user = new User;
+            $user->email = $email;
+            $user->password = $password;
+            $user->full_name = $fullname;
+            $user->avatar = $avatar;
+            $user->address = $address;
+            $user->access_level = $access_level;
+            $user->tel = $tel;
+            $user->company_name = $companyName;
+            $user->is_enabled = $is_enabled;
+            $user->token = $token;
+            $user->save();
+
+
+            $department = new Department;
+
+            $supervisor_detail=Supervisor_detail::all()->where('supervisor_id',"LIKE", $request->input('supervisor_detail'))->first();
+            // dd($supervisor_detail);
+            $department->supervisor_id=$supervisor_detail->supervisor_id;
+            $department->subordinate_id=$user->id;
+            $department->save();
+            $supervisor_detail->subordinate_amount=$supervisor_detail->subordinate_amount+1;
+            $supervisor_detail->save();
+            return redirect('/home');
+        } else {
+            return view('register.index');
+          }
+      }
+
+
+
+
+
 }
