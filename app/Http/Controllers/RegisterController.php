@@ -93,8 +93,6 @@ class RegisterController extends Controller
     }
 
     public function getQRcode(){
-      $boom = 'localhost:8000/'.Auth::user()->token;
-
 
       $qrCode = new QrCode('localhost:8000/'.Auth::user()->token);
       header('Content-Type: '.$qrCode->getContentType());
