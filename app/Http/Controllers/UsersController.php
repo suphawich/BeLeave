@@ -239,7 +239,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         // return $user;
-        if (count(Department::where('subordinate_id', $user->id)->first()) > 0) {
+        if (count(Department::where('subordinate_id', $user->id)->get()) > 0) {
             $user->supervisor_name = User::where('id', Department::where('subordinate_id', $user->id)->first()->supervisor_id)
                                         ->first()->full_name;
         }
