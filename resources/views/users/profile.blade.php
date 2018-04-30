@@ -43,8 +43,11 @@
 @endpush
 
 
+
+
 @section('content')
 <br>
+
       <div class="row">
 
 
@@ -53,6 +56,7 @@
 
             </div>
             <div class="col-6 card ">
+
 
 
               <div class="" style="text-align:center">
@@ -96,7 +100,7 @@
             <div class="modal-footer">
 
               <a href="/users/{{ $user->id }}/edit"><button  class="btn btn-default">Edit</button></a>
-              <button class="btn btn-default">Contact</button>
+              <button class="btn btn-default"data-toggle="modal" data-target="#myModal" >Contact</button>
           </div>
       </div>
 
@@ -106,6 +110,11 @@
 
 
     </div>
+
+
+
+
+
 
 
 

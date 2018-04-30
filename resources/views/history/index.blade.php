@@ -138,12 +138,21 @@ $(document).on('click', '.edit-modal', function() {
 
 @endif
 
-<div class="row">
+
+
+@if(Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Supervisor' )
+
+    <a href="/getPDFHistory"><button style="float: right;" type="button" class="btn btn-default">Create PDF</button></a>
+
+@endif
+<br>
+
+<div class="row col-12 " style="  width:100%">
    <div class="mt-5">
      <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
        <ul class="navbar-nav">
          <li class="nav-item active">
-           <a class="nav-link" style="font-size:30px" >You history</a>
+           <a class="nav-link" style="font-size:30px" >Your history</a>
          </li>
 
 
@@ -203,9 +212,9 @@ $(document).on('click', '.edit-modal', function() {
 
                 <td><button class="form-control "  style="height      : auto"><a href="{{ url('/users/' . $item->subordinate_id.'/profile') }}">{{ $item->substitute_id }}</a></button></td>
                 <td>{{ $item->leave_type }}</td>
-              <td>{{ date_format(date_create($item->depart_at),"m/d/Y") }}</td>
-              <td>{{ date_format(date_create($item->arrive_at),"m/d/Y") }}</td>
-                    <td>{{date_diff(date_create($item->depart_at), date_create($item->arrive_at))->format(" %a ")}}</td>
+                <td>{{ date_format(date_create($item->depart_at),"m/d/Y") }}</td>
+                <td>{{ date_format(date_create($item->arrive_at),"m/d/Y") }}</td>
+                <td>{{date_diff(date_create($item->depart_at), date_create($item->arrive_at))->format(" %a ")}}</td>
 
                 <td>{!! $item->is_enabled ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' !!}</td>
                 <td>{!! $item->is_approved ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>' !!}</td>
@@ -220,7 +229,6 @@ $(document).on('click', '.edit-modal', function() {
 
 </div>
 
-<a href="/getPDFHistory"><button style="float: right;" type="button" class="btn btn-default">Create PDF</button></a>
 
 
 

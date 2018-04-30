@@ -18,6 +18,7 @@
 
 @section('script-methods')
 
+
 @endsection
 
 @section('content')
@@ -113,7 +114,11 @@
         @empty
 
         @endforelse
-                <a href="/getPDFRequestLeave"><button style="float: right;" type="button" class="btn btn-outline-dark">Create PDF</button></a>
 
+        @if( count($requests) > 0)
+            @if(Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Supervisor' )
+                    <a href="/getPDFRequestLeave"><button style="float: right;" type="button" class="btn btn-outline-dark">Create PDF</button></a>
+            @endif
+        @endif
     </div>
 @endsection

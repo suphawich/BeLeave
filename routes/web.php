@@ -1,5 +1,6 @@
 <?php
-
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Response\QrCodeResponse;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,20 @@ Route::get('/register-complete', function () {
 });
 
 Route::get('/history', 'ManageController@history');
+
+
+
+
+Route::get('/QRcode', function(){
+  $qrCode = new QrCode('localhost:8000/readQRcode/'.Current_map::all()->where('id_user','LIKE',Auth::user()->id)->first()->password );
+                      header('Content-Type: '.$qrCode->getContentType());
+                      // Save it to a file
+                      // $qrCode->writeFile(__DIR__.'/qrcode.png');
+                      // Create a response object
+                      $response = new QrCodeResponse($qrCode);
+                      return $response;
+
+});
 
 
 

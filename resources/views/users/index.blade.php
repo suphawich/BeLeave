@@ -130,8 +130,8 @@
                 {{ $subordinates->appends(['sort' => request()->sort])->links() }}
             </div>
         </div>
-        <p> INDEDEDE  : {{ count($subordinates) }}</p>
-        <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-default">Create PDF</button></a>
-
+        @if(Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Supervisor' )
+          <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-outline-dark">Create PDF</button></a>
+        @endif
     </div>
 @endsection

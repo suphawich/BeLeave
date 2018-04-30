@@ -3,6 +3,7 @@
 @push('style')
     <link href="{{ asset('css/leave.css') }}" rel="stylesheet">
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+
 @endpush
 
 @push('script')
@@ -82,6 +83,7 @@
 @endsection
 
 @section('content')
+@if(Auth::user()->access_level == 'Subordinate' || Auth::user()->access_level == 'Supervisor')
     <div class="container-fluid body-content">
         <div class="modal fade" id="modalLeaveForm" ref="modalLeaveForm">
             <div class="modal-dialog modal-lg">
@@ -290,4 +292,34 @@
             </div>
         </div>
     </div>
+
+
+
+  @else
+
+
+
+
+  <div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-8" >
+    <center>
+      <a href="/dashboard"><button class="btn btn-outline-dark" style="font-size:50px ;margin-top:230px" name="button">You can't Leave</button></a>
+    </center>
+
+    </div>
+
+
+    <div class="col-2">
+
+    </div>
+
+  </div>
+
+
+
+
+  @endif
 @endsection

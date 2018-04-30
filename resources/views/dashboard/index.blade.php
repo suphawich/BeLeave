@@ -30,21 +30,21 @@
                             <div class="carousel-item active">
                               <img src="images/cover/person.png" alt="Los Angeles" width="100%" height="500">
                               <div class="carousel-caption">
-                                <h3><a href="/history">Leave now</a></h3>
+                                <h3><a href="/leave">Leave now</a></h3>
                                 <p>When you busy day</p>
                               </div>
                             </div>
                             <div class="carousel-item">
                               <img src="images/cover/summer.png" alt="Chicago" width="100%" height="500">
                               <div class="carousel-caption">
-                                <h3><a href="/history">Leave now</a></h3>
+                                <h3><a href="/leave">Leave now</a></h3>
                                 <p>You want to take a rest</p>
                               </div>
                             </div>
                             <div class="carousel-item">
                               <img src="images/cover/sick.jpg" alt="New York" width="100%" height="500">
                               <div class="carousel-caption">
-                                <h3><a href="/history">Leave now</a></h3>
+                                <h3><a href="/leave">Leave now</a></h3>
                                 <p>If you get sick</p>
                               </div>
                             </div>
