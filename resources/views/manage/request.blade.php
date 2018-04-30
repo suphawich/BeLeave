@@ -71,14 +71,7 @@
                 </div>
             </div>
         @endforeach --}}
-        @forelse($settings as $setting)
-        @if ($setting->is_enabled)
         <a href="/getPDFRequest"><button style="float: right;" type="button" class="btn btn-info">Create PDF</button></a>
-        @endif
-        @empty
-            
-        @endforelse
-        
 
     </div>
 @endsection
