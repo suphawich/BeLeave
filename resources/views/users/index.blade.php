@@ -95,7 +95,7 @@
                             <th scope="col">Full name</th>
                             <th scope="col" v-if="!isShowNewUser">Supervisor name</th>
                             <th scope="col">Task</th>
-                            <th scope="col">E-m ail</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Phone number</th>
                         </tr>
                     </thead>
@@ -131,7 +131,7 @@
             </div>
         </div>
         @if(Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Supervisor' )
-          <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-outline-dark">Create PDF</button></a>
+          <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-outline-darke">Create PDF</button></a>
         @endif
     </div>
 @endsection
