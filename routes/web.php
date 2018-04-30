@@ -37,6 +37,7 @@ Route::get('/register-complete', function () {
 Route::get('/history', 'ManageController@history');
 
 
+<<<<<<< HEAD
 
 
 Route::get('/QRcode', function(){
@@ -54,6 +55,8 @@ Route::get('/QRcode', function(){
 
 
 
+=======
+>>>>>>> 63c0d1d805535505f322d69d6c0feae4a5d6be9a
 Route::get('/', function (){
   return view('layout.master');
 });
@@ -124,21 +127,24 @@ Route::get('noti/receive', function () {
 });
 
 
-Route::get('sendmail', function () {
-    $data = array('name' => 'Mark');
-    Mail::send('email.email', $data, function ($message) {
-        // $message->to('suphawich.s@ku.th', 'Suphawich')
-        $message->to('tanya.pa@ku.th', 'Suphawich')
-                ->subject('Regitered');
-        $message->from('beleavemanagement@gmail.com', 'Suphawich');
-    });
-    echo "Sent email, compelete";
-});
+// Route::get('sendmail', function () {
+//     $data = array('name' => 'Mark');
+//     Mail::send('email.email', $data, function ($message) {
+//         // $message->to('suphawich.s@ku.th', 'Suphawich')
+//         $message->to('tanya.pa@ku.th', 'Suphawich')
+//                 ->subject('Regitered');
+//         $message->from('beleavemanagement@gmail.com', 'Suphawich');
+//     });
+//     echo "Sent email, compelete";
+// });
+
+
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'LoginController@logout');
 
 Route::get('/plan','PlanController@index');
 

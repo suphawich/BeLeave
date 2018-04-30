@@ -31,6 +31,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected $user;
 
     /**
      * Create a new controller instance.
@@ -53,7 +54,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'full_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
             'tel'=>'required|max:10|unique:users',
             'company_name'=>'required|string|max:100',
             // 'access_level'=>'required|string',
@@ -73,10 +73,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $user= User::create([
+        $pass = str_random(20);
+
+        $user = User::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => password_hash($pass, PASSWORD_DEFAULT),
             'access_level'=>'Guest',
             'tel'=>$data['tel'],
             'is_enabled'=>1,
@@ -84,7 +86,19 @@ class RegisterController extends Controller
             'token'=>str_random(100)
 
         ]);
+        $this->user = $user;
 
+        $data = array(
+            'user' => $user,
+            'pass' => $pass
+        );
+        Mail::send('email.email', $data, function ($message) {
+            // $message->to('suphawich.s@ku.th', 'Suphawich')
+            $message->to($this->user->email, $this->user->full_name)
+                    ->subject('Regitered');
+            $message->from('beleavemanagement@gmail.com', 'Suphawich');
+        });
+        
         // Mail::to($user->email)->send(new DemoMail($user));
 
         return $user;

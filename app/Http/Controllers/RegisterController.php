@@ -46,7 +46,10 @@ class RegisterController extends Controller
             $user->token = $token;
             $user->save();
 
-
+            $sysl = new System_log;
+            $sysl->action_type = "Insert";
+            $sysl->description = $user->id.' had insert user table.';
+            $sysl->save();
 
             return redirect('/');
         } else {
@@ -90,6 +93,8 @@ class RegisterController extends Controller
       $users= Auth::user()->id;
       return view('register.payment',['user'=>$user,'plan'=>$plan]);
     }
+
+
     public function updatepayment(Request $request, $user,$plan)
     {
       $request->validate(['payment_type'=>'required']);
@@ -108,6 +113,12 @@ class RegisterController extends Controller
         $supervisor_detail->subordinate_capacity=$plan->capacity;
         $supervisor_detail->link_create_subordinate=$user->token;
         $supervisor_detail->save();
+
+        $sysl = new System_log;
+        $sysl->action_type = "Create";
+        $sysl->description = $supervisor_detail->id.' had create in supervisor detail table.';
+        $sysl->save();
+
         $supervisor_plans= new Supervisor_plan;
         $supervisor_plans->supervisor_id=Auth::user()->id;
         $supervisor_plans->plan=$plan->name;
@@ -116,6 +127,11 @@ class RegisterController extends Controller
 
         $supervisor_plans->save();
 
+        $sysl = new System_log;
+        $sysl->action_type = "Create";
+        $sysl->description = $supervisor_plans->id.' had create in supervisor plan table.';
+        $sysl->save();
+
         $transaction= new Transaction;
 
         $transaction->supervisor_id=Auth::user()->id;
@@ -123,8 +139,15 @@ class RegisterController extends Controller
         $transaction->payment_type= $request->payment_type;
         $transaction->save();
 
+        $sysl = new System_log;
+        $sysl->action_type = "Create";
+        $sysl->description = $transaction->id.'had create in transaction table.';
+        $sysl->save();
+
         return view('register.complete',['plan'=>$plan]);
     }
+
+
     public function editpro(Request $request,$user,$plan){
       $user = User::findOrFail($user);
       $plan = Plan::findOrFail($plan);
@@ -136,6 +159,7 @@ class RegisterController extends Controller
       $transaction->plan_id=$plan->id;
       $transaction->payment_type= $request->payment_type;
       $transaction->save();
+
       return view('register.complete',['plan'=>$plan]);
 
 
@@ -186,6 +210,10 @@ class RegisterController extends Controller
             $user->token = $token;
             $user->save();
 
+            $sysl = new System_log;
+            $sysl->action_type = "Create";
+            $sysl->description = $user->id.' had create subordinate in user table.';
+            $sysl->save();
 
             $department = new Department;
 
@@ -194,6 +222,12 @@ class RegisterController extends Controller
             $department->supervisor_id=$supervisor_detail->supervisor_id;
             $department->subordinate_id=$user->id;
             $department->save();
+
+            $sysl = new System_log;
+            $sysl->action_type = "Create";
+            $sysl->description = $department->id.' had create department in department table.';
+            $sysl->save();
+
             $supervisor_detail->subordinate_amount=$supervisor_detail->subordinate_amount+1;
             $supervisor_detail->save();
             return redirect('/home');
