@@ -96,12 +96,13 @@
 
 
 
-
+              @if(Auth::user()->$access_level = 'Manager')
             <div class="modal-footer">
 
               <a href="/users/{{ $user->id }}/edit"><button  class="btn btn-default">Edit</button></a>
-              <button class="btn btn-default"data-toggle="modal" data-target="#myModal" >Contact</button>
+
           </div>
+          @endif
       </div>
 
 

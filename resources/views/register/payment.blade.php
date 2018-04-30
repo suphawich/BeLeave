@@ -49,6 +49,16 @@
                 <div class="form-group text-center">
                     <img src="/images/logo.png" class="logo" alt="logo website">
                 </div>
+                <div class="container">
+                  @if (count($errors) > 0)
+                      <div class="row">
+                          <div class="col-12 alert alert-danger text-center">
+                              @foreach ($errors->all() as $message)
+                                  <div>{!! nl2br($message) !!}</div>
+                              @endforeach
+                          </div>
+                      </div>
+                    @endif
                 <div class="row">
                     <div class="col-12 col-lg-7">
                         <ul class="list-group payment-type-content">
