@@ -56,13 +56,9 @@
                             @endforeach
                             </div>
                             <a href="/users/{{ Auth::user()->id }}/edit" class="username"><span><i class="fa fa-user"></i></span><span>{{ Auth::user()->full_name }}</span></a>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a href="/logout">
                                 <span><i class="fa fa-sign-out"></i></span><span> Log Out</span>
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -176,9 +172,9 @@
                         <a href="/graph" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Graph</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <!-- <a href="#" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Leave tracking</span>
-                        </a>
+                        </a> -->
                     </div>
                     <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuAccounts}" v-on:click="toggleAccounts" @mouseover="hoverMenuAccounts" @mouseout="closeMenuAccounts">
                         <span class="menuIcon"><i class="fa fa-users"></i></span>
@@ -199,10 +195,10 @@
                             <span class="menuText">Users</span>
                         </a>
                     </div>
-                    <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuSetting}" @mouseover="hoverMenuSetting" @mouseout="closeMenuSetting">
+                    <!-- <a href="#" class="sidebar-item sidebar-item-hover-default" v-bind:class="{'sidebar-item-toggled': isShowMenuIcon, 'sidebar-item-toggled-hover': isHoverSubMenuSetting}" @mouseover="hoverMenuSetting" @mouseout="closeMenuSetting">
                         <span class="menuIcon"><i class="fa fa-cog"></i></span>
                         <span class="menuText"> Setting</span>
-                    </a>
+                    </a> -->
                 </div>
                 <div class="content" v-bind:class="{'content-toggled': isShowMenuIcon}">
                     <div class="w3-container"  >
@@ -244,7 +240,7 @@
                         <a href="/manage/request/leave" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Request Leave</span>
                         </a>
-                        <a href="#" class="sidebar-item sidebar-item-hover-default">
+                        <a href="/history" class="sidebar-item sidebar-item-hover-default">
                             <span class="menuText">Leave history</span>
                         </a>
                     </div>

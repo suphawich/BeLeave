@@ -72,14 +72,15 @@
             </div>
         @endforeach --}}
         @forelse($settings as $setting)
-        @if ($setting->is_enabled)
-        <a href="/getPDFRequest"><button style="float: right;" type="button" class="btn btn-info">Create PDF</button></a>
-        @endif
+          @if ($setting->is_enabled)
+              @if(Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Supervisor' )
+                  <a href="/getPDFRequest"><button style="float: right;" type="button" class="btn btn-outline-dark">Create PDF</button></a>
+              @endif
+          @endif
         @empty
-            
+
         @endforelse
-        
+
 
     </div>
 @endsection
-

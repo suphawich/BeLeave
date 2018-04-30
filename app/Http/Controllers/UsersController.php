@@ -13,6 +13,8 @@ use App\Task;
 use App\Department;
 use PDF;
 
+use App\System_log;
+
 class UsersController extends Controller
 {
     public function __construct() {
@@ -29,7 +31,12 @@ class UsersController extends Controller
         $supervisor_id = Auth::user()->id;
 
         $data = array();
-        $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('users.*', 'tasks.task')->get()->toArray();
+        $subordinates = Department::where('supervisor_id', $supervisor_id, 'desc')
+                    ->join('users', 'departments.subordinate_id', '=', 'users.id')
+                    ->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')
+                    ->select('users.*', 'tasks.task')
+                    ->get()
+                    ->toArray();
         while (count($subordinates) > 0) {
             $subordinate = array_shift($subordinates);
             if (!array_key_exists('supervisor_name', $subordinate)) {
@@ -176,6 +183,23 @@ class UsersController extends Controller
         $task->task = $request->input('task');
         $task->save();
 
+        $sysl = new System_log;
+        $sysl->action_type = "Insert";
+        $sysl->description = $user->id.' had insert user table';
+        $sysl->save();
+        $sysl = new System_log;
+        $sysl->action_type = "Insert";
+        $sysl->description = $user->id.' had insert department table';
+        $sysl->save();
+        $sysl = new System_log;
+        $sysl->action_type = "Insert";
+        $sysl->description = $user->id.' had insert user setting table';
+        $sysl->save();
+        $sysl = new System_log;
+        $sysl->action_type = "Insert";
+        $sysl->description = $user->id.' had insert task table';
+        $sysl->save();
+
         return back();
     }
 
@@ -248,6 +272,11 @@ class UsersController extends Controller
                 $user->company_name = $companyName;
                 $user->save();
 
+                $sysl = new System_log;
+                $sysl->action_type = "Alter";
+                $sysl->description = $user->id.' had update information user table.';
+                $sysl->save();
+
                 $request->session()->flash('error', 'Changed profile successfully.');
                 return redirect('/users/'.$user->id.'/edit');
             }
@@ -309,6 +338,11 @@ class UsersController extends Controller
         $user->company_name = $request->input('company_name');
         $user->save();
 
+        $sysl = new System_log;
+        $sysl->action_type = "Alter";
+        $sysl->description = Auth::user()->id.' had update '.$user->id.'information.';
+        $sysl->save();
+
         $request->session()->flash('error', 'Changed '.$user->full_name.' information successful.');
         return back();
     }
@@ -322,6 +356,12 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        $sysl = new System_log;
+        $sysl->action_type = "Delete";
+        $sysl->description = $user->id.' had delete from user table';
+        $sysl->save();
+
         // $user->is_enabled = 0;
         // $user->save();
         return back();

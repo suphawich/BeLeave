@@ -85,11 +85,11 @@ class RegisterController extends Controller
 
         ]);
 
-        Mail::to($user->email)->send(new DemoMail($user));
+
 
         return $user;
-        
+
 
     }
-   
+
 }

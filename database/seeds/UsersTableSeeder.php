@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Task;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,17 +13,17 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User;
-        $user->email = "admin@beleave";
-        $user->password = password_hash('password', PASSWORD_DEFAULT);
-        $user->full_name = 'Administrator';
-        // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-        $user->address = "BeLeave Company Ltd";
-        $user->access_level = 'Administrator';
-        $user->tel = '0836429451';
-        $user->company_name = "BeLeave";
-        $user->token = str_random(64);
-        $user->save();
+        // $user = new User;
+        // $user->email = "admin@beleave";
+        // $user->password = password_hash('password', PASSWORD_DEFAULT);
+        // $user->full_name = 'Administrator';
+        // // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        // $user->address = "BeLeave Company Ltd";
+        // $user->access_level = 'Administrator';
+        // $user->tel = '0836429451';
+        // $user->company_name = "BeLeave";
+        // $user->token = str_random(64);
+        // $user->save();
 
         $user = new User;
         $user->email = "jirath@bnk48official";
@@ -42,11 +43,15 @@ class UsersTableSeeder extends Seeder
         $user->full_name = 'NATAPHOL PAVARAVADHANA';
         // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
         $user->address = "Bangkok";
-        $user->access_level = 'Supervisor';
+        $user->access_level = 'Subordinate';
         $user->tel = '0848484848';
         $user->company_name = "BNK48";
         $user->token = str_random(64);
         $user->save();
+        $task = new Task;
+        $task->subordinate_id = $user->id;
+        $task->subordinate_id = 'general manager';
+        $task->save();
 
         foreach ($this->getMembers() as $member) {
             $user = new User;
@@ -60,6 +65,11 @@ class UsersTableSeeder extends Seeder
             $user->company_name = $member->company_name;
             $user->token = str_random(64);
             $user->save();
+
+            $task = new Task;
+            $task->subordinate_id = $user->id;
+            $task->task = $member->task;
+            $task->save();
         }
 
 
@@ -114,7 +124,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'can',
                 'address' => 'Bangkok',
                 'tel' => '0842141104',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'frontline'
             ],
             (Object) [
                 'email' => 'izurina@bnk48official',
@@ -122,7 +133,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'izurina',
                 'address' => 'Saitama, Japan',
                 'tel' => '0842141105',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'middleline'
             ],
             (Object) [
                 'email' => 'jaa@bnk48official',
@@ -148,7 +160,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'jib',
                 'address' => 'Lopburi',
                 'tel' => '0842141108',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'backline'
             ],
             (Object) [
                 'email' => 'kaew@bnk48official',
@@ -174,7 +187,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'kate',
                 'address' => 'Phayao',
                 'tel' => '0842141111',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'backline'
             ],
             (Object) [
                 'email' => 'korn@bnk48official',
@@ -191,7 +205,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'miori',
                 'address' => 'Ibaraki, Japan',
                 'tel' => '0842141113',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'middleline'
             ],
             (Object) [
                 'email' => 'mobile@bnk48official',
@@ -226,7 +241,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'namsai',
                 'address' => 'Chiang Mai',
                 'tel' => '0842141117',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'backline'
             ],
             (Object) [
                 'email' => 'nink@bnk48official',
@@ -234,7 +250,8 @@ class UsersTableSeeder extends Seeder
                 'password' => 'nink',
                 'address' => 'Samut Sakorn',
                 'tel' => '0842141118',
-                'company_name' => 'BNK48'
+                'company_name' => 'BNK48',
+                'task' => 'frontline'
             ],
             (Object) [
                 'email' => 'noey@bnk48official',

@@ -37,9 +37,23 @@ Route::get('/history', 'ManageController@history');
 
 
 
+// Route::get('/QRcode', function(){
+//   $qrCode = new QrCode('localhost:8000/readQRcode/'.Current_map::all()->where('id_user','LIKE',Auth::user()->id)->first()->password );
+//                       header('Content-Type: '.$qrCode->getContentType());
+//                       // Save it to a file
+//                       // $qrCode->writeFile(__DIR__.'/qrcode.png');
+//                       // Create a response object
+//                       $response = new QrCodeResponse($qrCode);
+//                       return $response;
+//
+// });
 
 
-Route::get('/', 'DashboardController@index');
+
+
+Route::get('/', function (){
+  return view('layout.master');
+});
 Route::get('/dashboard', 'DashboardController@index');
 
 
@@ -107,21 +121,24 @@ Route::get('noti/receive', function () {
 });
 
 
-Route::get('sendmail', function () {
-    $data = array('name' => 'Mark');
-    Mail::send('email.email', $data, function ($message) {
-        // $message->to('suphawich.s@ku.th', 'Suphawich')
-        $message->to('tanya.pa@ku.th', 'Suphawich')
-                ->subject('Regitered');
-        $message->from('beleavemanagement@gmail.com', 'Suphawich');
-    });
-    echo "Sent email, compelete";
-});
+// Route::get('sendmail', function () {
+//     $data = array('name' => 'Mark');
+//     Mail::send('email.email', $data, function ($message) {
+//         // $message->to('suphawich.s@ku.th', 'Suphawich')
+//         $message->to('tanya.pa@ku.th', 'Suphawich')
+//                 ->subject('Regitered');
+//         $message->from('beleavemanagement@gmail.com', 'Suphawich');
+//     });
+//     echo "Sent email, compelete";
+// });
+
+
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'LoginController@logout');
 
 Route::get('/plan','PlanController@index');
 
