@@ -14,9 +14,6 @@ use App\Transaction;
 use App\Department;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-use App\System_log;
-use App\User_setting;
-use Mail;
 
 
 class RegisterController extends Controller
@@ -185,12 +182,9 @@ class RegisterController extends Controller
            'tel'=>'required|min:10|max:10',
            'agree'=>'required',
            'task'=>'required'])) {
-
-            $pass = str_random(20);
-
             $email = $request->input('email');
             $password = $this->genePassword();
-            $password = password_hash($pass, PASSWORD_DEFAULT);
+            $password = password_hash($password, PASSWORD_DEFAULT);
             $fullname = $request->input('full_name');
             $avatar = $this->defaultAvatarPath();
             $address = $request->input('address');
@@ -249,28 +243,6 @@ class RegisterController extends Controller
 
             $supervisor_detail->subordinate_amount=$supervisor_detail->subordinate_amount+1;
             $supervisor_detail->save();
-
-
-
-            $us = new User_setting;
-            $us->user_id = $user->id;
-            $us->save();
-
-            $this->user = $user;
-            $data = array(
-                'user' => $user,
-                'pass' => $pass
-            );
-
-            Mail::send('email.email', $data, function ($message) {
-                // $message->to('suphawich.s@ku.th', 'Suphawich')
-                $message->to($this->user->email, $this->user->full_name)
-                        ->subject('Regitered');
-                $message->from('beleavemanagement@gmail.com', 'BeLeaveMaster');
-            });
-
-
-
             return redirect('/home');
         } else {
             return view('register.index');
