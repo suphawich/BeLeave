@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Controllers\Controller;
 use Table;
+use Mail;
 use Auth;
 use App\User;
 use App\User_setting;
@@ -147,9 +148,8 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $email = $request->input('email');
-        // $password = str_random(20);
-        $password = "mark";
-        $password = password_hash($password, PASSWORD_DEFAULT);
+        $pass = str_random(20);
+        $password = password_hash($pass, PASSWORD_DEFAULT);
         $fullname = $request->input('full_name');
         $avatar = $this->defaultAvatarPath();
         $access_level = $request->input('access_level');

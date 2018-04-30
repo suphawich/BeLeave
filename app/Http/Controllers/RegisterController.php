@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\Plan;
 use Auth;
+use Mail;
 use App\Task;
 use App\User;
 use App\Supervisor_detail;
 use App\Supervisor_plan;
 use App\Transaction;
 use App\Department;
+use App\System_log;
+use App\User_setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
@@ -182,9 +185,9 @@ class RegisterController extends Controller
            'tel'=>'required|min:10|max:10',
            'agree'=>'required',
            'task'=>'required'])) {
+            $pass = str_random(20);
             $email = $request->input('email');
-            $password = $this->genePassword();
-            $password = password_hash($password, PASSWORD_DEFAULT);
+            $password = password_hash($pass, PASSWORD_DEFAULT);
             $fullname = $request->input('full_name');
             $avatar = $this->defaultAvatarPath();
             $address = $request->input('address');
@@ -253,6 +256,10 @@ class RegisterController extends Controller
             $sysl->action_type = "Create";
             $sysl->description = $department->id.' had create department in department table.';
             $sysl->save();
+
+            $us = new User_setting;
+            $us->user_id = $user->id;
+            $us->save();
 
             $supervisor_detail->subordinate_amount=$supervisor_detail->subordinate_amount+1;
             $supervisor_detail->save();

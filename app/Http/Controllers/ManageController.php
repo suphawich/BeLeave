@@ -87,11 +87,6 @@ class ManageController extends Controller
         );
         $account = User::where('id', $user_id)->update($data);
 
-        $sysl = new System_log;
-        $sysl->action_type = "Alter";
-        $sysl->description = $account->id.' updated to Supervisor in user table.';
-        $sysl->save();
-
         return redirect()->back();
     }
 
@@ -120,10 +115,6 @@ class ManageController extends Controller
         );
         $leaveeave = Leave::where('id', $id)->update($data);
 
-        $sysl = new System_log;
-        $sysl->action_type = "Alter";
-        $sysl->description = $leaveeave->id.' updated to accept in leave table.';
-        $sysl->save();
 
         return redirect()->back();
     }
@@ -134,11 +125,6 @@ class ManageController extends Controller
             'is_approved' => 0
         );
         $leaveeave = Leave::where('id', $id)->update($data);
-
-        $sysl = new System_log;
-        $sysl->action_type = "Alter";
-        $sysl->description = $leaveeave->id.' updated to decline in leave table.';
-        $sysl->save();
 
         return redirect()->back();
     }
