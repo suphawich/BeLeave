@@ -90,7 +90,7 @@
                     <label class="form-topic">Phone Number</label>
                     <input type="tel" class="form-control form-field" name="tel" placeholder="Phone" pattern="[0-9][0-9+]+" required value="{{ $user->tel }}">
                 </div>
-                @if ($user->access_level != 'Administrator' or $user->access_level != 'Manager')
+                @if (!($user->access_level == 'Administrator' or $user->access_level == 'Manager'))
                     <div class="form-group input-group">
                         <label class="form-topic">Supervisor name</label>
                         <input type="text" class="form-control form-field" name="supervisor_name" disabled value="{{ $user->supervisor_name }}">
