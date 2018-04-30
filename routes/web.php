@@ -103,6 +103,17 @@ Route::get('noti/receive', function () {
 });
 
 
+Route::get('sendmail', function () {
+    $data = array('name' => 'Mark');
+    Mail::send('email.email', $data, function ($message) {
+        // $message->to('suphawich.s@ku.th', 'Suphawich')
+        $message->to('suphawichtsd@gmail.com', 'Suphawich')
+                ->subject('Regitered');
+        $message->from('beleavemanagement@gmail.com', 'Suphawich');
+    });
+    echo "Sent email, compelete";
+});
+
 
 Auth::routes();
 
