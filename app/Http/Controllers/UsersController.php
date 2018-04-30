@@ -18,7 +18,7 @@ use App\System_log;
 class UsersController extends Controller
 {
     protected $user;
-    
+
     public function __construct() {
         $this->middleware('auth');
     }
@@ -269,7 +269,6 @@ class UsersController extends Controller
 
             $companyEmail = $request->input('company_email');
             $fullname = $request->input('full_name');
-            $avatar = $request->session()->get('avatar');
             $address = $request->input('address');
             $access_level = $request->input('access_level');
             $tel = $request->input('tel');
@@ -278,10 +277,10 @@ class UsersController extends Controller
             if (!$this->hasEmailNotDup($companyEmail)) {
                 if ($request->hasFile('file')) {
                     $avatar = $request->file->store('/images/profiles');
+                    $user->avatar = '/'.$avatar;
                 }
                 $user->email = $companyEmail;
                 $user->full_name = $fullname;
-                $user->avatar = $avatar;
                 $user->address = $address;
                 $user->tel = $tel;
                 $user->company_name = $companyName;
