@@ -33,7 +33,6 @@ class RegisterController extends Controller
             $password = $this->genePassword();
             $password = password_hash($password, PASSWORD_DEFAULT);
             $fullname = $request->input('full_name');
-            $avatar = $this->defaultAvatarPath();
             $address = $request->input('address');
             $access_level = "Guest";
             $tel = $request->input('tel');
@@ -45,7 +44,6 @@ class RegisterController extends Controller
             $user->email = $companyEmail;
             $user->password = $password;
             $user->full_name = $fullname;
-            $user->avatar = $avatar;
             $user->address = $address;
             $user->access_level = $access_level;
             $user->tel = $tel;
@@ -101,10 +99,6 @@ class RegisterController extends Controller
       return $response;
 
 
-    }
-
-    private function defaultAvatarPath() {
-        return 'C:\xampp\htdocs\BeLeave\public\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
     }
 
     public function payment(User $user ,Plan $plan){
@@ -207,7 +201,6 @@ class RegisterController extends Controller
             $password = $this->genePassword();
             $password = password_hash($pass, PASSWORD_DEFAULT);
             $fullname = $request->input('full_name');
-            $avatar = $this->defaultAvatarPath();
             $address = $request->input('address');
             $access_level = "Subordinate";
             $tel = $request->input('tel');
@@ -229,7 +222,6 @@ class RegisterController extends Controller
             $user->email = $email;
             $user->password = $password;
             $user->full_name = $fullname;
-            $user->avatar = $avatar;
             $user->address = $address;
             $user->access_level = $access_level;
             $user->tel = $tel;
