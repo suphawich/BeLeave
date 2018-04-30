@@ -230,6 +230,12 @@ class RegisterController extends Controller
 
             $supervisor_detail->subordinate_amount=$supervisor_detail->subordinate_amount+1;
             $supervisor_detail->save();
+
+
+            $us = new User_setting;
+            $us->user_id = $user->id;
+            $us->save();
+            
             return redirect('/home');
         } else {
             return view('register.index');
