@@ -1,6 +1,5 @@
 <?php
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\Response\QrCodeResponse;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,26 +36,21 @@ Route::get('/register-complete', function () {
 Route::get('/history', 'ManageController@history');
 
 
-<<<<<<< HEAD
 
-
-Route::get('/QRcode', function(){
-  $qrCode = new QrCode('localhost:8000/readQRcode/'.Current_map::all()->where('id_user','LIKE',Auth::user()->id)->first()->password );
-                      header('Content-Type: '.$qrCode->getContentType());
-                      // Save it to a file
-                      // $qrCode->writeFile(__DIR__.'/qrcode.png');
-                      // Create a response object
-                      $response = new QrCodeResponse($qrCode);
-                      return $response;
-
-});
-
+// Route::get('/QRcode', function(){
+//   $qrCode = new QrCode('localhost:8000/readQRcode/'.Current_map::all()->where('id_user','LIKE',Auth::user()->id)->first()->password );
+//                       header('Content-Type: '.$qrCode->getContentType());
+//                       // Save it to a file
+//                       // $qrCode->writeFile(__DIR__.'/qrcode.png');
+//                       // Create a response object
+//                       $response = new QrCodeResponse($qrCode);
+//                       return $response;
+//
+// });
 
 
 
 
-=======
->>>>>>> 63c0d1d805535505f322d69d6c0feae4a5d6be9a
 Route::get('/', function (){
   return view('layout.master');
 });
