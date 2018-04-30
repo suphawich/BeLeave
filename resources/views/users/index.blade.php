@@ -40,27 +40,27 @@
         <div class="row">
             <div class="col-md-6 col-sm-8 col-12 pl-0 pr-0" >
                 <div class="card">
-                  @if(Auth::user()->access_level ==  'Supervisor'||Auth::user()->access_level ==  'Manager' )
                     <div class="card-header">
                         <span>Generate register link</span>
                         <a href="/users/{{ Auth::user()->id }}/retoken" class="float-right"><i class="fa fa-refresh"></i></a>
                     </div>
-
                     <div class="card-body text-center">
                         <form method="post">
-
                         <div class="form-group input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">url</span>
                             </div>
-                            <input type="text" class="form-control" name="url" value="{{'localhost:8000/register/'.Auth::user()->token}}" v-on:click="copyToClipboard">
+                            <input type="text" class="form-control" name="url" value="{{'localhost:7000/newuser/'.Auth::user()->token}}" v-on:click="copyToClipboard">
                         </div>
                         <label class="copy-message" v-if="isCopyUrl">Copied text to clipboard</label>
                         <label class="copy-message" v-else><i class="fa fa-external-link"></i> Click to copy</label>
+                        <br>
+
                         </form>
+                        <a href="/qr"><button  class="btn btn-outline-dark" style="float:right">QRcode</button></a>
                     </div>
-                    @endif
                 </div>
+
             </div>
         </div>
         <div class="row">
@@ -95,7 +95,7 @@
                             <th scope="col">Full name</th>
                             <th scope="col" v-if="!isShowNewUser">Supervisor name</th>
                             <th scope="col">Task</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">E-m ail</th>
                             <th scope="col">Phone number</th>
                         </tr>
                     </thead>
@@ -130,8 +130,8 @@
                 {{ $subordinates->appends(['sort' => request()->sort])->links() }}
             </div>
         </div>
-        @if(Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Supervisor' )
-          <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-outline-darke">Create PDF</button></a>
-        @endif
+
+        <a href="/getPDFUsers"><button style="float: right;" type="button" class="btn btn-default">Create PDF</button></a>
+
     </div>
 @endsection

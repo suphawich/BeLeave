@@ -6,17 +6,21 @@ use Illuminate\Http\Request;
 use App\Account;
 use App\Plan;
 use Auth;
-use Mail;
 use App\Task;
 use App\User;
 use App\Supervisor_detail;
 use App\Supervisor_plan;
 use App\Transaction;
 use App\Department;
-use App\System_log;
-use App\User_setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use App\System_log;
+use Mail;
+
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\LabelAlignment;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Response\QrCodeResponse;
 
 
 class RegisterController extends Controller
@@ -86,6 +90,19 @@ class RegisterController extends Controller
             $pwd .= chr($n);
         }
         return $pwd;
+    }
+
+    public function getQRcode(){
+      $boom = 'localhost:8000/'.Auth::user()->token;
+
+
+      $qrCode = new QrCode('localhost:8000/'.Auth::user()->token);
+      header('Content-Type: '.$qrCode->getContentType());
+
+      $response = new QrCodeResponse($qrCode);
+      return $response;
+
+
     }
 
     private function defaultAvatarPath() {
@@ -185,8 +202,11 @@ class RegisterController extends Controller
            'tel'=>'required|min:10|max:10',
            'agree'=>'required',
            'task'=>'required'])) {
+
             $pass = str_random(20);
+
             $email = $request->input('email');
+            $password = $this->genePassword();
             $password = password_hash($pass, PASSWORD_DEFAULT);
             $fullname = $request->input('full_name');
             $avatar = $this->defaultAvatarPath();
@@ -231,19 +251,6 @@ class RegisterController extends Controller
           $sysl->description = $user->id.' had create subordinate in user table.';
           $sysl->save();
 
-          $this->user = $user;
-            $data = array(
-                'user' => $user,
-                'pass' => $pass
-            );
-
-            Mail::send('email.email', $data, function ($message) {
-                // $message->to('suphawich.s@ku.th', 'Suphawich')
-                $message->to($this->user->email, $this->user->full_name)
-                        ->subject('Regitered');
-                $message->from('beleavemanagement@gmail.com', 'BeLeaveMaster');
-            });
-
 
             $department = new Department;
             $supervisor_detail=Supervisor_detail::all()->where('supervisor_id',"LIKE", $request->input('supervisor_detail'))->first();
@@ -257,12 +264,22 @@ class RegisterController extends Controller
             $sysl->description = $department->id.' had create department in department table.';
             $sysl->save();
 
-            $us = new User_setting;
-            $us->user_id = $user->id;
-            $us->save();
-
             $supervisor_detail->subordinate_amount=$supervisor_detail->subordinate_amount+1;
             $supervisor_detail->save();
+            $this->user = $user;
+            $data = array(
+                'user' => $user,
+                'pass' => $pass
+            );
+
+            Mail::send('email.email', $data, function ($message) {
+                // $message->to('suphawich.s@ku.th', 'Suphawich')
+                $message->to($this->user->email, $this->user->full_name)
+                        ->subject('Regitered');
+                $message->from('beleavemanagement@gmail.com', 'BeLeaveMaster');
+            });
+
+
             return redirect('/home');
         } else {
             return view('register.index');
