@@ -52,10 +52,12 @@
                     </thead>
                     <tbody class="tbody-text">
                         @foreach ($logs as $log)
-                            <td>{{ $log->id }}</td>
-                            <td>{{ $log->full_name }}</td>
-                            <td>{{ $log->action_type }}</td>
-                            <td>{{ date_format(date_create($log->created_at),"m/d/Y H:i A") }}</td>
+                            <tr>
+                                <td>{{ $log->id }}</td>
+                                <td>{{ $log->full_name }}</td>
+                                <td>{{ $log->action_type }}</td>
+                                <td>{{ date_format(date_create($log->created_at),"m/d/Y H:i A") }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

@@ -27,79 +27,79 @@ class UsersTableSeeder extends Seeder
         $user->token = str_random(64);
         $user->save();
 
-        $user = new User;
-        $user->email = "jirath@bnk48official";
-        $user->password = password_hash('jobsan', PASSWORD_DEFAULT);
-        $user->full_name = 'JIRATH PAVARAVADHANA';
-        // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-        $user->address = "Bangkok";
-        $user->access_level = 'Manager';
-        $user->tel = '0818151905';
-        $user->company_name = "BNK48";
-        $user->token = str_random(64);
-        $user->save();
-        $task = new Task;
-        $task->subordinate_id = $user->id;
-        $task->task = 'director manager';
-        $task->save();
-        $us = new User_setting;
-        $us->user_id = $user->id;
-        $us->save();
-
-        $jirath_id = $user->id;
-
-
-        $user = new User;
-        $user->email = "jobsan@bnk48official";
-        $user->password = password_hash('jobsan', PASSWORD_DEFAULT);
-        $user->full_name = 'NATAPHOL PAVARAVADHANA';
-        // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-        $user->address = "Bangkok";
-        $user->access_level = 'Supervisor';
-        $user->tel = '0848484848';
-        $user->company_name = "BNK48";
-        $user->token = str_random(64);
-        $user->save();
-        $department = new Department;
-        $department->supervisor_id = $jirath_id;
-        $department->subordinate_id = $user->id;
-        $department->save();
-        $task = new Task;
-        $task->subordinate_id = $user->id;
-        $task->task = 'general manager';
-        $task->save();
-        $us = new User_setting;
-        $us->user_id = $user->id;
-        $us->save();
-        $jobsan_id = $user->id;
-
-        foreach ($this->getMembers() as $member) {
-            $user = new User;
-            $user->email = $member->email;
-            $user->password = password_hash($member->password, PASSWORD_DEFAULT);
-            $user->full_name = $member->full_name;
-            // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-            $user->address = $member->address;
-            $user->access_level = 'Subordinate';
-            $user->tel = $member->tel;
-            $user->company_name = $member->company_name;
-            $user->token = str_random(64);
-            $user->save();
-
-            $task = new Task;
-            $task->subordinate_id = $user->id;
-            $task->task = $member->task;
-            $task->save();
-
-            $us = new User_setting;
-            $us->user_id = $user->id;
-            $us->save();
-
-            $dep = new Department;
-            $dep->supervisor_id = $jobsan_id;
-            $dep->subordinate_id = $user->id;
-            $dep->save();
-        }
+        // $user = new User;
+        // $user->email = "jirath@bnk48official";
+        // $user->password = password_hash('jobsan', PASSWORD_DEFAULT);
+        // $user->full_name = 'JIRATH PAVARAVADHANA';
+        // // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        // $user->address = "Bangkok";
+        // $user->access_level = 'Guest';
+        // $user->tel = '0818151905';
+        // $user->company_name = "BNK48";
+        // $user->token = str_random(64);
+        // $user->save();
+        // $task = new Task;
+        // $task->subordinate_id = $user->id;
+        // $task->task = 'director manager';
+        // $task->save();
+        // $us = new User_setting;
+        // $us->user_id = $user->id;
+        // $us->save();
+        // $plan =
+        // $jirath_id = $user->id;
+        //
+        //
+        // $user = new User;
+        // $user->email = "jobsan@bnk48official";
+        // $user->password = password_hash('jobsan', PASSWORD_DEFAULT);
+        // $user->full_name = 'NATAPHOL PAVARAVADHANA';
+        // // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        // $user->address = "Bangkok";
+        // $user->access_level = 'Supervisor';
+        // $user->tel = '0848484848';
+        // $user->company_name = "BNK48";
+        // $user->token = str_random(64);
+        // $user->save();
+        // $department = new Department;
+        // $department->supervisor_id = $jirath_id;
+        // $department->subordinate_id = $user->id;
+        // $department->save();
+        // $task = new Task;
+        // $task->subordinate_id = $user->id;
+        // $task->task = 'general manager';
+        // $task->save();
+        // $us = new User_setting;
+        // $us->user_id = $user->id;
+        // $us->save();
+        // $jobsan_id = $user->id;
+        //
+        // foreach ($this->getMembers() as $member) {
+        //     $user = new User;
+        //     $user->email = $member->email;
+        //     $user->password = password_hash($member->password, PASSWORD_DEFAULT);
+        //     $user->full_name = $member->full_name;
+        //     $user->avatar = '\images\profiles\\'.$member->password.'.jpeg';
+        //     $user->address = $member->address;
+        //     $user->access_level = 'Subordinate';
+        //     $user->tel = $member->tel;
+        //     $user->company_name = $member->company_name;
+        //     $user->token = str_random(64);
+        //     $user->save();
+        //
+        //     $task = new Task;
+        //     $task->subordinate_id = $user->id;
+        //     $task->task = $member->task;
+        //     $task->save();
+        //
+        //     $us = new User_setting;
+        //     $us->user_id = $user->id;
+        //     $us->save();
+        //
+        //     $dep = new Department;
+        //     $dep->supervisor_id = $jobsan_id;
+        //     $dep->subordinate_id = $user->id;
+        //     $dep->save();
+        // }
 
 
 
