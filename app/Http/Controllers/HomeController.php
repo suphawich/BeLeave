@@ -8,6 +8,7 @@ use App\User_setting;
 use App\Leave;
 use App\Department;
 use App\Plan;
+use App\User_log;
 use Auth;
 
 class HomeController extends Controller
@@ -47,6 +48,11 @@ class HomeController extends Controller
       }
       $requests = Department::where('supervisor_id', $supervisor_id, 'desc')->join('leaves', 'departments.subordinate_id', '=', 'leaves.subordinate_id')->join('users', 'departments.subordinate_id', '=', 'users.id')->join('tasks', 'departments.subordinate_id', '=', 'tasks.subordinate_id')->select('leaves.*', 'users.full_name','users.avatar','tasks.task')->paginate(5);
 
+      $user_log = new User_log;
+      $user_log->user_id = Auth::user()->id;
+      $user_log->action_type = "Login";
+      $user_log->save();
+      // return $user_log;
 
       return view('dashboard.index' , ['requests' => $requests, 'users' => $users , 'plans' => $plans]);
 

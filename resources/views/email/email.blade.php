@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Welcome Email</title>
+<title>Welcome</title>
 </head>
 <body>
-<h2>Welcome to the site {{$name}}</h2>
-{{-- // <h2>Welcome to the site {{$user['name']}}</h2> --}}
-<br/>
-{{-- Your registered email-id is {{$user['email']}} , Please click on the below link to verify your email account --}}
+<h1>Welcome to Website BeLeave</h1>
+<h2>Hi {{$user->full_name}} Thanks! for register </h2>
+<h2>Your registered email-id is {{$user->email}} and Your password is {{$pass}}</h2>
 <br/>
 </body>
 </html>

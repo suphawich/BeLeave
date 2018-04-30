@@ -27,10 +27,10 @@
         @csrf
         @method('PUT')
         <div class="row float-right d-none d-sm-none d-md-none d-lg-block">
-            <button type="submit" class="btn btn-secondary mr-2" name="save" v-if="isShowChangePassword">Change password</button>
-            <button type="submit" class="btn btn-secondary mr-2" name="save" v-else>Save changes</button>
-            <button type="reset" class="btn btn-success" name="cancel" v-if="isShowChangePassword" v-on:click="backToProfile">Cancel</button>
-            <button type="reset" class="btn btn-success" name="cancel" v-else>Cancel</button>
+            <button type="submit" class="btn btn-outline-dark" name="save" v-if="isShowChangePassword">Change password</button>
+            <button type="submit" class="btn btn-outline-dark" name="save" v-else>Save changes</button>
+            <button type="reset" class="btn btn-outline-info" name="cancel" v-if="isShowChangePassword" v-on:click="backToProfile">Cancel</button>
+            <button type="reset" class="btn btn-outline-info" name="cancel" v-else>Cancel</button>
         </div>
         {{-- <p>{{session()->get('status')}}</p> --}}
         <div class="row" v-if="isShowChangePassword">
@@ -104,14 +104,14 @@
             <div class="col-xl-4 col-md-6 avatar-content text-center">
                 <img src="{{ $user->avatar ?? '/images/profiles/user_default.jpg' }}" class="avatar circle mb-5 mt-4">
                 <input type="file" class="form-control form-file mb-4 ml-auto mr-auto" name="file">
-                <button type="button" name="change-password" class="btn btn-primary mb-5" v-on:click="showChangepwd">Change password</button>
+                <button type="button" name="change-password" class="btn btn-outline-dark" v-on:click="showChangepwd">Change password</button>
             </div>
         </div>
         <div class="row float-right d-block d-sm-block d-md-block d-lg-none d-xl-none submit-content">
-            <button type="submit" class="btn btn-secondary mr-2" name="save2" v-if="isShowChangePassword">Change password</button>
+            <button type="submit" class="btn btn-outline-dark" name="save2" v-if="isShowChangePassword">Change password</button>
             <button type="submit" class="btn btn-secondary mr-2" name="save2" v-else>Save changes</button>
-            <button type="reset" class="btn btn-success" name="cancel2" v-if="isShowChangePassword" v-on:click="backToProfile">Cancel</button>
-            <button type="reset" class="btn btn-success" name="cancel2" v-else>Cancel</button>
+            <button type="reset" class="btn btn-outline-info" name="cancel2" v-if="isShowChangePassword" v-on:click="backToProfile">Cancel</button>
+            <button type="reset" class="btn btn-outline-info" name="cancel2" v-else>Cancel</button>
         </div>
         </form>
     </div>

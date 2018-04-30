@@ -36,10 +36,9 @@ Route::get('/register-complete', function () {
 Route::get('/history', 'ManageController@history');
 
 
-
-
-
-Route::get('/', 'DashboardController@index');
+Route::get('/', function (){
+  return view('layout.master');
+});
 Route::get('/dashboard', 'DashboardController@index');
 
 
@@ -107,21 +106,24 @@ Route::get('noti/receive', function () {
 });
 
 
-Route::get('sendmail', function () {
-    $data = array('name' => 'Mark');
-    Mail::send('email.email', $data, function ($message) {
-        // $message->to('suphawich.s@ku.th', 'Suphawich')
-        $message->to('tanya.pa@ku.th', 'Suphawich')
-                ->subject('Regitered');
-        $message->from('beleavemanagement@gmail.com', 'Suphawich');
-    });
-    echo "Sent email, compelete";
-});
+// Route::get('sendmail', function () {
+//     $data = array('name' => 'Mark');
+//     Mail::send('email.email', $data, function ($message) {
+//         // $message->to('suphawich.s@ku.th', 'Suphawich')
+//         $message->to('tanya.pa@ku.th', 'Suphawich')
+//                 ->subject('Regitered');
+//         $message->from('beleavemanagement@gmail.com', 'Suphawich');
+//     });
+//     echo "Sent email, compelete";
+// });
+
+
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', 'LoginController@logout');
 
 Route::get('/plan','PlanController@index');
 
