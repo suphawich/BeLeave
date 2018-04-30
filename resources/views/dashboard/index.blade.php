@@ -145,7 +145,7 @@
 
 
 
-
+@if(Auth::user()->access_level === 'Manager')
 <div class="mt-4">
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -231,6 +231,8 @@
 </div>
 
 </div>
+
+@endif
 
 @push('script')
 
