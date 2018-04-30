@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Task;
+use App\Department;
+use App\User_setting;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,17 +15,17 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // $user = new User;
-        // $user->email = "admin@beleave";
-        // $user->password = password_hash('password', PASSWORD_DEFAULT);
-        // $user->full_name = 'Administrator';
-        // // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-        // $user->address = "BeLeave Company Ltd";
-        // $user->access_level = 'Administrator';
-        // $user->tel = '0836429451';
-        // $user->company_name = "BeLeave";
-        // $user->token = str_random(64);
-        // $user->save();
+        $user = new User;
+        $user->email = "admin@beleave";
+        $user->password = password_hash('password', PASSWORD_DEFAULT);
+        $user->full_name = 'Administrator';
+        // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        $user->address = "BeLeave Company Ltd";
+        $user->access_level = 'Administrator';
+        $user->tel = '0836429451';
+        $user->company_name = "BeLeave";
+        $user->token = str_random(64);
+        $user->save();
 
         $user = new User;
         $user->email = "jirath@bnk48official";
@@ -36,6 +38,16 @@ class UsersTableSeeder extends Seeder
         $user->company_name = "BNK48";
         $user->token = str_random(64);
         $user->save();
+        $task = new Task;
+        $task->subordinate_id = $user->id;
+        $task->task = 'director manager';
+        $task->save();
+        $us = new User_setting;
+        $us->user_id = $user->id;
+        $us->save();
+
+        $jirath_id = $user->id;
+
 
         $user = new User;
         $user->email = "jobsan@bnk48official";
@@ -43,15 +55,23 @@ class UsersTableSeeder extends Seeder
         $user->full_name = 'NATAPHOL PAVARAVADHANA';
         // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
         $user->address = "Bangkok";
-        $user->access_level = 'Subordinate';
+        $user->access_level = 'Supervisor';
         $user->tel = '0848484848';
         $user->company_name = "BNK48";
         $user->token = str_random(64);
         $user->save();
+        $department = new Department;
+        $department->supervisor_id = $jirath_id;
+        $department->subordinate_id = $user->id;
+        $department->save();
         $task = new Task;
         $task->subordinate_id = $user->id;
-        $task->subordinate_id = 'general manager';
+        $task->task = 'general manager';
         $task->save();
+        $us = new User_setting;
+        $us->user_id = $user->id;
+        $us->save();
+        $jobsan_id = $user->id;
 
         foreach ($this->getMembers() as $member) {
             $user = new User;
@@ -70,23 +90,32 @@ class UsersTableSeeder extends Seeder
             $task->subordinate_id = $user->id;
             $task->task = $member->task;
             $task->save();
+
+            $us = new User_setting;
+            $us->user_id = $user->id;
+            $us->save();
+
+            $dep = new Department;
+            $dep->supervisor_id = $jobsan_id;
+            $dep->subordinate_id = $user->id;
+            $dep->save();
         }
 
 
 
-        $user = new User;
-        $user->email = "suphawich.s@ku.th";
-        $user->password = password_hash('mark', PASSWORD_DEFAULT);
-        $user->full_name = 'Suphawich Sungkhavorn';
-        $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
-        $user->address = "20 Soi Pichayanunt15 Tiwanont Road";
-        $user->access_level = 'Manager';
-        $user->tel = '0836429451';
-        $user->company_name = "Suphawich";
-        $user->is_enabled = 0;
-        $user->token = str_random(64);
-        $user->save();
-        factory(App\User::class, 10)->create();
+        // $user = new User;
+        // $user->email = "suphawich.s@ku.th";
+        // $user->password = password_hash('mark', PASSWORD_DEFAULT);
+        // $user->full_name = 'Suphawich Sungkhavorn';
+        // $user->avatar = '\images\profiles\0b2bdcce13913b4c38daec9aba56b651.jpg';
+        // $user->address = "20 Soi Pichayanunt15 Tiwanont Road";
+        // $user->access_level = 'Manager';
+        // $user->tel = '0836429451';
+        // $user->company_name = "Suphawich";
+        // $user->is_enabled = 0;
+        // $user->token = str_random(64);
+        // $user->save();
+        // factory(App\User::class, 10)->create();
     }
 
     private function getMembers() {

@@ -17,6 +17,7 @@ class CreateSupervisorPlansTable extends Migration
             $table->increments('id');
             $table->unsignedinteger('supervisor_id');
             $table->string('plan');
+            $table->dateTime('exprie_plan');
             $table->timestamps();
 
             $table->foreign('supervisor_id')->references('id')->on('users');
