@@ -108,11 +108,12 @@
         @endforeach --}}
         @forelse($requests as $request)
         @if ($request->is_enabled)
-        <a href="/getPDFRequestLeave"><button style="float: right;" type="button" class="btn btn-info">Create PDF</button></a>
+
         @endif
         @empty
-            
+
         @endforelse
+                <a href="/getPDFRequestLeave"><button style="float: right;" type="button" class="btn btn-outline-dark">Create PDF</button></a>
 
     </div>
 @endsection

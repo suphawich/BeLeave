@@ -107,15 +107,13 @@
                 <h5>{{ $request->task}}      <a href="{{ url('/users/' . $request->subordinate_id.'/profile') }}" >profile</a></h5>
                 <p>Arrive Date : {{ date_format(date_create($request->depart_at),"m/d/Y") }}</p>
                 <p>Day : {{date_diff(date_create($request->depart_at), date_create($request->arrive_at))->format(" %a ")}}</p>
-                <p>Description : {{ $request->description}}</p>
+
+                    <p>Description : {{ $request->description}}</p>
+
                 <hr style="margin:8px auto">
 
 
-                <span class="label form-control"><a href="#" style=":white">approve</a></span>
-                <span class="label form-control"><a href="#">cancle</a></span>
 
-                <br>
-                <br>
             </div>
         </div>
 
