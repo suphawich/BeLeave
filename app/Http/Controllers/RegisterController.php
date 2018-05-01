@@ -12,6 +12,7 @@ use App\Supervisor_detail;
 use App\Supervisor_plan;
 use App\Transaction;
 use App\Department;
+use App\User_setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use App\System_log;
@@ -229,6 +230,10 @@ class RegisterController extends Controller
             $user->is_enabled = $is_enabled;
             $user->token = $token;
             $user->save();
+
+            $us = new User_setting;
+            $us->user_id = $user->id;
+            $us->save();
 
 
           $task = new Task;

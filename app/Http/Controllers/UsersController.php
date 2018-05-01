@@ -92,6 +92,7 @@ class UsersController extends Controller
             'Guest' => 'Guest'
         ];
 
+
         $users = User::paginate(10);
         return view('users.index_account', [
             'users' => $users,
@@ -119,6 +120,7 @@ class UsersController extends Controller
         $search_type = $request->input('search_type');
         $word = $request->input('search');
         $users = User::where($search_type, 'LIKE', $word.'%')->paginate(10);
+
 
         return view('users.index_account', [
             'users' => $users,
@@ -413,8 +415,16 @@ class UsersController extends Controller
         // set url path for generted links
         $data->setPath($request->url());
 
+        $isFull = 0;
+        if (Auth::user()->access_level == 'Guest' and count($data) >= 3) {
+            $isFull = 1;
+        }
+
         // return $data;
-        return view('users.index', ['subordinates' => $data]);
+        return view('users.index', [
+          'subordinates' => $data,
+          'isFull' => $isFull
+        ]);
     }
 
     public function retoken(User $user) {

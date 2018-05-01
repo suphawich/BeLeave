@@ -25,7 +25,7 @@
   <div class="card">
     <div class="card-image">
 
-      <img src=" /images/slide3.jpg " style="width:100%;height:200px;">
+      <img src=" /images/BGtest.jpg " style="width:100%;height:200px;">
       <h2 class="card-title ml-2"></h2>
     </div>
     <div class="card-content" style="padding:20px">

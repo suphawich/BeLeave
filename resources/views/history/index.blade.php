@@ -140,7 +140,7 @@ $(document).on('click', '.edit-modal', function() {
 
 
 
-@if(Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Supervisor' )
+@if (Auth::user()->access_level == 'Manager' || Auth::user()->access_level == 'Supervisor' )
 
     <a href="/getPDFHistory"><button style="float: right;" type="button" class="btn btn-default">Create PDF</button></a>
 

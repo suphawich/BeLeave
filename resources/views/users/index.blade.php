@@ -50,7 +50,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">url</span>
                             </div>
-                            <input type="text" class="form-control" name="url" value="{{'localhost:7000/newuser/'.Auth::user()->token}}" v-on:click="copyToClipboard">
+                            <input type="text" class="form-control" name="url" value="{{'localhost:8000/register/'.Auth::user()->token}}" v-on:click="copyToClipboard">
                         </div>
                         <label class="copy-message" v-if="isCopyUrl">Copied text to clipboard</label>
                         <label class="copy-message" v-else><i class="fa fa-external-link"></i> Click to copy</label>
@@ -95,7 +95,7 @@
                             <th scope="col">Full name</th>
                             <th scope="col" v-if="!isShowNewUser">Supervisor name</th>
                             <th scope="col">Task</th>
-                            <th scope="col">E-m ail</th>
+                            <th scope="col">E-mail</th>
                             <th scope="col">Phone number</th>
                         </tr>
                     </thead>

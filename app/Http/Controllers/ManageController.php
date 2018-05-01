@@ -14,6 +14,7 @@ use App\Task;
 use App\User_log;
 use App\System_log;
 use PDF;
+use App\Supervisor_detail;
 
 class ManageController extends Controller
 {
@@ -82,9 +83,18 @@ class ManageController extends Controller
             'r2sup' => 1
         );
         $setting = User_setting::where('user_id', $user_id)->update($data);
+
         $data = array(
             'access_level' => 'Supervisor'
         );
+        // $supervisor_detail= new Supervisor_detail;
+        // $supervisor_detail->supervisor_id = $user_id;
+        // $supervisor_detail->subordinate_amount=0;
+        // $supervisor_detail->is_api=true;
+        // $supervisor_detail->is_line_noti=true;
+        // $supervisor_detail->subordinate_capacity=$plan->capacity;
+        // $supervisor_detail->link_create_subordinate=$user->token;
+        // $supervisor_detail->save();
         $account = User::where('id', $user_id)->update($data);
 
         return redirect()->back();
