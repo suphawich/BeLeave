@@ -101,6 +101,8 @@ class UsersController extends Controller
         ]);
     }
 
+    
+
     public function search_account(Request $request) {
         $type = [
             'full_name' => 'Full Name',

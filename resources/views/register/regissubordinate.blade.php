@@ -55,7 +55,7 @@
       @csrf
         @method('PUT')
 
-        <input type="hidden" name="supervisor_detail" value='{{ $supervisor_detail->supervisor_id }}'>
+        
         <input type="hidden" name="user" value='{{ $user->id }}'>
         <input type="hidden" name="_token" value={{ csrf_token() }}>
         <div class="container">

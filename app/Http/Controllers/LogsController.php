@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User_log;
 use App\System_log;
+use PDF;
 
 class LogsController extends Controller
 {
@@ -157,5 +158,36 @@ class LogsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getPDFlog(Request $request){
+      $dates = [
+          'Show All' => 'Show All'
+      ];
+      foreach (User_log::orderBy('created_at', 'desc')->get() as $log) {
+          $date = $log->created_at;
+          $date_string = date_format(date_create($date),"m/d/Y");
+          $dates[$date_string] = $date_string;
+      }
+      if ($request->has('date')) {
+          $date = $request->input('date');
+          if ($request->input('date') != 'Show All') {
+              $date = date_format(date_create($date),"Y-m-d");
+              $logs = User_log::join('users', 'user_logs.user_id', '=', 'users.id')->select('user_logs.*', 'users.full_name')->whereDate('user_logs.created_at', $date)->orderBy('created_at', 'desc')->paginate(10);
+          } else {
+              $logs = User_log::join('users', 'user_logs.user_id', '=', 'users.id')->select('user_logs.*', 'users.full_name')->orderBy('created_at', 'desc')->paginate(10);
+          }
+      } else {
+          // $date = date_format(date_create(\Carbon\Carbon::now()),"Y-m-d");
+          $date = 'Show All';
+          $logs = User_log::join('users', 'user_logs.user_id', '=', 'users.id')->select('user_logs.*', 'users.full_name')->orderBy('created_at', 'desc')->paginate(10);
+      }
+
+      $pdf=PDF::loadView('logs.index_userlog',[
+          'logs' => $logs,
+          'dates' => $dates,
+          'date' => $date
+      ]);
+
+      return $pdf->stream('log.pdf');
     }
 }

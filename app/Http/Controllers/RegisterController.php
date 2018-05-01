@@ -93,7 +93,7 @@ class RegisterController extends Controller
 
     public function getQRcode(){
 
-      $qrCode = new QrCode('localhost:8000/'.Auth::user()->token);
+      $qrCode = new QrCode('localhost:8000/register/'.Auth::user()->token);
       header('Content-Type: '.$qrCode->getContentType());
 
       $response = new QrCodeResponse($qrCode);
@@ -219,39 +219,39 @@ class RegisterController extends Controller
                   //
                   // ]);
 
-            $user = new User;
-            $user->email = $email;
-            $user->password = $password;
-            $user->full_name = $fullname;
-            $user->address = $address;
-            $user->access_level = $access_level;
-            $user->tel = $tel;
-            $user->company_name = $companyName;
-            $user->is_enabled = $is_enabled;
-            $user->token = $token;
-            $user->save();
+            $user1 = new User;
+            $user1->email = $email;
+            $user1->password = $password;
+            $user1->full_name = $fullname;
+            $user1->address = $address;
+            $user1->access_level = $access_level;
+            $user1->tel = $tel;
+            $user1->company_name = $companyName;
+            $user1->is_enabled = $is_enabled;
+            $user1->token = $token;
+            $user1->save();
 
             $us = new User_setting;
-            $us->user_id = $user->id;
+            $us->user_id = $user1->id;
             $us->save();
 
 
           $task = new Task;
-          $task->subordinate_id=$user->id;
+          $task->subordinate_id=$user1->id;
           $task->task=$task1;
           $task->save();
 
           $sysl = new System_log;
           $sysl->action_type = "Create";
-          $sysl->description = $user->id.' had create subordinate in user table.';
+          $sysl->description = $user1->id.' had create subordinate in user table.';
           $sysl->save();
 
 
             $department = new Department;
-            $supervisor_detail=Supervisor_detail::all()->where('supervisor_id',"LIKE", $request->input('supervisor_detail'))->first();
+            $user=User::all()->where('id',"LIKE", $request->input('user'))->first();
             // dd($supervisor_detail);
-            $department->supervisor_id=$supervisor_detail->supervisor_id;
-            $department->subordinate_id=$user->id;
+            $department->supervisor_id=$user->id;
+            $department->subordinate_id=$user1->id;
             $department->save();
 
             $sysl = new System_log;
@@ -259,11 +259,11 @@ class RegisterController extends Controller
             $sysl->description = $department->id.' had create department in department table.';
             $sysl->save();
 
-            $supervisor_detail->subordinate_amount=$supervisor_detail->subordinate_amount+1;
-            $supervisor_detail->save();
-            $this->user = $user;
+            // $supervisor_detail->subordinate_amount=$supervisor_detail->subordinate_amount+1;
+            // $supervisor_detail->save();
+            $this->user = $user1;
             $data = array(
-                'user' => $user,
+                'user' => $user1,
                 'pass' => $pass
             );
 
