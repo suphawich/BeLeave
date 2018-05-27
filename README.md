@@ -24,8 +24,31 @@
 
 # How to work?
     First, you can sign in to dashboard, if you have account or sign up which log in page. Registration don't verify email or account id, but user got password (generate by server) for sign in. Second, after sign in can use function:
-    - 
-
+    - If you are administrator
+        - Personalization: show profile and can edit profile.
+        - Accounts: show all account of website, moreover admin can find account with filter or search bar.
+        - Detail: show information of website.
+        - Graph: show analytic user.
+        - User log: show login and logout of account.
+        - System log: show action of user which action to server.
+ 
+    - If you are Manager
+        - Request Leave: accept or decline request.
+        - Request position: accept or decline request.
+        - Graph: show analytic of subordinate account.
+        - Personalization: show profile and can edit profile.
+        - Subscription: buy or upgrade package.
+        
+    - If you are Supervisor
+        - Request Leave: accept or decline request.
+        - Request position: accept or decline request.
+        - Personalization: show profile and can edit profile.
+ 
+    - If you are Subordinate
+        - Leave: request new leave and show leave history and status.
+        - Personalization: show profile and can edit profile.
+        - Setting: Request change position to Supervisor.
+Finally, after you regsitration, your account got Manager position, user have to buy package before create new Subordinate.
 
 # Config
 1. edit default disk path (for storing file)
